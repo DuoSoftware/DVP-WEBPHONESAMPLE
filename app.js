@@ -5,18 +5,19 @@
 'use strict';
 
 var routerApp = angular.module('veerySoftPhone',
-    ['ui.bootstrap', 'ui.router','btford.socket-io','ui-notification']);
+    ['ui.bootstrap', 'ui.router', 'btford.socket-io',
+        'ui-notification', 'ngAnimate']);
 
 routerApp.config(["$httpProvider", "$stateProvider", "$urlRouterProvider",
     function ($httpProvider, $stateProvider, $urlRouterProvider) {
-/*
-        $httpProvider.defaults.headers.post['Content-Type'] = 'multipart/form-data';
-        $httpProvider.defaults.useXDomain = true;
-        delete $httpProvider.defaults.headers.common['X-Requested-With'];
-        $httpProvider.defaults.headers.common["Content-Type"] = "application/x-www-form-urlencoded";
+        /*
+         $httpProvider.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+         $httpProvider.defaults.useXDomain = true;
+         delete $httpProvider.defaults.headers.common['X-Requested-With'];
+         $httpProvider.defaults.headers.common["Content-Type"] = "application/x-www-form-urlencoded";
 
 
-*/
+         */
         $urlRouterProvider.otherwise('/reg');
         $stateProvider
             .state("register", {

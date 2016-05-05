@@ -11,6 +11,10 @@ routerApp.controller('registrationCtrl', function ($rootScope,$scope, $state,dat
             dataParser.userProfile = $scope.profile;
             $state.go('callControl');
     };
+    $scope.status = {
+        isFirstOpen: true,
+        isFirstDisabled: false
+    };
 
 
 });

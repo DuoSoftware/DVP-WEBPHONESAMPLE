@@ -1,6 +1,6 @@
 
 .bg-image {
-    background: url('../images/bg/phone-booth-758751_1920.jpg');
+    /*background: url('../images/bg/phone-booth-758751_1920.jpg');*/
     background-repeat: no-repeat;
 }
 
@@ -8,7 +8,12 @@
     height: 100%;
     width: 100%;
     position: absolute;
-    background: rgba(61, 72, 107, 0.7);
+    /*background: rgba(61, 72, 107, 0.7);*/
+    /*background: rgba(88, 75, 61, 0.7);*/
+}
+
+.reg-bg-color-wrap:before {
+    background: rgba(88, 75, 61, 0.7);
 }
 
 .h1, .h2, .h3, .h4, .h5 {
@@ -19,9 +24,10 @@
 .reg-wrap {
     float: right;
     min-height: 500px;
-    background: #ffffff;
+    background: rgba(0, 0, 0, 0.26);
     margin-top: 60px;
     width: 85%;
+    border-radius: 15px;
     -webkit-box-shadow: 0px 0px 8px -5px rgba(0, 0, 0, 0.56);
     -moz-box-shadow: 0px 0px 8px -5px rgba(0, 0, 0, 0.56);
     box-shadow: 0px 0px 8px -5px rgba(0, 0, 0, 0.56);
@@ -62,7 +68,7 @@
 }
 
 .reg-lef-wrap {
-    margin-top: 25%;
+    margin-top: 20%;
     padding: 50px;
 }
 
@@ -138,6 +144,10 @@
     color: #ffffff;
 }
 
+.fnt-color-blue1 {
+    color: #1E93BB;
+}
+
 .fnt-color-3 {
     color: #e8c110;
 }
@@ -153,22 +163,24 @@
 
 /*#form style*/
 label {
-    font-family: 'Noto Sans', sans-serif;
-    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 200;
+    text-transform: capitalize;
+    outline: none !important;
 }
 
 .form-control {
     display: block;
     width: 100%;
-    height: 40px;
+    height: 39px;
     padding: 6px 12px;
     font-size: 14px;
     line-height: 1.42857143;
-    color: #555;
-    background-color: #fff;
+    color: #fff;
+    background-color: #3E4651;
     background-image: none;
-    border: 2px solid #dfe0e0;
-    border-radius: 0px;
+    border: 3px solid #1C90B7;
+    border-radius: 10px;
     -webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, .075);
     box-shadow: inset 0 0px 0px rgba(0, 0, 0, .075);
     -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
@@ -186,9 +198,10 @@ label {
     color: #fff;
     background-color: #e8c110;
     border-color: #e8c110;
-    font-family: 'Noto Sans', sans-serif;
+    font-family: 'Dosis', sans-serif;
     font-weight: 400;
     font-size: 18px;
+    transition: background 3s;
 }
 
 .btn-yellow:hover,
@@ -205,6 +218,9 @@ label {
     height: 40px;
 }
 
+.width-180 {
+    width: 180px;
+}
 
 .dialpadbtn {
     display: inline-block;
@@ -214,27 +230,120 @@ label {
     line-height: 18px;
     color: #333;
     text-align: center;
-    text-shadow: 0 1px 1px rgba(255,255,255,0.75);
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
     vertical-align: middle;
     background-color: #f5f5f5;
-    background-image: -moz-linear-gradient(top,#fff,#e6e6e6);
-    background-image: -ms-linear-gradient(top,#fff,#e6e6e6);
-    background-image: -webkit-gradient(linear,0 0,0 100%,from(#fff),to(#e6e6e6));
-    background-image: -webkit-linear-gradient(top,#fff,#e6e6e6);
-    background-image: -o-linear-gradient(top,#fff,#e6e6e6);
-    background-image: linear-gradient(top,#fff,#e6e6e6);
+    background-image: -moz-linear-gradient(top, #fff, #e6e6e6);
+    background-image: -ms-linear-gradient(top, #fff, #e6e6e6);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#e6e6e6));
+    background-image: -webkit-linear-gradient(top, #fff, #e6e6e6);
+    background-image: -o-linear-gradient(top, #fff, #e6e6e6);
+    background-image: linear-gradient(top, #fff, #e6e6e6);
     background-repeat: repeat-x;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff',endColorstr='#e6e6e6',GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
     border-color: #e6e6e6 #e6e6e6 #bfbfbf;
-    border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
     filter: progid:dximagetransform.microsoft.gradient(enabled=false);
     border: 1px solid #ccc;
     border-bottom-color: #b3b3b3;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
-    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
     cursor: pointer;
+}
+
+.veery-logo101 {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.veery-logo101 > img {
+    width: 235px;
+    height: auto;
+}
+
+/*font family*/
+
+.font-Dosis {
+    font-family: 'Dosis', cursive !important;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.panel {
+    margin-bottom: 0px;
+    background-color: rgba(27, 143, 182, 0.14);
+    border: 1px solid transparent;
+    border-radius: 0px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .0);
+    box-shadow: 0 0px 0px rgba(0, 0, 0, .0);
+}
+
+.panel-default > .panel-heading {
+    color: #1D92BA;
+    background-color: rgba(27, 143, 182, 0.14);
+    border-color: #3A4C5A;
+
+}
+
+.panel-title {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 200;
+    font-size: 15px;
+}
+
+.panel-group .panel-heading + .panel-collapse .panel-body {
+    border-top: 1px solid #1B8FB6;
+}
+
+.glyphicon,
+.glyphicon:hover,
+.glyphicon:focus,
+span,
+span:focus,
+.panel-title > a,
+a:hover,
+a,
+span:hover {
+    outline: none !important;
+}
+
+.panel-title > a, a:hover,
+a {
+    text-decoration: none;
+}
+
+.btn-default.disabled, .btn-default[disabled],
+fieldset[disabled] .btn-default,
+.btn-default.disabled:hover,
+.btn-default[disabled]:hover,
+fieldset[disabled] .btn-default:hover,
+.btn-default.disabled:focus, .btn-default[disabled]:focus,
+fieldset[disabled] .btn-default:focus, .btn-default.disabled:active,
+.btn-default[disabled]:active, fieldset[disabled] .btn-default:active,
+.btn-default.disabled.active, .btn-default[disabled].active,
+fieldset[disabled] .btn-default.active {
+    background-color: #3E4651;
+    border-color: transparent;
+    cursor: not-allowed !important;;
+}
+
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn {
+    cursor: not-allowed;
+}
+
+.verry-help > a {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    padding: 8px;
+}
+
+.has-error .form-control {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0) inset !important;
 }
