@@ -1,0 +1,119 @@
+<div ng-controller="registrationCtrl">
+<div class="reg-warp-main bg-image main-bg-color"      id="regSection">
+    <div class="reg-bg-color-wrap"></div>
+    <div class="container" >
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="reg-lef-wrap">
+                        <h1 class="h1 fnt-color-white fnt-weight-500">Registration</h1>
+                        <p class="font-family-Roboto fnt-color-3 fnt-weight-200 ">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                            been the
+                            industry's standard dummy text ever since the 1500s....
+                        </p>
+                        <div class="mode-wrap">
+                            <ul class="mode">
+                                <li class="ti-cup hvr-rotate"
+                                    tooltip-trigger tooltip-placement="top"
+                                    uib-tooltip="need SIP account" tooltip-trigger="focus"
+                                        ></li>
+                                <li class="ti-slice hvr-rotate"
+                                    tooltip-trigger tooltip-placement="top"
+                                    uib-tooltip="expert mode" tooltip-trigger="focus"
+                                        ></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="reg-wrap p-20 animated fadeInRight">
+                        <form class="form-horizontal" name="callForm">
+                            <div class="form-group" >
+                                <div class="col-sm-12"  ng-class="{ 'has-error' : callForm.displayNme.$invalid && !callForm.displayNme.$pristine }">
+                                    <label for="displayNme">Display Name</label>
+                                    <input type="text" required class="form-control" name="displayNme" id="displayNme" ng-model="profile.displayName" placeholder="Display Name">
+                                    <p ng-show="callForm.displayNme.$invalid && !callForm.displayNme.$pristine" class="help-block">Display Name is required.</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12" ng-class="{ 'has-error' : callForm.privateId.$invalid && !callForm.privateId.$pristine }">
+                                    <label for="privateId">Private Identity</label>
+                                    <input type="text" class="form-control"  required name="privateId" id="privateId" ng-model="profile.authorizationName"
+                                           placeholder="Private Identity*">
+                                    <p ng-show="callForm.privateId.$invalid && !callForm.privateId.$pristine" class="help-block">Private ID is required.</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12" ng-class="{ 'has-error' : callForm.publicId.$invalid && !callForm.publicId.$pristine }">
+                                    <label for="publicId">Public Identity</label>
+                                    <input type="text" class="form-control"  required  name="publicId" id="publicId" ng-model="profile.publicIdentity" placeholder="Public Identity">
+                                    <p ng-show="callForm.publicId.$invalid && !callForm.publicId.$pristine" class="help-block">Public Identity is required.</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12" ng-class="{ 'has-error' : callForm.password.$invalid && !callForm.password.$pristine }">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control"  required  name="password" id="password" ng-model="profile.password" placeholder="Password">
+                                    <p ng-show="callForm.password.$invalid && !callForm.password.$pristine" class="help-block">Password is required.</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12" ng-class="{ 'has-error' : callForm.realm.$invalid && !callForm.realm.$pristine }">
+                                    <label for="realm">Domain</label>
+                                    <input type="text" class="form-control" required  name="realm"  id="realm" ng-model="profile.server.domain" placeholder="Domain">
+                                    <p ng-show="callForm.realm.$invalid && !callForm.realm.$pristine" class="help-block">Domain is required.</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12" ng-class="{ 'has-error' : callForm.websocketUrl.$invalid && !callForm.websocketUrl.$pristine }">
+                                    <label for="realm">Web Socket Url</label>
+                                    <input type="text" class="form-control" required  name="websocketUrl"  id="websocketUrl"  ng-model="profile.server.websocketUrl" placeholder="websocketUrl">
+                                    <p ng-show="callForm.websocketUrl.$invalid && !callForm.websocketUrl.$pristine" class="help-block">Websocket URL is required.</p>
+                                </div>
+                            </div>
+
+
+
+                            <a href="#" ng-model="collapsed" ng-click="collapsed=!collapsed"><strong>Optional Setting</strong></a>
+                            <hr ng-show="collapsed"/>
+                            <div ng-show="collapsed" class="form-group">
+                                <div class="col-sm-12">
+                                    <label for="realm">Outbound Proxy</label>
+                                    <input type="text" class="form-control" id="outboundProxy"  ng-model="profile.server.outboundProxy" placeholder="outboundProxy">
+                                </div>
+                            </div>
+                            <div ng-show="collapsed" class="form-group">
+                                <div class="col-sm-12">
+                                    <label for="realm">Enable RtcwebBreaker</label>
+                                    <input type="text" class="form-control" id="enableRtcwebBreaker"  ng-model="profile.server.enableRtcwebBreaker" placeholder="enableRtcwebBreaker">
+                                </div>
+                            </div>
+                            <hr ng-show="collapsed"/>
+
+                            <div class="form-group">
+
+                                <div class="col-sm-12 p-t-20">
+                                    <button ng-disabled="callForm.$invalid" type="submit" class="btn btn-default btn-yellow
+                                    btn-block height-40" ng-click="Register()">Login
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</div>
+
+
