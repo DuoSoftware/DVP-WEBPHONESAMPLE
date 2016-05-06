@@ -6,160 +6,202 @@
         <div class="col-lg-12">
             <div class="row">
                 <div class="col-lg-7">
-                    <div class="reg-lef-wrap">
-                        <h1 class="h1 fnt-color-white fnt-weight-500">Veery Web Phone</h1>
+                    <div class="reg-lef-wrap animated fadeIn">
+                        <div class="veery-logo101">
+                            <img src="assets/images/logo1.png">
+                        </div>
+                        <h1 class="h1 fnt-color-blue1 font-Dosis  fnt-weight-500">Veery Web Phone</h1>
+                        <p class="font-family-Roboto fnt-color-3 fnt-weight-200 ">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                            has
+                            been the
+                            industry's standard dummy text ever since the 1500s....
+                        </p>
+                    </div>
 
-                        <div class="mode-wrap">
-                            <div id="divVideo" class='div-video'>
-                                <div id="divVideoRemote"
-                                     style='position:relative; border:1px solid #009; height:100%; width:100%; z-index: auto; opacity: 1'>
-                                    <video class="video" width="100%" height="100%" id="video_remote"
-                                           autoplay="autoplay"
-                                           style="opacity: 0;
+                    <div class="mode-wrap">
+                        <div id="divVideo" class='div-video'>
+                            <div id="divVideoRemote"
+                                 style='position:relative; border:1px solid #009; height:100%; width:100%; z-index: auto; opacity: 1'>
+                                <video class="video" width="100%" height="100%" id="video_remote"
+                                       autoplay="autoplay"
+                                       style="opacity: 0;
                                         background-color: #000000; -webkit-transition-property: opacity; -webkit-transition-duration: 2s;"></video>
-                                </div>
+                            </div>
 
-                                <div id="divVideoLocalWrapper"
-                                     style="margin-left: 0px; border:0px solid #009; z-index: 1000">
-                                    <iframe class="previewvideo" style="border:0px solid #009; z-index: 1000"></iframe>
-                                    <div id="divVideoLocal" class="previewvideo"
-                                         style=' border:0px solid #009; z-index: 1000'>
-                                        <video class="video" width="100%" height="100%" id="video_local"
-                                               autoplay="autoplay"
-                                               muted="true" style="opacity: 0;
+                            <div id="divVideoLocalWrapper"
+                                 style="margin-left: 0px; border:0px solid #009; z-index: 1000">
+                                <iframe class="previewvideo" style="border:0px solid #009; z-index: 1000"></iframe>
+                                <div id="divVideoLocal" class="previewvideo"
+                                     style=' border:0px solid #009; z-index: 1000'>
+                                    <video class="video" width="100%" height="100%" id="video_local"
+                                           autoplay="autoplay"
+                                           muted="true" style="opacity: 0;
                                             background-color: #000000; -webkit-transition-property: opacity;
                                             -webkit-transition-duration: 2s;"></video>
-                                    </div>
                                 </div>
-                                <div id="divScreencastLocalWrapper"
-                                     style="margin-left: 90px; border:0px solid #009; z-index: 1000">
-                                    <iframe class="previewvideo" style="border:0px solid #009; z-index: 1000"></iframe>
-                                    <div id="divScreencastLocal" class="previewvideo"
-                                         style=' border:0px solid #009; z-index: 1000'>
-                                    </div>
-                                </div>
-                                <!--div id="div1" style="margin-left: 300px; border:0px solid #009; z-index: 1000">
-                                    <iframe class="previewvideo" style="border:0px solid #009; z-index: 1000"> </iframe>
-                                    <div id="div2" class="previewvideo" style='border:0px solid #009; z-index: 1000'>
-                                      <input type="button" class="btn" style="" id="Button1" value="Button1" /> &nbsp;
-                                      <input type="button" class="btn" style="" id="Button2" value="Button2" /> &nbsp;
-                                    </div>
-                                </div-->
                             </div>
+                            <div id="divScreencastLocalWrapper"
+                                 style="margin-left: 90px; border:0px solid #009; z-index: 1000">
+                                <iframe class="previewvideo" style="border:0px solid #009; z-index: 1000"></iframe>
+                                <div id="divScreencastLocal" class="previewvideo"
+                                     style=' border:0px solid #009; z-index: 1000'>
+                                </div>
+                            </div>
+                            <!--div id="div1" style="margin-left: 300px; border:0px solid #009; z-index: 1000">
+                                <iframe class="previewvideo" style="border:0px solid #009; z-index: 1000"> </iframe>
+                                <div id="div2" class="previewvideo" style='border:0px solid #009; z-index: 1000'>
+                                  <input type="button" class="btn" style="" id="Button1" value="Button1" /> &nbsp;
+                                  <input type="button" class="btn" style="" id="Button2" value="Button2" /> &nbsp;
+                                </div>
+                            </div-->
                         </div>
+                    </div>
 
-                        <!-- KeyPad Div  class='span2 well div-keypad'-->
-                        <div id='divKeyPad' class="span2 well div-keypad"
-                             style="left:0px; top:0px; width:378px; height:240px; visibility:hidden">
-                            <table style="width: 100%; height: 100%">
-                                <tr>
-                                    <td><input type="button" style="width: 33%" class="dialpadbtn" value="1"
-                                               onclick="sipSendDTMF('1');"/><input type="button" style="width: 33%"
-                                                                                   class="dialpadbtn" value="2"
-                                                                                   onclick="sipSendDTMF('2');"/><input
-                                            type="button" style="width: 33%" class="dialpadbtn" value="3"
-                                            onclick="sipSendDTMF('3');"/></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="button" style="width: 33%" class="dialpadbtn" value="4"
-                                               onclick="sipSendDTMF('4');"/><input type="button" style="width: 33%"
-                                                                                   class="dialpadbtn" value="5"
-                                                                                   onclick="sipSendDTMF('5');"/><input
-                                            type="button" style="width: 33%" class="dialpadbtn" value="6"
-                                            onclick="sipSendDTMF('6');"/></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="button" style="width: 33%" class="dialpadbtn" value="7"
-                                               onclick="sipSendDTMF('7');"/><input type="button" style="width: 33%"
-                                                                                   class="dialpadbtn" value="8"
-                                                                                   onclick="sipSendDTMF('8');"/><input
-                                            type="button" style="width: 33%" class="dialpadbtn" value="9"
-                                            onclick="sipSendDTMF('9');"/></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="button" style="width: 33%" class="dialpadbtn" value="*"
-                                               onclick="sipSendDTMF('*');"/><input type="button" style="width: 33%"
-                                                                                   class="dialpadbtn" value="0"
-                                                                                   onclick="sipSendDTMF('0');"/><input
-                                            type="button" style="width: 33%" class="dialpadbtn" value="#"
-                                            onclick="sipSendDTMF('#');"/></td>
-                                </tr>
-                                <tr>
-                                    <td colspan=3><input type="button" style="width: 100%"
-                                                         class="btn btn-medium btn-danger" value="close"
-                                                         ng-click="closeKeyPad()"/></td>
-                                </tr>
-                            </table>
-                        </div>
+                    <!-- KeyPad Div  class='span2 well div-keypad'-->
+                    <div id='divKeyPad' class="span2 well div-keypad"
+                         style="left:0px; top:0px; width:378px; height:240px; visibility:hidden">
+                        <table style="width: 100%; height: 100%">
+                            <tr>
+                                <td><input type="button" style="width: 33%" class="dialpadbtn" value="1"
+                                           onclick="sipSendDTMF('1');"/><input type="button" style="width: 33%"
+                                                                               class="dialpadbtn" value="2"
+                                                                               onclick="sipSendDTMF('2');"/><input
+                                        type="button" style="width: 33%" class="dialpadbtn" value="3"
+                                        onclick="sipSendDTMF('3');"/></td>
+                            </tr>
+                            <tr>
+                                <td><input type="button" style="width: 33%" class="dialpadbtn" value="4"
+                                           onclick="sipSendDTMF('4');"/><input type="button" style="width: 33%"
+                                                                               class="dialpadbtn" value="5"
+                                                                               onclick="sipSendDTMF('5');"/><input
+                                        type="button" style="width: 33%" class="dialpadbtn" value="6"
+                                        onclick="sipSendDTMF('6');"/></td>
+                            </tr>
+                            <tr>
+                                <td><input type="button" style="width: 33%" class="dialpadbtn" value="7"
+                                           onclick="sipSendDTMF('7');"/><input type="button" style="width: 33%"
+                                                                               class="dialpadbtn" value="8"
+                                                                               onclick="sipSendDTMF('8');"/><input
+                                        type="button" style="width: 33%" class="dialpadbtn" value="9"
+                                        onclick="sipSendDTMF('9');"/></td>
+                            </tr>
+                            <tr>
+                                <td><input type="button" style="width: 33%" class="dialpadbtn" value="*"
+                                           onclick="sipSendDTMF('*');"/><input type="button" style="width: 33%"
+                                                                               class="dialpadbtn" value="0"
+                                                                               onclick="sipSendDTMF('0');"/><input
+                                        type="button" style="width: 33%" class="dialpadbtn" value="#"
+                                        onclick="sipSendDTMF('#');"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan=3><input type="button" style="width: 100%"
+                                                     class="btn btn-medium btn-danger" value="close"
+                                                     ng-click="closeKeyPad()"/></td>
+                            </tr>
+                        </table>
+                    </div>
 
-                        <div class="mode-wrap">
-                            <ul class="mode">
-                                <li class="ti-lock hvr-rotate" ng-click="unRegister();" tooltip-trigger
-                                    tooltip-placement="top" uib-tooltip="log out" tooltip-trigger="focus"></li>
-                            </ul>
-                        </div>
-                        <div   >
-                            <!-- Audios -->
-                            <audio id="audio_remote" autoplay="autoplay"></audio>
-                            <audio id="ringtone" loop src="sounds/ringtone.wav"></audio>
-                            <audio id="ringbacktone" loop src="sounds/ringbacktone.wav"></audio>
-                            <audio id="dtmfTone" src="sounds/dtmf.wav"></audio>
-                        </div>
+                    <div>
+                        <!-- Audios -->
+                        <audio id="audio_remote" autoplay="autoplay"></audio>
+                        <audio id="ringtone" loop src="sounds/ringtone.wav"></audio>
+                        <audio id="ringbacktone" loop src="sounds/ringbacktone.wav"></audio>
+                        <audio id="dtmfTone" src="sounds/dtmf.wav"></audio>
                     </div>
                 </div>
                 <div class="col-lg-5">
-                    <div class="call-control-wrap p-20 animated fadeInRight">
+                    <div class="call-control-wrap call-wrap p-20 animated fadeInRight">
                         <form class="form-horizontal">
                             <div class="form-group">
-                             <!-- <label id="lblStatus"></label></br>
-                                <label id="lblSipStatus"></label></br>
-                                <label id="lblNotification"></label>-->
+                                <!-- <label id="lblStatus"></label></br>
+                                   <label id="lblSipStatus"></label></br>
+                                   <label id="lblNotification"></label>-->
 
-                                <div class="col-sm-12 p-t-20">
-                                    <label for="number">Enter the phone no to call</label>
+                                <div class="col-sm-12 p-t-20 margin-20-bottom">
+                                    <label for="number" class="fnt-color-white">Enter the phone no to call</label>
                                     <input type="text" class="form-control" id="number" ng-model="call.number"
                                            placeholder="Enter the phone no to call">
                                 </div>
+
+                                 <div class="mode-wrap">
+                                     <ul class="mode"
+                                         style="display: inline-block">
+                                         <li class="font-family-Roboto call-btn"
+                                         style="display: inline-block">
+                                             <span class="fa fa-phone"></span>
+                                         </li>
+                                         <li class="font-family-Roboto video-btn"
+                                             style="display: inline-block">
+                                             <span class="fa fa-video-camera"></span>
+                                         </li>
+
+                                     </ul>
+                                 </div>
+
+                                <div class="mode-wrap">
+                                    <ul class="mode">
+                                        <li class="font-family-Roboto call-btn-rounder">
+                                            <span class="icon-phone-call"></span>
+                                        </li>
+                                        <li class="font-family-Roboto call-btn-rounder video">
+                                            <span class="icon-tiny-video-symbol"></span>
+                                        </li>
+                                        <li class="font-family-Roboto call-btn-rounder microphone">
+                                            <span class="fa fa-microphone"></span>
+                                            <!--<span class="fa fa-microphone-slash"></span>-->
+                                        </li>
+                                        <li class="font-family-Roboto call-btn-rounder microphone">
+                                            <span class="icon-telephone-keypad-with-ten-keys"></span>
+                                            <!--<span class="fa fa-microphone-slash"></span>-->
+                                        </li>
+                                        <!--`-->
+
+                                    </ul>
+                                </div>
+
+
                             </div>
 
                             <div class="form-group" id="phoneButtons">
 
-                                <div class="col-sm-12 p-t-20">
-                                    <button id="btnAudioCall" class="btn btn-default btn-yellow
-                                    btn-block height-40" ng-click="makeCall(call)">Call
-                                    </button>
-                                </div>
-                                <div class="col-sm-12 p-t-20">
-                                    <button id="btnCall" class="btn btn-default btn-yellow
-                                    btn-block height-40" ng-click="makeVideoCall(call)">Video Call
-                                    </button>
-                                </div>
 
-                                <div class="col-sm-12 p-t-20" id="phoneIncomingButtons"  style="visibility: hidden">
-                                    <button id="btnAnswer" class="btn btn-default btn-yellow
-                                    btn-block height-40" ng-click="answerCall()">Answer
-                                    </button>
-                                </div>
+                                <!--<div class="col-sm-12 p-t-20">-->
+                                <!--<button id="btnAudioCall" class="btn btn-default btn-yellow-->
+                                <!--btn-block height-40" ng-click="makeCall(call)">Call-->
+                                <!--</button>-->
+                                <!--</div>-->
+                                <!--<div class="col-sm-12 p-t-20">-->
+                                <!--<button id="btnCall" class="btn btn-default btn-yellow-->
+                                <!--btn-block height-40" ng-click="makeVideoCall(call)">Video Call-->
+                                <!--</button>-->
+                                <!--</div>-->
 
-                                <div class="col-sm-12 p-t-20">
-                                    <button id="btnHangUp" class="btn btn-default btn-yellow
-                                    btn-block height-40" ng-click="hangUp()">HangUp
-                                    </button>
-                                </div>
-                                <div class="col-sm-12 p-t-20">
-                                    <button id="btnReject" class="btn btn-default btn-yellow
-                                    btn-block height-40" ng-click="rejectCall()">Reject
-                                    </button>
-                                </div>
+                                <!--<div class="col-sm-12 p-t-20" id="phoneIncomingButtons" style="visibility: hidden">-->
+                                <!--<button id="btnAnswer" class="btn btn-default btn-yellow-->
+                                <!--btn-block height-40" ng-click="answerCall()">Answer-->
+                                <!--</button>-->
+                                <!--</div>-->
+
+                                <!--<div class="col-sm-12 p-t-20">-->
+                                <!--<button id="btnHangUp" class="btn btn-default btn-yellow-->
+                                <!--btn-block height-40" ng-click="hangUp()">HangUp-->
+                                <!--</button>-->
+                                <!--</div>-->
+                                <!--<div class="col-sm-12 p-t-20">-->
+                                <!--<button id="btnReject" class="btn btn-default btn-yellow-->
+                                <!--btn-block height-40" ng-click="rejectCall()">Reject-->
+                                <!--</button>-->
+                                <!--</div>-->
 
                             </div>
 
-                            <div class="col-sm-12 p-t-20">
+                            <!--<div class="col-sm-12 p-t-20">
                                 <div class="dial-pad">
                                     <i class="ti-menu" ng-click="openKeyPad()"></i>
                                 </div>
 
-                            </div>
+                            </div>-->
                         </form>
 
 

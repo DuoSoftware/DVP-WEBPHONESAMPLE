@@ -3,7 +3,7 @@
  */
 
 'use strict'
-routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, dataParser,socketAuth,Notification) {
+routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, dataParser, socketAuth, Notification) {
 
 
     var onEventsListener = function (e) {
@@ -18,7 +18,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
             Notification.info({message: e, delay: 500, closeOnClick: true});
             if (e.type == 'Session Progress') {
                 //document.getElementById("lblSipStatus").innerHTML = 'Session Progress';
-               //document.getElementById("lblStatus").innerHTML = 'Session Progress';
+                //document.getElementById("lblStatus").innerHTML = 'Session Progress';
                 Notification.info({message: 'Session Progress', delay: 500, closeOnClick: true});
             }
         }
@@ -57,7 +57,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
         //document.getElementById("lblStatus").innerHTML = e;
         Notification.error({message: e, delay: 500, closeOnClick: true});
         console.error(e);
-        $state.go('register');
+        //$state.go('register');
     };
     var uiOnConnectionEvent = function (b_connected, b_connecting) {
         try {
@@ -217,7 +217,8 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
 
     $scope.openKeyPad = function () {
         document.getElementById("divKeyPad").style.visibility = 'visible';
-        document.getElementById("divKeyPad").style.left = ((document.body.clientWidth - C.divKeyPadWidth) >> 1) + 'px';
+        document.getElementById("divKeyPad").style.left = ((document.body.clientWidth - C.divKeyPadWidth) >> 1)
+            + 'px';
         document.getElementById("divKeyPad").style.top = '70px';
         document.getElementById("divKeyPad").style.visibility = 'visible';
     };
@@ -255,7 +256,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
         }
         else {
             console.error("Document Ready-login fails");
-            $state.go('register');
+            // $state.go('register');
         }
 
     });
