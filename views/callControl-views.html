@@ -58,49 +58,6 @@
                         </div>
                     </div>
 
-                    <!-- KeyPad Div  class='span2 well div-keypad'-->
-                    <div id='divKeyPad' class="span2 well div-keypad"
-                         style="left:0px; top:0px; width:378px; height:240px; visibility:hidden">
-                        <table style="width: 100%; height: 100%">
-                            <tr>
-                                <td><input type="button" style="width: 33%" class="dialpadbtn" value="1"
-                                           onclick="sipSendDTMF('1');"/><input type="button" style="width: 33%"
-                                                                               class="dialpadbtn" value="2"
-                                                                               onclick="sipSendDTMF('2');"/><input
-                                        type="button" style="width: 33%" class="dialpadbtn" value="3"
-                                        onclick="sipSendDTMF('3');"/></td>
-                            </tr>
-                            <tr>
-                                <td><input type="button" style="width: 33%" class="dialpadbtn" value="4"
-                                           onclick="sipSendDTMF('4');"/><input type="button" style="width: 33%"
-                                                                               class="dialpadbtn" value="5"
-                                                                               onclick="sipSendDTMF('5');"/><input
-                                        type="button" style="width: 33%" class="dialpadbtn" value="6"
-                                        onclick="sipSendDTMF('6');"/></td>
-                            </tr>
-                            <tr>
-                                <td><input type="button" style="width: 33%" class="dialpadbtn" value="7"
-                                           onclick="sipSendDTMF('7');"/><input type="button" style="width: 33%"
-                                                                               class="dialpadbtn" value="8"
-                                                                               onclick="sipSendDTMF('8');"/><input
-                                        type="button" style="width: 33%" class="dialpadbtn" value="9"
-                                        onclick="sipSendDTMF('9');"/></td>
-                            </tr>
-                            <tr>
-                                <td><input type="button" style="width: 33%" class="dialpadbtn" value="*"
-                                           onclick="sipSendDTMF('*');"/><input type="button" style="width: 33%"
-                                                                               class="dialpadbtn" value="0"
-                                                                               onclick="sipSendDTMF('0');"/><input
-                                        type="button" style="width: 33%" class="dialpadbtn" value="#"
-                                        onclick="sipSendDTMF('#');"/></td>
-                            </tr>
-                            <tr>
-                                <td colspan=3><input type="button" style="width: 100%"
-                                                     class="btn btn-medium btn-danger" value="close"
-                                                     ng-click="closeKeyPad()"/></td>
-                            </tr>
-                        </table>
-                    </div>
 
                     <div>
                         <!-- Audios -->
@@ -117,49 +74,161 @@
                                 <!-- <label id="lblStatus"></label></br>
                                    <label id="lblSipStatus"></label></br>
                                    <label id="lblNotification"></label>-->
+                                <!-- number display -->
+                                <div class="number-display">
+                                    <div class="col-sm-12  margin-20-bottom">
+                                        <label for="number" class="fnt-color-white">Enter the phone no to call</label>
+                                        <input type="text" class="form-control" id="number" ng-model="call.number"
+                                               placeholder="Enter the phone no to call">
+                                    </div>
+                                </div>  <!-- end -->
 
-                                <div class="col-sm-12 p-t-20 margin-20-bottom">
-                                    <label for="number" class="fnt-color-white">Enter the phone no to call</label>
-                                    <input type="text" class="form-control" id="number" ng-model="call.number"
-                                           placeholder="Enter the phone no to call">
+                                <!-- #keypad  #call history -->
+                                <div class="call-history-wrap">
+                                    <div class="loading-history" ng-if="UIelementOption.isLoadingHistory;">
+                                        <i class="fa fa-circle-o-notch fa-spin"></i>
+
+                                    </div>
+                                    <div class="call-history animated fadeInLeft"
+                                         ng-if="UIelementOption.isCallHistory"
+                                         ng-class="UIelementOption.isCallHistory==false?'display-none' :'display-block'">
+                                        <div class="details" ng-repeat="caller in callHistoryes">
+                                            <div class="type">
+                                                <i
+                                                   ng-class="caller.state== 0 ? 'icon-call-ended miss' :
+                                                    caller.state== 1 ? 'icon-phone-call-1 outgoing':
+                                                   caller.state== 2 ?'icon-phone-call-2 incoming':'incoming'"></i>
+                                            </div>
+                                            <div class="log">
+                                                <span class="font-Dosis">{{caller.name}}</span>
+                                                <div class="log-date font-family-Roboto">{{caller.date}},
+                                                    {{caller.time}}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--<div class="details">-->
+                                        <!--<div class="type">-->
+                                        <!--<i class="icon-phone-call incoming"></i>-->
+                                        <!--</div>-->
+                                        <!--<div class="log">-->
+                                        <!--<span class="font-Dosis">test caller</span>-->
+                                        <!--<div class="log-date font-family-Roboto">25, mar 2016 , 5.30pm</div>-->
+                                        <!--</div>-->
+                                        <!--</div>-->
+
+                                        <!--<div class="details">-->
+                                        <!--<div class="type">-->
+                                        <!--<i class="icon-phone-call-1 outgoing"></i>-->
+                                        <!--</div>-->
+                                        <!--<div class="log">-->
+                                        <!--<span class="font-Dosis">test caller</span>-->
+                                        <!--<div class="log-date font-family-Roboto">25, mar 2016 , 5.30pm</div>-->
+                                        <!--</div>-->
+                                        <!--</div>-->
+
+                                        <!--<div class="details">-->
+                                        <!--<div class="type">-->
+                                        <!--<i class="icon-phone-call-1 outgoing"></i>-->
+                                        <!--</div>-->
+                                        <!--<div class="log">-->
+                                        <!--<span class="font-Dosis">test caller</span>-->
+                                        <!--<div class="log-date font-family-Roboto">25, mar 2016 , 5.30pm</div>-->
+                                        <!--</div>-->
+                                        <!--</div>-->
+                                    </div>
+
+                                    <!-- KeyPad Div  class='span2 well div-keypad'-->
+                                    <div id='divKeyPad'
+                                         ng-show="UIelementOption.isKeyPad"
+                                         ng-class="UIelementOption.isKeyPad==false?'display-none' :'display-block'"
+                                         class="span2 well div-keypad animated fadeInRight">
+
+                                        <table style="width: 100%; height: 100%">
+                                            <tr>
+                                                <td><a href="javascript:void (0);" no-click class="dialpadbtn m-r-35"
+                                                       no-click
+                                                       value="1"
+                                                       onclick="sipSendDTMF('1');">1</a>
+                                                    <a class="dialpadbtn m-r-35" href="javascript:void (0);" no-click
+                                                       value="2"
+                                                       onclick="sipSendDTMF('2');">2</a>
+                                                    <a class="dialpadbtn" href="javascript:void (0);" no-click value="3"
+                                                       onclick="sipSendDTMF('3');">3</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <a class="dialpadbtn m-r-35" href="javascript:void (0);" no-click
+                                                       value="4"
+                                                       onclick="sipSendDTMF('4');">4</a>
+                                                    <a class="dialpadbtn m-r-35" href="javascript:void (0);" no-click
+                                                       value="5"
+                                                       onclick="sipSendDTMF('5');">5</a>
+                                                    <a class="dialpadbtn" value="6" href="javascript:void (0);" no-click
+                                                       onclick="sipSendDTMF('6');">6</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><a class="dialpadbtn m-r-35" href="javascript:void (0);" no-click
+                                                       value="7"
+                                                       onclick="sipSendDTMF('7');">7</a>
+                                                    <a class="dialpadbtn m-r-35" href="javascript:void (0);" no-click
+                                                       value="8"
+                                                       onclick="sipSendDTMF('8');">8</a>
+                                                    <a class="dialpadbtn " href="javascript:void (0);" no-click
+                                                       value="9"
+                                                       onclick="sipSendDTMF('9');">9</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><a type="button" class="dialpadbtn m-r-35"
+                                                       href="javascript:void (0);" no-click value="*"
+                                                       onclick="sipSendDTMF('*');">*</a>
+                                                    <a type="button" class="dialpadbtn m-r-35"
+                                                       href="javascript:void (0);" no-click value="0"
+                                                       onclick="sipSendDTMF('0');">0</a>
+                                                    <a type="button" class="dialpadbtn " href="javascript:void (0);"
+                                                       no-click value="#"
+                                                       onclick="sipSendDTMF('#');">#</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <!--<td colspan=3><input type="button" style="width: 100%"-->
+                                                <!--class="btn btn-medium btn-danger" value="close"-->
+                                                <!--ng-click="closeKeyPad()"/></td>-->
+                                            </tr>
+                                        </table>
+                                    </div>
+
                                 </div>
+                                <!-- end -->
 
-                                 <div class="mode-wrap">
-                                     <ul class="mode"
-                                         style="display: inline-block">
-                                         <li class="font-family-Roboto call-btn"
-                                         style="display: inline-block">
-                                             <span class="fa fa-phone"></span>
-                                         </li>
-                                         <li class="font-family-Roboto video-btn"
-                                             style="display: inline-block">
-                                             <span class="fa fa-video-camera"></span>
-                                         </li>
-
-                                     </ul>
-                                 </div>
-
+                                <!-- call option -->
                                 <div class="mode-wrap">
                                     <ul class="mode">
-                                        <li class="font-family-Roboto call-btn-rounder">
-                                            <span class="icon-phone-call"></span>
+                                        <li class="font-family-Roboto call-btn-rounder call-anz "
+                                            id="masterfab">
+                                            <span class=" icon-call-answer"></span>
                                         </li>
-                                        <li class="font-family-Roboto call-btn-rounder video">
-                                            <span class="icon-tiny-video-symbol"></span>
+                                        <li class="font-family-Roboto call-btn-rounder end-call">
+                                            <span class="icon-end-call-button"></span>
                                         </li>
                                         <li class="font-family-Roboto call-btn-rounder microphone">
                                             <span class="fa fa-microphone"></span>
                                             <!--<span class="fa fa-microphone-slash"></span>-->
                                         </li>
-                                        <li class="font-family-Roboto call-btn-rounder microphone">
+                                        <li class="font-family-Roboto call-btn-rounder keypad"
+                                            ng-class="UIelementOption.isKeyPad== true ? 'keypad-selected':
+                                             'keypad-select'"
+                                            ng-click="eventHandler.onClickKeyPad()">
                                             <span class="icon-telephone-keypad-with-ten-keys"></span>
                                             <!--<span class="fa fa-microphone-slash"></span>-->
                                         </li>
                                         <!--`-->
-
                                     </ul>
                                 </div>
-
+                                <!-- end -->
 
                             </div>
 
@@ -195,13 +264,12 @@
                                 <!--</div>-->
 
                             </div>
+                            <!-- <div class="col-sm-12 p-t-20">
+                                 <div class="dial-pad">
+                                     <i class="ti-menu" ng-click="openKeyPad()"></i>
+                                 </div>
 
-                            <!--<div class="col-sm-12 p-t-20">
-                                <div class="dial-pad">
-                                    <i class="ti-menu" ng-click="openKeyPad()"></i>
-                                </div>
-
-                            </div>-->
+                             </div>-->
                         </form>
 
 
@@ -212,3 +280,5 @@
     </div>
 
 </div>
+
+

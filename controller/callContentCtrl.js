@@ -215,13 +215,63 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
         divKeyPadWidth: 220
     };
 
-    $scope.openKeyPad = function () {
-        document.getElementById("divKeyPad").style.visibility = 'visible';
-        document.getElementById("divKeyPad").style.left = ((document.body.clientWidth - C.divKeyPadWidth) >> 1)
-            + 'px';
-        document.getElementById("divKeyPad").style.top = '70px';
-        document.getElementById("divKeyPad").style.visibility = 'visible';
+
+    //code update #damith
+    //#keypad option
+    //call state
+    // 0  miss call , 1 outgoing , 2 incoming
+    $scope.callHistoryes = [
+        {
+            "id": 102, "name": 'johe keep', "date": '2 mar 2016', "time": '25.30', "state": 0
+        },
+        {
+            "id": 250, "name": 'Mason Ava', "date": '2 mar 2016', "time": '5.30', "state": 0
+        },
+        {
+            "id": 100, "name": 'Logon JP', "date": '4 mar 2016', "time": '8.00', "state": 1
+        },
+        {
+            "id": 131, "name": 'Samuwel CA', "date": '10 mar 2016', "time": '12.30', "state": 2
+        },
+        {
+            "id": 137, "name": 'John zone', "date": '12 mar 2016', "time": '8.40', "state": 0
+        },
+        {
+            "id": 132, "name": 'Owen elie', "date": '25 mar 2016', "time": '6.20', "state": 2
+        },
+        {
+            "id": 135, "caller": 'Thomes sadie', "date": '2 jan 2016', "time": '10.45', "state": 1
+        }
+    ]
+    var UIelementOption = {
+            isLoadingHistory: false,
+            isKeyPad: false,
+            isCallHistory: true,
+        }
+        ;
+    $scope.UIelementOption = UIelementOption;
+    $scope.UIelementOption.isCallHistory = true;
+
+    $scope.eventHandler = {
+        onClickKeyPad: function () {
+            if (UIelementOption.isCallHistory) {
+                $scope.UIelementOption.isCallHistory = false;
+                setTimeout(function () {
+                    $scope.UIelementOption.isKeyPad = true;
+                }, 1);
+
+            } else {
+                $scope.UIelementOption.isCallHistory = true;
+                $scope.UIelementOption.isKeyPad = false;
+            }
+        }
+    }
+
+    var openKeyPad = function () {
+
     };
+
+    openKeyPad();
 
     $scope.closeKeyPad = function () {
         document.getElementById("divKeyPad").style.left = '0px';
@@ -239,7 +289,6 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
     angular.element(document).ready(function () {
         inIdleState();
         if (angular.isDefined($rootScope.login)) {
-
             var userEvent = {
                 onSipEventSession: onSipEventSession,
                 notificationEvent: notificationEvent,
@@ -260,4 +309,22 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
         }
 
     });
+
+
+}).directive('noClick', function () {
+    return {
+        restrict: 'EA',
+        replace: true,
+        link: function (scope, element, attrs) {
+            var clickingCallback = function () {
+                var soundUrl = 'assets/audio/135691_2465261.mp3';
+                var sound = new Audio(soundUrl);
+                sound.play();
+                setTimeout(function () {
+                    sound.pause();
+                }, 120);
+            };
+            element.bind('click', clickingCallback);
+        }
+    };
 });

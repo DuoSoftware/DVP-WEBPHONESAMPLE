@@ -84,13 +84,13 @@ body {
 }
 
 .div-keypad {
-    z-index: 100;
-    position: fixed;
-    -moz-transition-property: left top;
-    -o-transition-property: left top;
-    -webkit-transition-duration: 2s;
-    -moz-transition-duration: 2s;
-    -o-transition-duration: 2s;
+
+    /*position: fixed;*/
+    /*-moz-transition-property: left top;*/
+    /*-o-transition-property: left top;*/
+    /*-webkit-transition-duration: 2s;*/
+    /*-moz-transition-duration: 2s;*/
+    /*-o-transition-duration: 2s;*/
 }
 
 .previewvideo {
@@ -98,4 +98,14 @@ body {
     width: 88px;
     height: 72px;
     margin-top: -42px;
+}
+
+.display-none {
+    display: none;
+    z-index: 0;
+}
+
+.display-block {
+    display: block;
+    z-index: 101;
 }

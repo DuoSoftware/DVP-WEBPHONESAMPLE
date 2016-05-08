@@ -38,7 +38,9 @@ html, body {
 
 .call-control-wrap {
     float: right;
-    min-height: 450px;
+    overflow: hidden;
+    position: relative;
+    min-height: 460px;
     background: rgba(0, 0, 0, 0.26);
     margin-top: 100px;
     width: 85%;
@@ -88,10 +90,37 @@ html, body {
 
 }
 
+.call-history-wrap {
+    height: 236px;
+    text-align: center;
+
+}
+
+.m-r-35 {
+    margin-right: 30px;
+}
+
+.m-l-25 {
+    margin-left: 25px;
+}
+
 #call span {
     display: inline-block;
     -webkit-animation: Rotate 2000ms linear 2000ms 5;
     animation: Rotate 2000ms linear 2000ms 5;
+}
+
+/*click numberpad*/
+.dialpadbtn:hover {
+    text-decoration: none !important;
+}
+
+.dialpadbtn:active {
+    background: #49a3d3;
+    color: #fff;
+    font-weight: 500;
+    transition: background 0.1s;
+    text-decoration: none !important;
 }
 
 @-webkit-keyframes Rotate {
@@ -157,100 +186,53 @@ html, body {
     display: inline-block;
     text-align: center;
     vertical-align: middle;
-    padding: 11px 17px;
+    padding: 10px 14px;
     border: 0px solid #43b34a;
     background: rgba(0, 0, 0, 0.3);
     width: 60px;
-. height: 60 px;
+    height: 60px;
     border-radius: 50px;
     cursor: pointer;
 }
 
-.mode > li.call-btn-rounder > span {
-    font-size: 30px;
+.mode > li.call-anz > span {
+    font-size: 28px;
     color: #43b34a;
-    line-height: 36px;
-
-}
-
-.mode > li.video > span {
-    font-size: 26px;
-    color: #fff;
-    line-height: 36px;
-}
-
-.mode > li.microphone > span {
-    font-size: 26px;
-    color: #fff;
-    line-height: 36px;
+    line-height: 45px;
 
 }
 
 .mode > li.end-call > span {
-    font-size: 26px;
+    font-size: 36px;
+    color: #b94544;
+    line-height: 45px;
+
+}
+
+.mode > li.video > span {
+    font-size: 30px;
     color: #fff;
-    line-height: 36px;
+    line-height: 43px;
+}
+
+.mode > li.microphone > span {
+    font-size: 34px;
+    color: #fff;
+    line-height: 41px;
 
 }
 
-/*call btn*/
-.mode > li.call-btn {
-    display: inline-block;
-    text-align: center;
-    vertical-align: middle;
-    padding: 10px 20px;
-    border: 0px solid #de6830;
-    border-radius: 21px;
-    background: #de6830;
-    background: -webkit-gradient(linear, left top, left bottom, from(#fd8e25), to(#de6830));
-    background: -moz-linear-gradient(top, #fd8e25, #de6830);
-    background: linear-gradient(to bottom, #fd8e25, #de6830);
-    font: normal normal 200 18px Roboto;
-    color: #ffffff;
-    text-decoration: none;
-    cursor: pointer;
-    width: 165px;
+.mode > li.keypad > span {
+    font-size: 28px;
+    line-height: 48px;
+
 }
 
-.mode > li.call-btn > span {
-    font-size: 25px;
-    text-shadow: #de6830 2px 1px 0px;
+.keypad-selected{
+    color: #1E93BB;
 }
-
-.mode > li.call-btn:hover,
-.mode > li.call-btn:focus {
-    background: #de8649;
-    background: -webkit-gradient(linear, left top, left bottom, from(#de8649), to(#de6830));
-    background: -moz-linear-gradient(top, #de8649, #de6830);
-    background: linear-gradient(to bottom, #de8649, #de6830);
-    color: #ffffff;
-    text-decoration: none;
-}
-
-.mode > li.call-btn:active {
-    background: #de6830;
-    background: -webkit-gradient(linear, left top, left bottom, from(#de6830), to(#de6830));
-    background: -moz-linear-gradient(top, #de6830, #de6830);
-    background: linear-gradient(to bottom, #de6830, #de6830);
-}
-
-/*video btn*/
-.mode > li.video-btn {
-    display: inline-block;
-    text-align: center;
-    vertical-align: middle;
-    padding: 10px 20px;
-    border: 0px solid #49a3d3;
-    border-radius: 21px;
-    background: #49a3d3;
-    background: -webkit-gradient(linear, left top, left bottom, from(#49a3d3), to(#344656));
-    background: -moz-linear-gradient(top, #49a3d3, #344656);
-    background: linear-gradient(to bottom, #49a3d3, #344656);
-    font: normal normal 200 18px Roboto;
-    color: #ffffff;
-    text-decoration: none;
-    cursor: pointer;
-    width: 160px;
+.keypad-select{
+    color: #fff;
 }
 
 .mode > li.call-btn > span {
@@ -263,21 +245,10 @@ html, body {
     text-shadow: #344656 2px 1px 0px;
 }
 
-.mode > li.video-btn:hover,
-.mode > li.video-btn:focus {
-    background: #de8649;
-    background: -webkit-gradient(linear, left top, left bottom, from(#de8649), to(#de6830));
-    background: -moz-linear-gradient(top, #de8649, #de6830);
-    background: linear-gradient(to bottom, #de8649, #de6830);
-    color: #ffffff;
-    text-decoration: none;
-}
-
-.mode > li.video-btn:active {
-    background: #de6830;
-    background: -webkit-gradient(linear, left top, left bottom, from(#de6830), to(#de6830));
-    background: -moz-linear-gradient(top, #de6830, #de6830);
-    background: linear-gradient(to bottom, #de6830, #de6830);
+.number-display {
+    height: 76px;
+    display: block;
+    position: relative;
 }
 
 /*call control */
@@ -407,35 +378,19 @@ label {
 
 .dialpadbtn {
     display: inline-block;
-    padding: 4px 10px 4px;
-    margin-bottom: 0;
-    font-size: 13px;
-    line-height: 18px;
-    color: #333;
+    width: 55px;
+    height: 55px;
+    color: #fff;
+    border-radius: 50px;
+    background: rgba(0, 0, 0, 0.1);
+    overflow: hidden;
     text-align: center;
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
-    vertical-align: middle;
-    background-color: #f5f5f5;
-    background-image: -moz-linear-gradient(top, #fff, #e6e6e6);
-    background-image: -ms-linear-gradient(top, #fff, #e6e6e6);
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#e6e6e6));
-    background-image: -webkit-linear-gradient(top, #fff, #e6e6e6);
-    background-image: -o-linear-gradient(top, #fff, #e6e6e6);
-    background-image: linear-gradient(top, #fff, #e6e6e6);
-    background-repeat: repeat-x;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
-    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
-    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-    filter: progid:dximagetransform.microsoft.gradient(enabled=false);
-    border: 1px solid #ccc;
-    border-bottom-color: #b3b3b3;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-    cursor: pointer;
+    line-height: 3;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+    text-decoration: none !important;
+
 }
 
 .veery-logo101 {
@@ -552,7 +507,7 @@ input:-webkit-autofill {
 }
 
 .margin-20-bottom {
-    margin-bottom: 35px;
+    margin-bottom: 20px;
 }
 
 /*#animation #fly*/
@@ -707,3 +662,118 @@ input:-webkit-autofill {
     bottom: 10px;
     color: #1b7b97;
 }
+
+/*dial pad*/
+.well {
+    min-height: 20px;
+    padding: 19px;
+    margin-bottom: 20px;
+    background-color: transparent;
+    border: 0px solid #e3e3e3;
+    border-radius: 0px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0);
+}
+
+.div-keypad {
+    left: 0px;
+    width: 301px;
+    height: 280px;
+    /* background: rgba(40, 55, 71, 0.9); */
+    margin: 0 auto;
+    position: relative;
+    /* border-radius: 51px; */
+}
+
+/*#call history*/
+.call-history {
+    padding-left: 15px;
+    padding-right: 15px;
+    overflow: hidden;
+    height: 265px;
+    overflow-y: auto;
+    margin-right: 20px;
+}
+
+.call-history::-webkit-scrollbar {
+    background: rgba(0, 0, 0, 0);
+    width: 4px;
+    border-radius: 10px;
+}
+
+.call-history::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.call-history::-webkit-scrollbar-corner {
+    border-radius: 10px;
+}
+
+.call-history > .details {
+    width: 100%;
+    height: 66px;
+    border-bottom: 1px solid rgba(27, 143, 182, 0.12);
+    padding-top: 10px;
+}
+
+.call-history > .details > .type {
+    float: left;
+    width: 50px;
+    text-align: center;
+    display: inline-block;
+    margin-right: 15px;
+    padding-top: 5px;
+}
+
+.call-history > .details > .type > i.miss {
+    color: #b94544;
+    font-size: 30px;
+}
+
+.call-history > .details > .type > i.incoming {
+    color: #43b34a;
+    font-size: 30px;
+}
+
+.call-history > .details > .type > i.outgoing {
+    color: #1E93BB;
+    font-size: 30px;
+}
+
+.call-history > .details > .log {
+    display: inline-block;
+    float: left;
+}
+
+.call-history > .details > .log > span {
+    color: rgb(62, 70, 81);
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-transform: lowercase;
+    width: 100%;
+    display: block;
+    text-align: left;
+}
+
+.call-history > .details > .log > .log-date {
+    color: #1B8FB6;
+    letter-spacing: 1px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 200;
+
+}
+
+.loading-history {
+    width: 100%;
+    top: 45%;
+    height: 100%;
+    position: absolute;
+}
+
+.loading-history > i {
+    color: #1B8FB6;
+    font-size: 25px;
+}
+
