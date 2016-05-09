@@ -77,7 +77,6 @@
                                 <!-- number display -->
                                 <div class="number-display">
                                     <div class="col-sm-12  margin-20-bottom">
-                                        <label for="number" class="fnt-color-white">Enter the phone no to call</label>
                                         <input type="text" class="form-control" id="number" ng-model="call.number"
                                                placeholder="Enter the phone no to call">
                                     </div>
@@ -90,12 +89,12 @@
 
                                     </div>
                                     <div class="call-history animated fadeInLeft"
-                                         ng-if="UIelementOption.isCallHistory"
+                                         ng-show="UIelementOption.isCallHistory"
                                          ng-class="UIelementOption.isCallHistory==false?'display-none' :'display-block'">
                                         <div class="details" ng-repeat="caller in callHistoryes">
                                             <div class="type">
                                                 <i
-                                                   ng-class="caller.state== 0 ? 'icon-call-ended miss' :
+                                                        ng-class="caller.state== 0 ? 'icon-call-ended miss' :
                                                     caller.state== 1 ? 'icon-phone-call-1 outgoing':
                                                    caller.state== 2 ?'icon-phone-call-2 incoming':'incoming'"></i>
                                             </div>
@@ -140,8 +139,8 @@
 
                                     <!-- KeyPad Div  class='span2 well div-keypad'-->
                                     <div id='divKeyPad'
-                                         ng-show="UIelementOption.isKeyPad"
-                                         ng-class="UIelementOption.isKeyPad==false?'display-none' :'display-block'"
+                                         ng-hide="UIelementOption.isCallHistory"
+                                         ng-class="UIelementOption.isCallHistory==false?'display-block' :'display-none'"
                                          class="span2 well div-keypad animated fadeInRight">
 
                                         <table style="width: 100%; height: 100%">
@@ -219,7 +218,7 @@
                                             <!--<span class="fa fa-microphone-slash"></span>-->
                                         </li>
                                         <li class="font-family-Roboto call-btn-rounder keypad"
-                                            ng-class="UIelementOption.isKeyPad== true ? 'keypad-selected':
+                                            ng-class="UIelementOption.isCallHistory== false ? 'keypad-selected':
                                              'keypad-select'"
                                             ng-click="eventHandler.onClickKeyPad()">
                                             <span class="icon-telephone-keypad-with-ten-keys"></span>

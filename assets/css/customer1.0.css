@@ -1,5 +1,11 @@
 html, body {
     overflow-x: hidden !important;
+    scrollbar-track-color: rgba(0, 0, 0, 0);
+    scrollbar-base-color: rgba(0, 0, 0, 0);
+}
+
+-moz-appearance {
+    background: none;
 }
 
 .bg-image {
@@ -228,10 +234,11 @@ html, body {
 
 }
 
-.keypad-selected{
+.keypad-selected {
     color: #1E93BB;
 }
-.keypad-select{
+
+.keypad-select {
     color: #fff;
 }
 
@@ -246,6 +253,7 @@ html, body {
 }
 
 .number-display {
+    padding-top: 15px;
     height: 76px;
     display: block;
     position: relative;
@@ -697,6 +705,7 @@ input:-webkit-autofill {
 
 .call-history::-webkit-scrollbar {
     background: rgba(0, 0, 0, 0);
+
     width: 4px;
     border-radius: 10px;
 }

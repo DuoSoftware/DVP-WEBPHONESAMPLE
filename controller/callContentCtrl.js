@@ -240,12 +240,11 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
             "id": 132, "name": 'Owen elie', "date": '25 mar 2016', "time": '6.20', "state": 2
         },
         {
-            "id": 135, "caller": 'Thomes sadie', "date": '2 jan 2016', "time": '10.45', "state": 1
+            "id": 135, "name": 'Thomes sadie', "date": '2 jan 2016', "time": '10.45', "state": 1
         }
     ]
     var UIelementOption = {
             isLoadingHistory: false,
-            isKeyPad: false,
             isCallHistory: true,
         }
         ;
@@ -256,13 +255,9 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
         onClickKeyPad: function () {
             if (UIelementOption.isCallHistory) {
                 $scope.UIelementOption.isCallHistory = false;
-                setTimeout(function () {
-                    $scope.UIelementOption.isKeyPad = true;
-                }, 1);
 
             } else {
                 $scope.UIelementOption.isCallHistory = true;
-                $scope.UIelementOption.isKeyPad = false;
             }
         }
     }
