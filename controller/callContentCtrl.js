@@ -57,7 +57,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
         //document.getElementById("lblStatus").innerHTML = e;
         Notification.error({message: e, delay: 500, closeOnClick: true});
         console.error(e);
-        //$state.go('register');
+        $state.go('register');
     };
     var uiOnConnectionEvent = function (b_connected, b_connecting) {
         try {
@@ -159,29 +159,6 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
 
     };
 
-    var inCallState = function () {
-        document.getElementById("btnAudioCall").disabled = true;
-        document.getElementById("btnCall").disabled = true;
-        document.getElementById("phoneIncomingButtons").style.visibility = "hidden";
-        document.getElementById("btnHangUp").disabled = false;
-        document.getElementById("btnReject").style.visibility = "hidden";
-    };
-
-    var inIdleState = function () {
-        document.getElementById("btnAudioCall").disabled = false;
-        document.getElementById("btnCall").disabled = false;
-        document.getElementById("phoneIncomingButtons").style.visibility = "hidden";
-        document.getElementById("btnHangUp").disabled = true;
-        document.getElementById("btnReject").style.visibility = "hidden";
-    };
-
-    var inIncomingState = function () {
-        document.getElementById("btnAudioCall").disabled = true;
-        document.getElementById("btnCall").disabled = true;
-        document.getElementById("phoneIncomingButtons").style.visibility = "visible";
-        document.getElementById("btnHangUp").disabled = true;
-        document.getElementById("btnReject").style.visibility = "visible";
-    };
 
     $scope.answerCall = function () {
         inCallState();
@@ -295,67 +272,23 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
     $scope.UIelementOption = UIelementOption;
     $scope.UIelementOption.isCallHistory = true;
 
-
-    //#UI change state
-    var UIStateChange = (function () {
+    var mainFuntion = (function () {
+        var inIdleState = function () {
+            //enable
+            document.getElementById("btnAudioCall").disabled = false;
+            document.getElementById("btnCall").disabled = false;
+            document.getElementById("btnHangUp").disabled = true;
+            // document.getElementById("btnReject").style.visibility = "hidden";
+        };
+        var inCallState = function () {
+            document.getElementById("btnAudioCall").disabled = true;
+            document.getElementById("btnCall").disabled = true;
+            document.getElementById("btnHangUp").disabled = false;
+            // document.getElementById("btnReject").style.visibility = "hidden";
+        };
         return {
-            changeCallHistoryState: function (state) {
-                $scope.UIelementOption.isCallHistory = state;
-                $scope.UIelementOption.isOpenKeyPad = false;
-                $scope.UIelementOption.isOutGoingCall = false;
-                $scope.UIelementOption.isIncomingCall = false;
-                $scope.UIelementOption.isVideoCall = false;
-            },
-            changeEnableKeyPadState: function (state) {
-                $scope.UIelementOption.isOpenKeyPad = state;
-                $scope.UIelementOption.isCallHistory = false;
-                $scope.UIelementOption.isOutGoingCall = false;
-                $scope.UIelementOption.isIncomingCall = false;
-                $scope.UIelementOption.isVideoCall = false;
-            },
-            changeEnableOutGoingState: function (state) {
-                $scope.UIelementOption.isOutGoingCall = state;
-                $scope.UIelementOption.isOpenKeyPad = false;
-                $scope.UIelementOption.isCallHistory = false;
-                $scope.UIelementOption.isIncomingCall = false;
-                $scope.UIelementOption.isVideoCall = false;
-            },
-            ChangeEnableIncomingCallState: function (state) {
-                $scope.UIelementOption.isIncomingCall = state;
-                $scope.UIelementOption.isOutGoingCall = false;
-                $scope.UIelementOption.isOpenKeyPad = false;
-                $scope.UIelementOption.isCallHistory = false;
-                $scope.UIelementOption.isVideoCall = false;
-            },
-            ChangeLoadInitState: function (state) {
-                $scope.UIelementOption.isCallHistory = state;
-                $scope.UIelementOption.isIncomingCall = state;
-                $scope.UIelementOption.isOutGoingCall = state;
-                $scope.UIelementOption.isOpenKeyPad = state;
-                $scope.UIelementOption.isVideoCall = state;
-            },
-            refreshAllUIState: function (state) {
-                $scope.UIelementOption.isIncomingCall = state;
-                $scope.UIelementOption.isOutGoingCall = state;
-                $scope.UIelementOption.isOpenKeyPad = state;
-                $scope.UIelementOption.isCallHistory = state;
-                $scope.UIelementOption.isVideoCall = state;
-            },
-            enableTimer: function () {
-                $scope.$broadcast('timer-start');
-                $scope.UIelementOption.isTimer = true;
-            },
-            disableTimer: function () {
-                $scope.$broadcast('timer-stop');
-                $scope.UIelementOption.isTimer = false;
-                $scope.UIelementOption.isCallHistory = true;
-            }
-        }
-    });//end
-
-
-    var mainFunction = (function () {
-        return {
+            inIdleState: inIdleState,
+            inCallState: inCallState,
             callConnection: function () {
                 setTimeout(function () {
                     $scope.$apply(function () {
@@ -373,7 +306,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
                 } else {
                     $scope.UIelementOption.isOutGoingCall = true;
                     $scope.UIelementOption.isCallHistory = false;
-                    mainFunction.callConnection();
+                   
                 }
             },
             endCall: function () {
@@ -383,9 +316,9 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
                 $scope.UIelementOption.isOpenKeyPad = false;
             },
             makeVideoCall: function (call) {
-
-            },
-            onClickIncomingCall: function () {
+                alert("make video call");
+                inCallState();
+                sipCall('call-audiovideo', '5000');
             }
         }
     })();
@@ -415,8 +348,46 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
         ,
         onClickIncomingCall: function () {
 
+    var openKeyPad = function () {
+
+    };
+
+    openKeyPad();
+
+    $scope.closeKeyPad = function () {
+        document.getElementById("divKeyPad").style.left = '0px';
+        document.getElementById("divKeyPad").style.top = '0px';
+        document.getElementById("divKeyPad").style.visibility = 'hidden';
+        document.getElementById("divKeyPad").style.visibility = 'hidden';
+    };
+
+    $scope.unRegister = function () {
+        sipUnRegister();
+    };
+
+    document.getElementById("phoneButtons").style.visibility = 'hidden';
+
+    angular.element(document).ready(function () {
+        mainFuntion.inIdleState();
+        if (angular.isDefined($rootScope.login)) {
+            var userEvent = {
+                onSipEventSession: onSipEventSession,
+                notificationEvent: notificationEvent,
+                onErrorCallback: onErrorCallback,
+                uiOnConnectionEvent: uiOnConnectionEvent,
+                uiVideoDisplayShowHide: uiVideoDisplayShowHide,
+                uiVideoDisplayEvent: uiVideoDisplayEvent,
+                onIncomingCall: onIncomingCall,
+                uiCallTerminated: uiCallTerminated
+            };
+            socketAuth.getAuthenticatedAsPromise();// connect to notification server
+            preInit(userEvent, dataParser.userProfile);// initialize Soft phone
+
         }
-    }
+        else {
+            console.error("Document Ready-login fails");
+            $state.go('register');
+        }
 
 
 }).directive('noClick', function () {

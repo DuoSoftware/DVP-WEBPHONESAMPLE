@@ -11,6 +11,7 @@
                             <img src="assets/images/logo1.png">
                         </div>
                         <h1 class="h1 fnt-color-blue1 font-Dosis  fnt-weight-500">Veery Web Phone</h1>
+
                         <p class="font-family-Roboto fnt-color-3 fnt-weight-200 ">
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
                             has
@@ -100,6 +101,7 @@
                                             </div>
                                             <div class="log">
                                                 <span class="font-Dosis">{{caller.name}}</span>
+
                                                 <div class="log-date font-family-Roboto">{{caller.date}},
                                                     {{caller.time}}
                                                 </div>
@@ -216,17 +218,18 @@
                                 <!-- call option -->
                                 <div class="mode-wrap">
                                     <div class="video-wrap">
-                                        <a ng-click="eventHandler.onClickVideoCall(call);">
+                                        <a id="btnCall" ng-click="eventHandler.onClickVideoCall(call);">
                                             <i class="icon-tiny-video-symbol"></i>
                                         </a>
                                     </div>
                                     <ul class="mode">
                                         <li class="font-family-Roboto call-btn-rounder call-anz disable-btn"
-                                            id="masterfab"
+                                            id="btnAudioCall"
                                             ng-click="eventHandler.onClickOutGoingCall()">
                                             <span class=" icon-call-answer"></span>
                                         </li>
                                         <li class="font-family-Roboto call-btn-rounder end-call"
+                                            id="btnHangUp"
                                             ng-click="eventHandler.onClickEndCall()">
                                             <span class="icon-end-call-button"></span>
                                         </li>
