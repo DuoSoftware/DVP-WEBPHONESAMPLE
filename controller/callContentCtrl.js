@@ -5,7 +5,6 @@
 'use strict'
 routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, dataParser, socketAuth, Notification) {
 
-
     var onEventsListener = function (e) {
         console.info(e.type);
         //document.getElementById("lblStatus").innerHTML = e.type;
@@ -261,13 +260,11 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
     //#keypad option
     //call state
     // 0  miss call , 1 outgoing , 2 incoming
-    $scope.callHistoryes = [
+    $scope.callHistoryes = [];
 
-    ];
-
-    var addCallToHistory = function(name,state){
+    var addCallToHistory = function (name, state) {
         var item = {
-            "id": 135, "name":name, "date": '2 jan 2016', "time": '10.45', "state": state
+            "id": 135, "name": name, "date": '2 jan 2016', "time": '10.45', "state": state
         };
         $scope.callHistoryes.push(item);
     };
@@ -288,7 +285,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
         isKeyPadBtn: false,
         isVideoCallBtn: false,
         isChangeBtnWrap: false,
-        callFunctions:false
+        callFunctions: false
     };
 
     $scope.UIelementOption = UIelementOption;
@@ -326,7 +323,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
                 $scope.UIelementOption.isOpenKeyPad = false;
                 $scope.UIelementOption.isCallHistory = false;
                 $scope.UIelementOption.isVideoCall = false;
-                $scope.UIelementOption.callFunctions= !state;
+                $scope.UIelementOption.callFunctions = !state;
             },
             loadInit: function (state) {
                 $scope.UIelementOption.isIncomingCall = state;
@@ -370,7 +367,6 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
     })();//end
 
 
-
     var mainFunction = (function () {
         return {
 
@@ -387,7 +383,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
                 }
                 inCallState();
                 sipCall('call-audio', call.number);
-                addCallToHistory(call.number,1);
+                addCallToHistory(call.number, 1);
             },
             endCall: function () {
                 $scope.UIelementOption.isCallConnect = false;
@@ -400,7 +396,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
             makeVideoCall: function (call) {
                 inCallState();
                 sipCall('call-audiovideo', call.number);
-                addCallToHistory(call.number,1);
+                addCallToHistory(call.number, 1);
             },
             onClickIncomingCall: function () {
             },
@@ -422,17 +418,17 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
         onClickKeyPad: function () {
 
 
-            if(UIelementOption.isCallConnect){
-                if($scope.UIelementOption.isOpenKeyPad) {
+            if (UIelementOption.isCallConnect) {
+                if ($scope.UIelementOption.isOpenKeyPad) {
                     $scope.UIelementOption.isOpenKeyPad = false;
                     $scope.UIelementOption.isOutGoingCall = true;
                 }
-                else{
+                else {
                     $scope.UIelementOption.isOpenKeyPad = true;
                     $scope.UIelementOption.isOutGoingCall = false;
                 }
             }
-            else{
+            else {
                 if (UIelementOption.isCallHistory) {
                     $scope.UIelementOption.isCallHistory = false;
                     $scope.UIelementOption.isOpenKeyPad = true;
