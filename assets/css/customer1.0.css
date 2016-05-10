@@ -209,6 +209,13 @@ html, body {
 
 }
 
+.mode > li.video-wrap > span {
+    font-size: 28px;
+    color: #ffffff;
+    line-height: 45px;
+
+}
+
 .mode > li.call-anz.disable-btn > span {
     pointer-events: none;
     font-size: 28px;
@@ -947,35 +954,6 @@ input:-webkit-autofill {
     font-size: 16px;
     color: rgb(62, 70, 81);
     font-weight: 200;
-}
-
-/*toggle video button*/
-.video-wrap {
-    position: absolute;
-    left: 16%;
-    bottom: 20%;
-
-    /*display: none;*/
-}
-
-.video-wrap > a {
-    display: inline-block;
-    text-align: center;
-    vertical-align: middle;
-    padding: 10px 14px;
-    background: rgba(0, 0, 0, 0.3);
-    width: 60px;
-    height: 60px;
-    border-radius: 50px;
-    cursor: pointer;
-}
-
-.video-wrap > a > i {
-    font-size: 35px;
-}
-
-.call-anz:hover .video-wrap {
-    display: block;
 }
 
 /*incoming anz call*/
