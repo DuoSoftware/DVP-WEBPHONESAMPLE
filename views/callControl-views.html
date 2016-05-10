@@ -91,12 +91,10 @@
                                     </div>
                                     <!-- #callhistory -->
                                     <div class="call-history animated fadeInLeft"
-                                         ng-show="UIelementOption.isCallHistory"
-                                         ng-class="UIelementOption.isCallHistory==false?'display-none' :'display-block'">
+                                         ng-show="UIelementOption.isCallHistory">
                                         <div class="details" ng-repeat="caller in callHistoryes">
                                             <div class="type">
-                                                <i
-                                                        ng-class="caller.state== 0 ? 'icon-call-ended miss' :
+                                                <i ng-class="caller.state== 0 ? 'icon-call-ended miss' :
                                                     caller.state== 1 ? 'icon-phone-call-1 outgoing':
                                                    caller.state== 2 ?'icon-phone-call-2 incoming':'incoming'"></i>
                                             </div>
@@ -107,41 +105,11 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <!--<div class="details">-->
-                                        <!--<div class="type">-->
-                                        <!--<i class="icon-phone-call incoming"></i>-->
-                                        <!--</div>-->
-                                        <!--<div class="log">-->
-                                        <!--<span class="font-Dosis">test caller</span>-->
-                                        <!--<div class="log-date font-family-Roboto">25, mar 2016 , 5.30pm</div>-->
-                                        <!--</div>-->
-                                        <!--</div>-->
-
-                                        <!--<div class="details">-->
-                                        <!--<div class="type">-->
-                                        <!--<i class="icon-phone-call-1 outgoing"></i>-->
-                                        <!--</div>-->
-                                        <!--<div class="log">-->
-                                        <!--<span class="font-Dosis">test caller</span>-->
-                                        <!--<div class="log-date font-family-Roboto">25, mar 2016 , 5.30pm</div>-->
-                                        <!--</div>-->
-                                        <!--</div>-->
-
-                                        <!--<div class="details">-->
-                                        <!--<div class="type">-->
-                                        <!--<i class="icon-phone-call-1 outgoing"></i>-->
-                                        <!--</div>-->
-                                        <!--<div class="log">-->
-                                        <!--<span class="font-Dosis">test caller</span>-->
-                                        <!--<div class="log-date font-family-Roboto">25, mar 2016 , 5.30pm</div>-->
-                                        <!--</div>-->
-                                        <!--</div>-->
                                     </div>
 
                                     <!--#KeyPad-->
                                     <div id='divKeyPad'
-                                         ng-hide="!UIelementOption.isCallHistory"
+                                         ng-show="UIelementOption.isOpenKeyPad==true"
                                          ng-class="UIelementOption.isCallHistory==false?'display-block' :'display-none'"
                                          class="span2 well div-keypad animated fadeInRight">
 
@@ -204,7 +172,7 @@
 
                                     <!--#outgoingCall -->
                                     <div class="outgoing-call"
-                                         ng-show="UIelementOption.isOutGoingCall">
+                                         ng-hide="!UIelementOption.isOutGoingCall">
                                         <div class="outgoing-wrap">
                                             <div class="connecting zoomIn animated"
                                                  ng-class="UIelementOption.isCallConnect==true?'connected-call':'connecting-call'">
@@ -219,7 +187,7 @@
                                                 </timer>
                                             </div>
                                             <div id="connecting"
-                                                 ng-show="!UIelementOption.isCallConnect">
+                                                 ng-show="UIelementOption.isTimer">
                                                 <div class="circle"></div>
                                                 <div class="circle"></div>
                                                 <div class="circle"></div>
@@ -233,8 +201,16 @@
                                                    ng-show="UIelementOption.isCallConnect">connected</span>
                                         </div>
                                     </div>
+
+                                    <!-- #outgoing call -->
+                                    <div class="incoming-call-wrap"
+                                         ng-hide="UIelementOption.isIncomingCall">
+
+                                    </div>
+                                    <!-- end -->
                                 </div>
                                 <!-- end -->
+
 
                                 <!--video call -->
                                 <!-- call option -->
@@ -245,7 +221,7 @@
                                         </a>
                                     </div>
                                     <ul class="mode">
-                                        <li class="font-family-Roboto call-btn-rounder call-anz"
+                                        <li class="font-family-Roboto call-btn-rounder call-anz disable-btn"
                                             id="masterfab"
                                             ng-click="eventHandler.onClickOutGoingCall()">
                                             <span class=" icon-call-answer"></span>
@@ -269,50 +245,10 @@
                                     </ul>
                                 </div>
                                 <!-- end -->
-
-                                <!-- #outgoing call -->
-
-
                             </div>
 
                             <div class="form-group" id="phoneButtons">
-
-
-                                <!--<div class="col-sm-12 p-t-20">-->
-                                <!--<button id="btnAudioCall" class="btn btn-default btn-yellow-->
-                                <!--btn-block height-40" ng-click="makeCall(call)">Call-->
-                                <!--</button>-->
-                                <!--</div>-->
-                                <!--<div class="col-sm-12 p-t-20">-->
-                                <!--<button id="btnCall" class="btn btn-default btn-yellow-->
-                                <!--btn-block height-40" ng-click="makeVideoCall(call)">Video Call-->
-                                <!--</button>-->
-                                <!--</div>-->
-
-                                <!--<div class="col-sm-12 p-t-20" id="phoneIncomingButtons" style="visibility: hidden">-->
-                                <!--<button id="btnAnswer" class="btn btn-default btn-yellow-->
-                                <!--btn-block height-40" ng-click="answerCall()">Answer-->
-                                <!--</button>-->
-                                <!--</div>-->
-
-                                <!--<div class="col-sm-12 p-t-20">-->
-                                <!--<button id="btnHangUp" class="btn btn-default btn-yellow-->
-                                <!--btn-block height-40" ng-click="hangUp()">HangUp-->
-                                <!--</button>-->
-                                <!--</div>-->
-                                <!--<div class="col-sm-12 p-t-20">-->
-                                <!--<button id="btnReject" class="btn btn-default btn-yellow-->
-                                <!--btn-block height-40" ng-click="rejectCall()">Reject-->
-                                <!--</button>-->
-                                <!--</div>-->
-
                             </div>
-                            <!-- <div class="col-sm-12 p-t-20">
-                                 <div class="dial-pad">
-                                     <i class="ti-menu" ng-click="openKeyPad()"></i>
-                                 </div>
-
-                             </div>-->
                         </form>
 
 

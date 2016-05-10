@@ -205,6 +205,14 @@ html, body {
 .mode > li.call-anz > span {
     font-size: 28px;
     color: #43b34a;
+    cursor: not-allowed;
+    line-height: 45px;
+
+}
+
+.mode > li.call-anz.disable-btn > span {
+    font-size: 28px;
+    color: rgba(0, 0, 0, 0.5);
     line-height: 45px;
 
 }
@@ -905,8 +913,8 @@ input:-webkit-autofill {
     position: absolute;
     left: 16%;
     bottom: 20%;
+    display: none;
 }
-
 
 .video-wrap > a {
     display: inline-block;
@@ -924,7 +932,8 @@ input:-webkit-autofill {
     font-size: 35px;
 }
 
-.call-anz:hover  .video-wrap {
+.call-anz:hover .video-wrap {
     display: block;
 }
+
 
