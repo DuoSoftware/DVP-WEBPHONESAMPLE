@@ -22,7 +22,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
                 //document.getElementById("lblStatus").innerHTML = 'Session Progress';
                 Notification.info({message: 'Session Progress', delay: 500, closeOnClick: true});
             }
-            else if (e == 'In Call') {
+            else if (e.toString().toLowerCase() == 'in call') {
                 inCallConnectedState();
 
             }
@@ -107,6 +107,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
             //document.getElementById("lblSipStatus").innerHTML = sRemoteNumber;
             Notification.info({message: sRemoteNumber, delay: 500, closeOnClick: true});
             inIncomingState();
+            $scope.call.number = sRemoteNumber;
         }
         catch (ex) {
             console.error(ex.message);
@@ -254,6 +255,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
 
     $scope.call = {};
     $scope.call.status = "";
+    $scope.call.number = "";
 
     //code update #damith
     //#keypad option
@@ -401,6 +403,13 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
                 addCallToHistory(call.number,1);
             },
             onClickIncomingCall: function () {
+            },
+            onAnswerCall: function () {
+                inCallState();
+                answerCall();
+            },
+            onRejectCall: function () {
+                rejectCall();
             }
         }
     })();
@@ -439,18 +448,21 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
         },
         onClickOutGoingCall: function (call) {
             mainFunction.outGoingCall(call);
-        }
-        ,
+        },
         onClickEndCall: function () {
             mainFunction.endCall();
-        }
-        ,
+        },
         onClickVideoCall: function (call) {
             mainFunction.makeVideoCall(call);
-        }
-        ,
+        },
         onClickIncomingCall: function () {
 
+        },
+        onAnswerCall: function () {
+            mainFunction.onAnswerCall();
+        },
+        onRejectCall: function () {
+            mainFunction.onRejectCall();
         }
     }
 

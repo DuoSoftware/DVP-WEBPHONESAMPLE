@@ -825,7 +825,7 @@ input:-webkit-autofill {
     color: #1C90B7;
     font-size: 22px;
     font-weight: 100;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
 }
 
 .outgoing-wrap > .connecting {
@@ -952,7 +952,7 @@ input:-webkit-autofill {
 
 .call-time {
     font-size: 16px;
-    color: rgb(62, 70, 81);
+    color: rgb(232, 193, 16);
     font-weight: 200;
 }
 
