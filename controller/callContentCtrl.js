@@ -57,7 +57,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
         //document.getElementById("lblStatus").innerHTML = e;
         Notification.error({message: e, delay: 500, closeOnClick: true});
         console.error(e);
-        //$state.go('register');
+        $state.go('register');
     };
     var uiOnConnectionEvent = function (b_connected, b_connecting) {
         try {
@@ -159,29 +159,6 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
 
     };
 
-    var inCallState = function () {
-        document.getElementById("btnAudioCall").disabled = true;
-        document.getElementById("btnCall").disabled = true;
-        document.getElementById("phoneIncomingButtons").style.visibility = "hidden";
-        document.getElementById("btnHangUp").disabled = false;
-        document.getElementById("btnReject").style.visibility = "hidden";
-    };
-
-    var inIdleState = function () {
-        document.getElementById("btnAudioCall").disabled = false;
-        document.getElementById("btnCall").disabled = false;
-        document.getElementById("phoneIncomingButtons").style.visibility = "hidden";
-        document.getElementById("btnHangUp").disabled = true;
-        document.getElementById("btnReject").style.visibility = "hidden";
-    };
-
-    var inIncomingState = function () {
-        document.getElementById("btnAudioCall").disabled = true;
-        document.getElementById("btnCall").disabled = true;
-        document.getElementById("phoneIncomingButtons").style.visibility = "visible";
-        document.getElementById("btnHangUp").disabled = true;
-        document.getElementById("btnReject").style.visibility = "visible";
-    };
 
     $scope.answerCall = function () {
         inCallState();
@@ -240,31 +217,86 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
             "id": 132, "name": 'Owen elie', "date": '25 mar 2016', "time": '6.20', "state": 2
         },
         {
-            "id": 135, "caller": 'Thomes sadie', "date": '2 jan 2016', "time": '10.45', "state": 1
+            "id": 135, "name": 'Thomes sadie', "date": '2 jan 2016', "time": '10.45', "state": 1
         }
     ]
     var UIelementOption = {
             isLoadingHistory: false,
-            isKeyPad: false,
             isCallHistory: true,
+            isOutGoingCall: false,
+            isCallConnect: false
         }
         ;
     $scope.UIelementOption = UIelementOption;
-    $scope.UIelementOption.isCallHistory = true;
+    $scope.UIelementOption.isCallHistory = false;
+
+    var mainFuntion = (function () {
+        var inIdleState = function () {
+            //enable
+            document.getElementById("btnAudioCall").disabled = false;
+            document.getElementById("btnCall").disabled = false;
+            document.getElementById("btnHangUp").disabled = true;
+            // document.getElementById("btnReject").style.visibility = "hidden";
+        };
+        var inCallState = function () {
+            document.getElementById("btnAudioCall").disabled = true;
+            document.getElementById("btnCall").disabled = true;
+            document.getElementById("btnHangUp").disabled = false;
+            // document.getElementById("btnReject").style.visibility = "hidden";
+        };
+        return {
+            inIdleState: inIdleState,
+            inCallState: inCallState,
+            callConnection: function () {
+                setTimeout(function () {
+                    $scope.$apply(function () {
+                        $scope.UIelementOption.isCallConnect = true;
+                        $scope.$broadcast('timer-start');
+                    });
+                }, 5000);
+            },
+            outGoingCall: function () {
+
+                if ($scope.UIelementOption.isOutGoingCall) {
+                    $scope.UIelementOption.isOutGoingCall = false;
+                    $scope.UIelementOption.isCallHistory = true;
+                } else {
+                    $scope.UIelementOption.isOutGoingCall = true;
+                    $scope.UIelementOption.isCallHistory = false;
+                    mainFuntion.callConnection();
+                }
+            },
+            endCall: function () {
+                $scope.UIelementOption.isCallConnect = false;
+                $scope.UIelementOption.isOutGoingCall = false;
+                $scope.UIelementOption.isCallHistory = true;
+            },
+            makeVideoCall: function (call) {
+                alert("make video call");
+                inCallState();
+                sipCall('call-audiovideo', '5000');
+            }
+        }
+
+    })();
 
     $scope.eventHandler = {
         onClickKeyPad: function () {
             if (UIelementOption.isCallHistory) {
                 $scope.UIelementOption.isCallHistory = false;
-                $scope.UIelementOption.isKeyPad = true;
-                //setTimeout(function () {
-                //
-                //}, 1);
 
             } else {
-                $scope.UIelementOption.isCallHistory = true;
-                $scope.UIelementOption.isKeyPad = false;
+                $scope.$broadcast('timer-start');
             }
+        },
+        onClickOutGoingCall: function () {
+            mainFuntion.outGoingCall();
+        },
+        onClickEndCall: function () {
+            mainFuntion.endCall();
+        },
+        onClickVideoCall: function () {
+            mainFuntion.makeVideoCall();
         }
     }
 
@@ -288,7 +320,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
     document.getElementById("phoneButtons").style.visibility = 'hidden';
 
     angular.element(document).ready(function () {
-        inIdleState();
+        mainFuntion.inIdleState();
         if (angular.isDefined($rootScope.login)) {
             var userEvent = {
                 onSipEventSession: onSipEventSession,
@@ -306,7 +338,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
         }
         else {
             console.error("Document Ready-login fails");
-            // $state.go('register');
+            $state.go('register');
         }
 
     });
