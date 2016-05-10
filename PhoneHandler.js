@@ -402,6 +402,7 @@ function onSipEventStack(e /*SIPml.Stack.Event*/) {
 function onSipEventSession(e /* SIPml.Session.Event */) {
 
     UserEvent.notificationEvent(e.description);
+
     switch (e.type) {
         case 'connecting':
         case 'connected':
@@ -417,7 +418,7 @@ function onSipEventSession(e /* SIPml.Session.Event */) {
                 if (bConnected) {
                     stopRingbackTone();
                     stopRingTone();
-
+                    UserEvent.onSipEventSession(e.description);
                     if (oNotifICall) {
                         oNotifICall.cancel();
                         oNotifICall = null;

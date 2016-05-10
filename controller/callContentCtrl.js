@@ -17,10 +17,13 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
             $scope.call.status = e;
             //document.getElementById("lblSipStatus").innerHTML = e;
             Notification.info({message: e, delay: 500, closeOnClick: true});
-            if (e.type == 'Session Progress') {
+            if (e == 'Session Progress') {
                 //document.getElementById("lblSipStatus").innerHTML = 'Session Progress';
                 //document.getElementById("lblStatus").innerHTML = 'Session Progress';
                 Notification.info({message: 'Session Progress', delay: 500, closeOnClick: true});
+            }
+            else if (e == 'In Call') {
+                UIStateChange.enableTimer();
             }
         }
         catch (ex) {
@@ -111,11 +114,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
 
     var uiCallTerminated = function (msg) {
         try {
-            /*
-             btnHangUp.value = 'HangUp';
-             btnHoldResume.value = 'hold';
-             btnMute.value = "Mute";
-             */
+            UIStateChange.disableTimer();
             inIdleState();
             if (window.btnBFCP) window.btnBFCP.disabled = true;
 
@@ -353,7 +352,6 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
             disableTimer: function () {
                 $scope.$broadcast('timer-stop');
                 $scope.UIelementOption.isTimer = false;
-                $scope.UIelementOption.isCallHistory = false;
             },
             changeCallBtnState: function (state) {
                 $scope.UIelementOption.isCallBtn = state;
