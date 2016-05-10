@@ -328,11 +328,11 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
                 $scope.UIelementOption.isVideoCall = false;
             },
             loadInit: function (state) {
-                $scope.UIelementOption.isIncomingCall = false;
-                $scope.UIelementOption.isOutGoingCall = false;
-                $scope.UIelementOption.isOpenKeyPad = false;
-                $scope.UIelementOption.isCallHistory = true;
-                $scope.UIelementOption.isVideoCall = false;
+                $scope.UIelementOption.isIncomingCall = state;
+                $scope.UIelementOption.isOutGoingCall = state;
+                $scope.UIelementOption.isOpenKeyPad = state;
+                $scope.UIelementOption.isCallHistory = state;
+                $scope.UIelementOption.isVideoCall = state;
             },
             refreshAllUI: function () {
                 $scope.UIelementOption.isIncomingCall = false;
