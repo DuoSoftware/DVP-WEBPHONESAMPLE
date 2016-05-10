@@ -256,9 +256,10 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
         onClickKeyPad: function () {
             if (UIelementOption.isCallHistory) {
                 $scope.UIelementOption.isCallHistory = false;
-                setTimeout(function () {
-                    $scope.UIelementOption.isKeyPad = true;
-                }, 1);
+                $scope.UIelementOption.isKeyPad = true;
+                //setTimeout(function () {
+                //
+                //}, 1);
 
             } else {
                 $scope.UIelementOption.isCallHistory = true;
