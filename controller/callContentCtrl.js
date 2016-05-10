@@ -57,7 +57,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
         //document.getElementById("lblStatus").innerHTML = e;
         Notification.error({message: e, delay: 500, closeOnClick: true});
         console.error(e);
-        //$state.go('register');
+        $state.go('register');
     };
     var uiOnConnectionEvent = function (b_connected, b_connecting) {
         try {
@@ -143,7 +143,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
             //document.getElementById("lblStatus").innerHTML = description;
             Notification.info({message: description, delay: 500, closeOnClick: true});
             if (description == 'Connected') {
-                document.getElementById("phoneButtons").style.visibility = 'visible';
+                inIdleState();
                 Notification.success({message: description, delay: 3000, closeOnClick: true});
 
             }
@@ -160,27 +160,27 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
     };
 
     var inCallState = function () {
-        document.getElementById("btnAudioCall").disabled = true;
-        document.getElementById("btnCall").disabled = true;
-        document.getElementById("phoneIncomingButtons").style.visibility = "hidden";
-        document.getElementById("btnHangUp").disabled = false;
-        document.getElementById("btnReject").style.visibility = "hidden";
+        UIStateChange.changeCallBtnState(false);
+        UIStateChange.changeVideoCall(false);
+        UIStateChange.changeEndCallBtnState(true);
+        UIStateChange.ChangeEnableIncomingCallState(false);
     };
 
     var inIdleState = function () {
-        document.getElementById("btnAudioCall").disabled = false;
-        document.getElementById("btnCall").disabled = false;
-        document.getElementById("phoneIncomingButtons").style.visibility = "hidden";
-        document.getElementById("btnHangUp").disabled = true;
-        document.getElementById("btnReject").style.visibility = "hidden";
+        UIStateChange.loadInit(true);
+        UIStateChange.changeCallHistoryState(true);
+        UIStateChange.changeCallBtnState(true);
+        UIStateChange.changeVideoCall(true);
+        UIStateChange.changeEndCallBtnState(false);
+        UIStateChange.ChangeEnableIncomingCallState(false);
     };
 
     var inIncomingState = function () {
-        document.getElementById("btnAudioCall").disabled = true;
-        document.getElementById("btnCall").disabled = true;
-        document.getElementById("phoneIncomingButtons").style.visibility = "visible";
-        document.getElementById("btnHangUp").disabled = true;
-        document.getElementById("btnReject").style.visibility = "visible";
+        UIStateChange.changeCallBtnState(false);
+        UIStateChange.changeVideoCall(false);
+        UIStateChange.changeEndCallBtnState(false);
+        UIStateChange.ChangeEnableIncomingCallState(true);
+
     };
 
     $scope.answerCall = function () {
@@ -231,7 +231,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
     document.getElementById("phoneButtons").style.visibility = 'hidden';
 
     angular.element(document).ready(function () {
-        inIdleState();
+        UIStateChange.loadInit(false);
         if (angular.isDefined($rootScope.login)) {
             var userEvent = {
                 onSipEventSession: onSipEventSession,
@@ -248,8 +248,8 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
 
         }
         else {
-            console.error("Document Ready-login fails");
-            // $state.go('register');
+
+             $state.go('register');
         }
 
     });
@@ -284,7 +284,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
     ];
     var UIelementOption = {
         isLoadingHistory: false,
-        isCallHistory: true,
+        isCallHistory: false,
         isOpenKeyPad: false,
         isOutGoingCall: false,
         isCallConnect: false,
@@ -300,7 +300,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
 
     };
     $scope.UIelementOption = UIelementOption;
-    $scope.UIelementOption.isCallHistory = true;
+
 
 
     //#UI change state
@@ -355,7 +355,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
             disableTimer: function () {
                 $scope.$broadcast('timer-stop');
                 $scope.UIelementOption.isTimer = false;
-                $scope.UIelementOption.isCallHistory = true;
+                $scope.UIelementOption.isCallHistory = false;
             },
             changeCallBtnState: function (state) {
                 $scope.UIelementOption.isCallBtn = state;
@@ -370,7 +370,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
                 $scope.UIelementOption.isVideoCallBtn = state;
             }
         }
-    });//end
+    })();//end
 
 
     var mainFunction = (function () {
