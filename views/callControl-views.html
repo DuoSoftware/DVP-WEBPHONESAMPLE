@@ -234,7 +234,7 @@
 
                                 <!--video call -->
                                 <!-- call option -->
-                                <div class="mode-wrap">
+                                <div ng-show="UIelementOption.callFunctions" id="callFunctions" class="mode-wrap">
                                     <div class="video-wrap"
                                          ng-show="UIelementOption.isVideoCallBtn">
                                         <a id="btnCall" ng-click="eventHandler.onClickVideoCall(call);">
