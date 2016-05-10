@@ -839,7 +839,13 @@ input:-webkit-autofill {
     left: 112px;
     top: 3px;
     overflow: hidden;
+}
+
+.ringing {
     animation: calling 1.1s ease-out infinite;
+}
+
+.stop-ringing {
 
 }
 

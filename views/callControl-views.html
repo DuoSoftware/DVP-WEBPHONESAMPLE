@@ -176,7 +176,8 @@
                                         <div class="outgoing-wrap">
                                             <div class="connecting zoomIn animated"
                                                  ng-class="UIelementOption.isCallConnect==true?'connected-call':'connecting-call'">
-                                                <a class="call-image">
+                                                <a class="call-image"
+                                                   ng-class="UIelementOption.isCallConnect==true?'stop-ringing':'ringing'">
                                                     <img src="assets/images/avatar_default.png">
                                                 </a>
                                             </div>
