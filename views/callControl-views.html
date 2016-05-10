@@ -111,8 +111,7 @@
 
                                     <!--#KeyPad-->
                                     <div id='divKeyPad'
-                                         ng-show="UIelementOption.isOpenKeyPad"
-                                                                                 class="span2 well div-keypad animated fadeInRight">
+                                         ng-show="UIelementOption.isOpenKeyPad" class="span2 well div-keypad animated fadeInRight">
 
                                         <table style="width: 100%; height: 100%">
                                             <tr>
@@ -192,10 +191,10 @@
                                                 <div class="circle"></div>
                                                 <div class="circle"></div>
                                             </div>
-                                            <p class="font-family-Roboto out-call-num">5555</p>
+                                            <p class="font-family-Roboto out-call-num">{{call.number}}</p>
 
                                              <span class="font-Dosis out-call-name "
-                                                   ng-show="!UIelementOption.isCallConnect">dial...
+                                                   ng-show="!UIelementOption.isCallConnect">{{call.status}}
                                             </span>
                                              <span class="font-Dosis out-call-name "
                                                    ng-show="UIelementOption.isCallConnect">connected</span>
@@ -216,7 +215,7 @@
                                 <!-- call option -->
                                 <div class="mode-wrap">
                                     <div class="video-wrap"
-                                         ng-show="UIelementOption.isEndCallBtn">
+                                         ng-show="UIelementOption.isVideoCallBtn">
                                         <a id="btnCall" ng-click="eventHandler.onClickVideoCall(call);">
                                             <i class="icon-tiny-video-symbol"></i>
                                         </a>
@@ -225,7 +224,7 @@
                                         <li class="font-family-Roboto call-btn-rounder call-anz "
                                             id="btnAudioCall"
                                             ng-show="UIelementOption.isCallBtn"
-                                            ng-click="eventHandler.onClickOutGoingCall()">
+                                            ng-click="eventHandler.onClickOutGoingCall(call)">
                                             <span class=" icon-call-answer"></span>
                                         </li>
                                         <li class="font-family-Roboto call-btn-rounder end-call"
