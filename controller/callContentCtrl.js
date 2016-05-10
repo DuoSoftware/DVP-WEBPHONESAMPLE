@@ -290,7 +290,14 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
         isCallConnect: false,
         isIncomingCall: false,
         isVideoCall: false,
-        isTimer: false
+        isTimer: false,
+        isCallBtn: false,
+        isAnzBtn: false,
+        isEndCallBtn: false,
+        isMicrophoneBtn: false,
+        isKeyPadBtn: false,
+        isVideoCallBtn: false
+
     };
     $scope.UIelementOption = UIelementOption;
     $scope.UIelementOption.isCallHistory = true;
@@ -349,6 +356,18 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
                 $scope.$broadcast('timer-stop');
                 $scope.UIelementOption.isTimer = false;
                 $scope.UIelementOption.isCallHistory = true;
+            },
+            changeCallBtnState: function (state) {
+                $scope.UIelementOption.isCallBtn = state;
+            },
+            changeEndCallBtnState: function (state) {
+                $scope.UIelementOption.isEndCallBtn = state;
+            },
+            changeAnzCall: function (state) {
+                $scope.UIelementOption.isAnzBtn = state;
+            },
+            changeVideoCall: function (state) {
+                $scope.UIelementOption.isVideoCallBtn = state;
             }
         }
     });//end

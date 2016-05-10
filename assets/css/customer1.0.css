@@ -205,12 +205,12 @@ html, body {
 .mode > li.call-anz > span {
     font-size: 28px;
     color: #43b34a;
-    cursor: not-allowed;
     line-height: 45px;
 
 }
 
 .mode > li.call-anz.disable-btn > span {
+    pointer-events: none;
     font-size: 28px;
     color: rgba(0, 0, 0, 0.5);
     line-height: 45px;
