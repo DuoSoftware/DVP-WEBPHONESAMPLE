@@ -6,7 +6,7 @@
 
 var routerApp = angular.module('veerySoftPhone',
     ['ui.bootstrap', 'ui.router', 'btford.socket-io',
-        'ui-notification', 'ngAnimate']);
+        'ui-notification', 'ngAnimate', 'timer']);
 
 routerApp.config(["$httpProvider", "$stateProvider", "$urlRouterProvider",
     function ($httpProvider, $stateProvider, $urlRouterProvider) {

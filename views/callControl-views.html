@@ -74,20 +74,22 @@
                                 <!-- <label id="lblStatus"></label></br>
                                    <label id="lblSipStatus"></label></br>
                                    <label id="lblNotification"></label>-->
-                                <!-- number display -->
+
+                                <!-- #number display -->
                                 <div class="number-display">
                                     <div class="col-sm-12  margin-20-bottom">
                                         <input type="text" class="form-control" id="number" ng-model="call.number"
                                                placeholder="Enter the phone no to call">
                                     </div>
-                                </div>  <!-- end -->
+                                </div>
+                                <!-- end -->
 
                                 <!-- #keypad  #call history -->
                                 <div class="call-history-wrap">
                                     <div class="loading-history" ng-if="UIelementOption.isLoadingHistory;">
                                         <i class="fa fa-circle-o-notch fa-spin"></i>
-
                                     </div>
+                                    <!-- #callhistory -->
                                     <div class="call-history animated fadeInLeft"
                                          ng-show="UIelementOption.isCallHistory"
                                          ng-class="UIelementOption.isCallHistory==false?'display-none' :'display-block'">
@@ -137,9 +139,9 @@
                                         <!--</div>-->
                                     </div>
 
-                                    <!-- KeyPad Div  class='span2 well div-keypad'-->
+                                    <!--#KeyPad-->
                                     <div id='divKeyPad'
-                                         ng-hide="UIelementOption.isCallHistory"
+                                         ng-hide="!UIelementOption.isCallHistory"
                                          ng-class="UIelementOption.isCallHistory==false?'display-block' :'display-none'"
                                          class="span2 well div-keypad animated fadeInRight">
 
@@ -200,17 +202,56 @@
                                         </table>
                                     </div>
 
+                                    <!--#outgoingCall -->
+                                    <div class="outgoing-call"
+                                         ng-show="UIelementOption.isOutGoingCall">
+                                        <div class="outgoing-wrap">
+                                            <div class="connecting zoomIn animated"
+                                                 ng-class="UIelementOption.isCallConnect==true?'connected-call':'connecting-call'">
+                                                <a>
+                                                    <i class="ti-user"></i>
+                                                </a>
+                                            </div>
+                                            <div class="font-family-Roboto call-time"
+                                                 ng-show="UIelementOption.isCallConnect">
+                                                <timer interval="1000" auto-start="false">
+                                                    {{mminutes}} : {{sseconds}}
+                                                </timer>
+                                            </div>
+                                            <div id="connecting"
+                                                 ng-show="!UIelementOption.isCallConnect">
+                                                <div class="circle"></div>
+                                                <div class="circle"></div>
+                                                <div class="circle"></div>
+                                            </div>
+                                            <p class="font-family-Roboto out-call-num">5555</p>
+
+                                             <span class="font-Dosis out-call-name "
+                                                   ng-show="!UIelementOption.isCallConnect">dial...
+                                            </span>
+                                             <span class="font-Dosis out-call-name "
+                                                   ng-show="UIelementOption.isCallConnect">connected</span>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- end -->
 
+                                <!--video call -->
                                 <!-- call option -->
                                 <div class="mode-wrap">
+                                    <div class="video-wrap">
+                                        <a ng-click="eventHandler.onClickVideoCall(call);">
+                                            <i class="icon-tiny-video-symbol"></i>
+                                        </a>
+                                    </div>
                                     <ul class="mode">
-                                        <li class="font-family-Roboto call-btn-rounder call-anz "
-                                            id="masterfab">
+                                        <li class="font-family-Roboto call-btn-rounder call-anz"
+                                            id="masterfab"
+                                            ng-click="eventHandler.onClickOutGoingCall()">
                                             <span class=" icon-call-answer"></span>
                                         </li>
-                                        <li class="font-family-Roboto call-btn-rounder end-call">
+                                        <li class="font-family-Roboto call-btn-rounder end-call"
+                                            ng-click="eventHandler.onClickEndCall()">
                                             <span class="icon-end-call-button"></span>
                                         </li>
                                         <li class="font-family-Roboto call-btn-rounder microphone">
@@ -228,6 +269,9 @@
                                     </ul>
                                 </div>
                                 <!-- end -->
+
+                                <!-- #outgoing call -->
+
 
                             </div>
 

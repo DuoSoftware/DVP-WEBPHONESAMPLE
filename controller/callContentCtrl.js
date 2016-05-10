@@ -246,10 +246,54 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
     var UIelementOption = {
             isLoadingHistory: false,
             isCallHistory: true,
+            isOutGoingCall: false,
+            isCallConnect: false
         }
         ;
     $scope.UIelementOption = UIelementOption;
-    $scope.UIelementOption.isCallHistory = true;
+    $scope.UIelementOption.isCallHistory = false;
+
+    var mainFuntion = (function () {
+        var inCallState = function () {
+            document.getElementById("btnAudioCall").disabled = true;
+            document.getElementById("btnCall").disabled = true;
+            document.getElementById("phoneIncomingButtons").style.visibility = "hidden";
+            document.getElementById("btnHangUp").disabled = false;
+            document.getElementById("btnReject").style.visibility = "hidden";
+        };
+        return {
+            callConnection: function () {
+                setTimeout(function () {
+                    $scope.$apply(function () {
+                        $scope.UIelementOption.isCallConnect = true;
+                        $scope.$broadcast('timer-start');
+                    });
+                }, 5000);
+            },
+            outGoingCall: function () {
+
+                if ($scope.UIelementOption.isOutGoingCall) {
+                    $scope.UIelementOption.isOutGoingCall = false;
+                    $scope.UIelementOption.isCallHistory = true;
+                } else {
+                    $scope.UIelementOption.isOutGoingCall = true;
+                    $scope.UIelementOption.isCallHistory = false;
+                    mainFuntion.callConnection();
+                }
+            },
+            endCall: function () {
+                $scope.UIelementOption.isCallConnect = false;
+                $scope.UIelementOption.isOutGoingCall = false;
+                $scope.UIelementOption.isCallHistory = true;
+            },
+            makeVideoCall: function (call) {
+                alert("make video call");
+                //inCallState();
+                sipCall('call-audiovideo', '5000');
+            }
+        }
+
+    })();
 
     $scope.eventHandler = {
         onClickKeyPad: function () {
@@ -257,8 +301,17 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
                 $scope.UIelementOption.isCallHistory = false;
 
             } else {
-                $scope.UIelementOption.isCallHistory = true;
+                $scope.$broadcast('timer-start');
             }
+        },
+        onClickOutGoingCall: function () {
+            mainFuntion.outGoingCall();
+        },
+        onClickEndCall: function () {
+            mainFuntion.endCall();
+        },
+        onClickVideoCall: function () {
+            mainFuntion.makeVideoCall();
         }
     }
 
