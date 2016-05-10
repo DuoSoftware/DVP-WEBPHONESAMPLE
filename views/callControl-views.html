@@ -112,7 +112,8 @@
 
                                     <!--#KeyPad-->
                                     <div id='divKeyPad'
-                                         ng-show="UIelementOption.isOpenKeyPad" class="span2 well div-keypad animated fadeInRight">
+                                         ng-show="UIelementOption.isOpenKeyPad"
+                                         class="span2 well div-keypad animated fadeInRight">
 
                                         <table style="width: 100%; height: 100%">
                                             <tr>
@@ -182,7 +183,7 @@
                                                 </a>
                                             </div>
                                             <div ng-show="UIelementOption.isTimer" class="font-family-Roboto call-time"
-                                                 >
+                                            >
                                                 <timer interval="1000" auto-start="false">
                                                     {{mminutes}} : {{sseconds}}
                                                 </timer>
@@ -235,13 +236,12 @@
                                 <!--video call -->
                                 <!-- call option -->
                                 <div ng-show="UIelementOption.callFunctions" id="callFunctions" class="mode-wrap">
-                                    <div class="video-wrap"
-                                         ng-show="UIelementOption.isVideoCallBtn">
-                                        <a id="btnCall" ng-click="eventHandler.onClickVideoCall(call);">
-                                            <i class="icon-tiny-video-symbol"></i>
-                                        </a>
-                                    </div>
                                     <ul class="mode">
+                                        <li class="font-family-Roboto call-btn-rounder video-wrap "
+                                            ng-show="UIelementOption.isVideoCallBtn"
+                                            ng-click="eventHandler.onClickVideoCall(call);">
+                                            <span class="icon-tiny-video-symbol"></span>
+                                        </li>
                                         <li class="font-family-Roboto call-btn-rounder call-anz "
                                             id="btnAudioCall"
                                             ng-show="UIelementOption.isCallBtn"
