@@ -296,14 +296,14 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
         isEndCallBtn: false,
         isMicrophoneBtn: false,
         isKeyPadBtn: false,
-        isVideoCallBtn: false
-
+        isVideoCallBtn: false,
+        isChangeBtnWrap: false
     };
+
     $scope.UIelementOption = UIelementOption;
-    $scope.UIelementOption.isCallHistory = true;
 
 
-    //#UI change state
+    //#UIstate change state
     var UIStateChange = (function () {
         return {
             changeCallHistoryState: function (state) {
@@ -340,6 +340,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
                 $scope.UIelementOption.isOpenKeyPad = state;
                 $scope.UIelementOption.isCallHistory = state;
                 $scope.UIelementOption.isVideoCall = state;
+
             },
             refreshAllUI: function () {
                 $scope.UIelementOption.isIncomingCall = false;
@@ -368,10 +369,17 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
             },
             changeVideoCall: function (state) {
                 $scope.UIelementOption.isVideoCallBtn = state;
+            },
+            disableBtnArea: function () {
+
             }
         }
-    });//end
+    })();//end
 
+    UIStateChange.loadInit(false);
+    UIStateChange.changeCallHistoryState(true);
+    UIStateChange.changeVideoCall(true);
+    $scope.UIelementOption.isChangeBtnWrap = true;
 
     var mainFunction = (function () {
         return {

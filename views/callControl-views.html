@@ -109,10 +109,10 @@
                                         </div>
                                     </div>
 
+
                                     <!--#KeyPad-->
                                     <div id='divKeyPad'
-                                         ng-show="UIelementOption.isOpenKeyPad==true"
-                                         ng-class="UIelementOption.isCallHistory==false?'display-block' :'display-none'"
+                                         ng-show="UIelementOption.isOpenKeyPad"
                                          class="span2 well div-keypad animated fadeInRight">
 
                                         <table style="width: 100%; height: 100%">
@@ -203,11 +203,30 @@
                                         </div>
                                     </div>
 
-                                    <!-- #outgoing call -->
+                                    <!-- #incoming  call -->
                                     <div class="incoming-call-wrap"
-                                         ng-hide="UIelementOption.isIncomingCall">
+                                         ng-show="UIelementOption.isIncomingCall">
+                                        <div class="outgoing-wrap">
+                                            <div class="connecting">
+                                                <a class="call-image">
+                                                    <img src="assets/images/avatar_default.png">
+                                                </a>
+                                            </div>
+                                            <div class="font-family-Roboto call-time">
+                                                <timer interval="1000" auto-start="false">
+                                                    {{mminutes}} : {{sseconds}}
+                                                </timer>
+                                            </div>
+                                            <p class="font-family-Roboto out-call-num">5555</p>
+                                            <span class="font-Dosis out-call-name">incoming call..</span>
 
+                                            <div class="incoming-btn-wrap">
+                                                <span class="anz icon-call-answer"> </span>
+                                                <span class="cut icon-end-call-button"> </span>
+                                            </div>
+                                        </div>
                                     </div>
+
                                     <!-- end -->
                                 </div>
                                 <!-- end -->
@@ -215,10 +234,9 @@
 
                                 <!--video call -->
                                 <!-- call option -->
-                                <div class="mode-wrap">
-                                    <div class="video-wrap"
-                                         ng-hide="UIelementOption.isEndCallBtn">
-                                        <a id="btnCall" ng-click="eventHandler.onClickVideoCall(call);">
+                                <div class="mode-wrap" ng-show="UIelementOption.isChangeBtnWrap">
+                                    <div class="video-wrap">
+                                        <a ng-click="eventHandler.onClickVideoCall(call);">
                                             <i class="icon-tiny-video-symbol"></i>
                                         </a>
                                     </div>
