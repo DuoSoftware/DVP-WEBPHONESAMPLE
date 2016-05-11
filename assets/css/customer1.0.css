@@ -1026,5 +1026,22 @@ input:-webkit-autofill {
     }
 }
 
+/*video option */
+.mode-wrap-video {
+    position: absolute;
+    top: 173px;
+    margin: 0 auto;
+    width: 100%;
+    height: auto;
+}
 
+.video-remote {
+    position: relative;
+    border: 0px solid #009;
+    background: rgba(0, 0, 0, 0.26);
+    height: 100%;
+    width: 100%;
+    z-index: auto;
+    opacity: 1
+}
 
