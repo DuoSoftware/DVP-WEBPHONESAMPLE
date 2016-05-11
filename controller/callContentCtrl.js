@@ -107,6 +107,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
             Notification.info({message: sRemoteNumber, delay: 500, closeOnClick: true});
             inIncomingState();
             $scope.call.number = sRemoteNumber;
+            addCallToHistory(sRemoteNumber,2);
         }
         catch (ex) {
             console.error(ex.message);
@@ -263,8 +264,11 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, da
     $scope.callHistoryes = [];
 
     var addCallToHistory = function (name, state) {
+        var dateOut = new Date();
+        var date = $filter('date')(dateOut,'dd-MM-yyyy');
+        var time = $filter('date')(dateOut,'HH:mm');
         var item = {
-            "id": 135, "name": name, "date": '2 jan 2016', "time": '10.45', "state": state
+            "id": 135, "name": name, "date": date, "time": time, "state": state
         };
         $scope.callHistoryes.push(item);
     };
