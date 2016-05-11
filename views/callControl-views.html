@@ -78,7 +78,7 @@
                                    <label id="lblNotification"></label>-->
 
                                 <!-- #number display -->
-                                <div class="number-display">
+                                <div ng-show="!UIelementOption.isIncomingCall" class="number-display">
                                     <div class="col-sm-12  margin-20-bottom">
                                         <input type="text" class="form-control" id="number" ng-model="call.number"
                                                placeholder="Enter the phone no to call">
@@ -93,7 +93,7 @@
                                     </div>
                                     <!-- #callhistory -->
                                     <div class="call-history animated fadeInLeft"
-                                         ng-hide="!UIelementOption.isCallHistory">
+                                         ng-show="UIelementOption.isCallHistory">
                                         <div class="details" ng-repeat="caller in callHistoryes">
                                             <div class="type">
                                                 <i ng-class="caller.state== 0 ? 'icon-call-ended miss' :
@@ -114,7 +114,7 @@
                                     <!--#KeyPad-->
                                     <div id='divKeyPad'
                                          ng-show="UIelementOption.isOpenKeyPad"
-                                         class="span2 well div-keypad animated fadeInRight">
+                                         class="span2 well div-keypad ">
 
                                         <table style="width: 100%; height: 100%">
                                             <tr>
@@ -189,12 +189,7 @@
                                                     {{mminutes}} : {{sseconds}}
                                                 </timer>
                                             </div>
-                                            <div id="connecting"
-                                                 ng-show="UIelementOption.isTimer">
-                                                <div class="circle"></div>
-                                                <div class="circle"></div>
-                                                <div class="circle"></div>
-                                            </div>
+
                                             <p class="font-family-Roboto out-call-num">{{call.number}}</p>
 
                                              <span class="font-Dosis out-call-name "
@@ -206,7 +201,7 @@
                                     </div>
 
                                     <!-- #incoming  call -->
-                                    <div class="incoming-call-wrap"
+                                    <div class="incoming-call-wrap animated zoomIn"
                                          ng-show="UIelementOption.isIncomingCall">
                                         <div class="outgoing-wrap">
                                             <div class="connecting">
@@ -219,12 +214,12 @@
                                                     {{mminutes}} : {{sseconds}}
                                                 </timer>
                                             </div>
-                                            <p class="font-family-Roboto out-call-num">5555</p>
+                                            <p class="font-family-Roboto out-call-num">{{call.number}}</p>
                                             <span class="font-Dosis out-call-name">incoming call..</span>
 
                                             <div class="incoming-btn-wrap">
-                                                <span class="anz icon-call-answer"> </span>
-                                                <span class="cut icon-end-call-button"> </span>
+                                                <span class="anz icon-call-answer" ng-click="eventHandler.onAnswerCall();"> </span>
+                                                <span class="cut icon-end-call-button" ng-click="eventHandler.onRejectCall();"> </span>
                                             </div>
                                         </div>
                                     </div>
@@ -236,7 +231,7 @@
 
                                 <!--video call -->
                                 <!-- call option -->
-                                <div class="mode-wrap">
+                                <div ng-show="UIelementOption.callFunctions" id="callFunctions" class="mode-wrap">
                                     <ul class="mode">
                                         <li class="font-family-Roboto call-btn-rounder video-wrap "
                                             ng-show="UIelementOption.isVideoCallBtn"
