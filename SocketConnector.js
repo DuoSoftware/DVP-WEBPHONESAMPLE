@@ -5,7 +5,7 @@
 /* global io */
 
 angular.module('veerySoftPhone')
-    .factory('socket', function (socketFactory, Notification) {
+    .factory('socket', function (socketFactory, Notification,dataParser) {
 
         var socket, ioSocket, isAuthenticated,
             self = {
@@ -43,42 +43,42 @@ angular.module('veerySoftPhone')
             });
             //---------------------
             socket.on('connect', function () {
-                Notification.info({message: "sending JWT", delay: 500, closeOnClick: true});
+                //Notification.info({message: "sending JWT", delay: 500, closeOnClick: true});
                 //send the jwt
-                socket.emit('authenticate', {token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzdWtpdGhhIiwianRpIjoiMTdmZTE4M2QtM2QyNC00NjQwLTg1NTgtNWFkNGQ5YzVlMzE1Iiwic3ViIjoiNTZhOWU3NTlmYjA3MTkwN2EwMDAwMDAxMjVkOWU4MGI1YzdjNGY5ODQ2NmY5MjExNzk2ZWJmNDMiLCJjbGllbnQiOiIxIiwiZXhwIjoxODkzMzAyNzUzLCJ0ZW5hbnQiOjEsImNvbXBhbnkiOjMsInNjb3BlIjpbeyJyZXNvdXJjZSI6ImFsbCIsImFjdGlvbnMiOiJhbGwifV0sImlhdCI6MTQ2MTI5OTE1M30._M8u4ElZESTdJtkQSEtr58kE97s0KiHeIaeWsoVc8Ho"});
+                socket.emit('authenticate', {token: dataParser.userProfile.server.token});
             });
 
             socket.on('clientdetails', function (data) {
-                Notification.info({message: data, delay: 500, closeOnClick: true});
+                //Notification.info({message: data, delay: 500, closeOnClick: true});
                 console.log(data);
             });
 
             socket.on('disconnect', function (reason) {
-                Notification.info({message: reason, delay: 500, closeOnClick: true});
+                //Notification.info({message: reason, delay: 500, closeOnClick: true});
                 console.log(reason);
             });
 
             socket.on('message', function (reason) {
-                Notification.info({message: reason, delay: 500, closeOnClick: true});
+                //Notification.info({message: reason, delay: 500, closeOnClick: true});
                 console.log(reason);
             });
 
             socket.on('broadcast', function (data) {
                 //document.getElementById("lblNotification").innerHTML = data;
-                Notification.info({message: data, delay: 500, closeOnClick: true});
+                //Notification.info({message: data, delay: 500, closeOnClick: true});
                 console.log(data);
             });
 
             socket.on('publish', function (data) {
                 //document.getElementById("lblNotification").innerHTML = data;
-                Notification.info({message: data, delay: 500, closeOnClick: true});
+                //Notification.info({message: data, delay: 500, closeOnClick: true});
                 console.log(data);
             });
 
             socket.on('agent_connected', function (data) {
                 //document.getElementById("lblNotification").innerHTML = data.Message;
 
-                Notification.primary({message: data.Message, delay: 5000, closeOnClick: true});
+                //Notification.primary({message: data.Message, delay: 5000, closeOnClick: true});
                 console.log(data);
             });
             socket.on('agent_found', function (data) {
@@ -96,7 +96,7 @@ angular.module('veerySoftPhone')
             });
             socket.on('agent_disconnected', function (data) {
                // document.getElementById("lblNotification").innerHTML = data.Message;
-                Notification.primary({message: data.Message, delay: 5000, closeOnClick: true});
+                //Notification.primary({message: data.Message, delay: 5000, closeOnClick: true});
                 console.log(data);
             });
         };

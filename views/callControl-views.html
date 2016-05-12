@@ -60,7 +60,6 @@
                         </div>
                     </div>
 
-
                     <div>
                         <!-- Audios -->
                         <audio id="audio_remote" autoplay="autoplay"></audio>
@@ -87,20 +86,21 @@
                                 <!-- end -->
 
                                 <!-- #keypad  #call history -->
-                                <div class="call-history-wrap">
+                                <div class="phone-middel-wrap">
                                     <div class="loading-history" ng-if="UIelementOption.isLoadingHistory;">
                                         <i class="fa fa-circle-o-notch fa-spin"></i>
                                     </div>
+
                                     <!-- #callhistory -->
                                     <div class="call-history animated fadeInLeft"
                                          ng-show="UIelementOption.isCallHistory">
                                         <div class="details" ng-repeat="caller in callHistoryes  | orderBy:'-id'">
-                                            <div class="type" ng-click="eventHandler.onClickOutGoingCall(caller)">
+                                            <div class="type" ng-click="eventHandler.makeAudioCall(caller)">
                                                 <i ng-class="caller.state== 0 ? 'icon-call-ended miss' :
                                                     caller.state== 1 ? 'icon-phone-call-1 outgoing':
                                                    caller.state== 2 ?'icon-phone-call-2 incoming':'incoming'"></i>
                                             </div>
-                                            <div class="log" ng-click="eventHandler.onClickOutGoingCall(caller)">
+                                            <div class="log" ng-click="eventHandler.makeAudioCall(caller)">
                                                 <span class="font-Dosis">{{caller.number}}</span>
 
                                                 <div class="log-date font-family-Roboto">{{caller.date}},
@@ -110,58 +110,55 @@
                                         </div>
                                     </div>
 
-
-
                                     <!--#KeyPad-->
                                     <div id='divKeyPad'
                                          ng-show="UIelementOption.isOpenKeyPad"
                                          class="span2 well div-keypad ">
 
-                                        <table style="width: 100%; height: 100%">
+                                        <table >
                                             <tr>
-                                                <td><a href="javascript:void (0);" no-click class="dialpadbtn m-r-35"
+                                                <td><a class="dialpadbtn m-r-35"
                                                        value="1"
                                                        onclick="sipSendDTMF('1');">1</a>
-                                                    <a class="dialpadbtn m-r-35" href="javascript:void (0);" no-click
+                                                    <a class="dialpadbtn m-r-35"
                                                        value="2"
                                                        onclick="sipSendDTMF('2');">2</a>
-                                                    <a class="dialpadbtn" href="javascript:void (0);" no-click value="3"
+                                                    <a class="dialpadbtn"  value="3"
                                                        onclick="sipSendDTMF('3');">3</a>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <a class="dialpadbtn m-r-35" href="javascript:void (0);" no-click
+                                                    <a class="dialpadbtn m-r-35"
                                                        value="4"
                                                        onclick="sipSendDTMF('4');">4</a>
-                                                    <a class="dialpadbtn m-r-35" href="javascript:void (0);" no-click
+                                                    <a class="dialpadbtn m-r-35"
                                                        value="5"
                                                        onclick="sipSendDTMF('5');">5</a>
-                                                    <a class="dialpadbtn" value="6" href="javascript:void (0);" no-click
+                                                    <a class="dialpadbtn" value="6"
                                                        onclick="sipSendDTMF('6');">6</a>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><a class="dialpadbtn m-r-35" href="javascript:void (0);" no-click
+                                                <td><a class="dialpadbtn m-r-35"
                                                        value="7"
                                                        onclick="sipSendDTMF('7');">7</a>
-                                                    <a class="dialpadbtn m-r-35" href="javascript:void (0);" no-click
+                                                    <a class="dialpadbtn m-r-35"
                                                        value="8"
                                                        onclick="sipSendDTMF('8');">8</a>
-                                                    <a class="dialpadbtn " href="javascript:void (0);" no-click
+                                                    <a class="dialpadbtn "
                                                        value="9"
                                                        onclick="sipSendDTMF('9');">9</a>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td><a type="button" class="dialpadbtn m-r-35"
-                                                       href="javascript:void (0);" no-click value="*"
+                                                        value="*"
                                                        onclick="sipSendDTMF('*');">*</a>
                                                     <a type="button" class="dialpadbtn m-r-35"
-                                                       href="javascript:void (0);" no-click value="0"
+                                                        value="0"
                                                        onclick="sipSendDTMF('0');">0</a>
-                                                    <a type="button" class="dialpadbtn " href="javascript:void (0);"
-                                                       no-click value="#"
+                                                    <a type="button" class="dialpadbtn "  value="#"
                                                        onclick="sipSendDTMF('#');">#</a>
                                                 </td>
                                             </tr>
@@ -219,8 +216,8 @@
                                             <span class="font-Dosis out-call-name">incoming call..</span>
 
                                             <div class="incoming-btn-wrap">
-                                                <span  class="anz icon-call-answer" ng-click="eventHandler.onAnswerCall();"> </span>
-                                                <span class="cut icon-end-call-button" ng-click="eventHandler.onRejectCall();"> </span>
+                                                <span  class="anz icon-call-answer" ng-click="eventHandler.answerCall();"> </span>
+                                                <span class="cut icon-end-call-button" ng-click="eventHandler.rejectCall();"> </span>
                                             </div>
                                         </div>
                                     </div>
@@ -237,20 +234,20 @@
                                         <li class="font-family-Roboto call-btn-rounder video-wrap "
                                             ng-show="UIelementOption.isVideoCallBtn"
 
-                                            ng-click="eventHandler.onClickVideoCall(call);">
+                                            ng-click="eventHandler.makeVideoCall(call);">
                                             <span class="icon-tiny-video-symbol"></span>
                                         </li>
                                         <li class="font-family-Roboto call-btn-rounder call-anz "
                                             id="btnAudioCall"
                                             ng-show="UIelementOption.isCallBtn"
 
-                                            ng-click="eventHandler.onClickOutGoingCall(call)">
+                                            ng-click="eventHandler.makeAudioCall(call)">
                                             <span class=" icon-call-answer"></span>
                                         </li>
                                         <li class="font-family-Roboto call-btn-rounder end-call"
                                             id="btnHangUp"
                                             ng-show="UIelementOption.isEndCallBtn"
-                                            ng-click="eventHandler.onClickEndCall()">
+                                            ng-click="eventHandler.endCall()">
                                             <span class="icon-end-call-button"></span>
                                         </li>
                                         <li class="font-family-Roboto call-btn-rounder microphone">
@@ -260,7 +257,7 @@
                                         <li class="font-family-Roboto call-btn-rounder keypad"
                                             ng-class="UIelementOption.isCallHistory? 'keypad-selected':
                                              'keypad-select'"
-                                            ng-click="eventHandler.onClickKeyPad()">
+                                            ng-click="eventHandler.keyPadClick()">
                                             <span class="icon-telephone-keypad-with-ten-keys"></span>
                                             <!--<span class="fa fa-microphone-slash"></span>-->
                                         </li>
@@ -273,8 +270,6 @@
                             <div class="form-group" id="phoneButtons">
                             </div>
                         </form>
-
-
                     </div>
                 </div>
             </div>
