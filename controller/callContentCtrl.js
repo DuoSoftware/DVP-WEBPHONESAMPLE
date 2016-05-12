@@ -3,7 +3,7 @@
  */
 
 'use strict'
-routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state,$filter, dataParser, socketAuth, Notification) {
+routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, $filter, dataParser, socketAuth, Notification) {
 
     var onEventsListener = function (e) {
         console.info(e.type);
@@ -13,7 +13,10 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state,$fi
 
     var onSipEventSession = function (e) {
         try {
-            $scope.call.status = e;
+            $scope.$apply(function () {
+                $scope.call.status = e;
+            });
+
             //document.getElementById("lblSipStatus").innerHTML = e;
             //Notification.info({message: e, delay: 500, closeOnClick: true});
             if (e == 'Session Progress') {
@@ -22,7 +25,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state,$fi
                 Notification.info({message: 'Session Progress', delay: 500, closeOnClick: true});
             }
             else if (e.toString().toLowerCase() == 'in call') {
-                inCallConnectedState();
+                UIStateChange.inCallConnectedState();
 
             }
         }
@@ -65,11 +68,12 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state,$fi
     };
     var uiOnConnectionEvent = function (b_connected, b_connecting) {
         try {
-            if (!b_connected && !b_connecting)$state.go('register');
+            if (!b_connected && !b_connecting)
+                $state.go('register');
 
-            document.getElementById("btnCall").disabled = !(b_connected && tsk_utils_have_webrtc() && tsk_utils_have_stream());
-            document.getElementById("btnAudioCall").disabled = document.getElementById("btnCall").disabled;
-            document.getElementById("btnHangUp").disabled = !oSipSessionCall;
+            /* document.getElementById("btnCall").disabled = !(b_connected && tsk_utils_have_webrtc() && tsk_utils_have_stream());
+             document.getElementById("btnAudioCall").disabled = document.getElementById("btnCall").disabled;
+             document.getElementById("btnHangUp").disabled = !oSipSessionCall;*/
         }
         catch (ex) {
             console.error(ex.message);
@@ -105,8 +109,9 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state,$fi
         try {
             //document.getElementById("lblSipStatus").innerHTML = sRemoteNumber;
             //Notification.info({message: sRemoteNumber, delay: 500, closeOnClick: true});
-            inIncomingState();
+            UIStateChange.inIncomingState();
             $scope.call.number = sRemoteNumber;
+            addCallToHistory(sRemoteNumber, 2);
         }
         catch (ex) {
             console.error(ex.message);
@@ -115,8 +120,10 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state,$fi
 
     var uiCallTerminated = function (msg) {
         try {
+
             UIStateChange.disableTimer();
-            inIdleState();
+            UIStateChange.inIdleState();
+            console.log("uiCallTerminated");
             if (window.btnBFCP) window.btnBFCP.disabled = true;
 
 
@@ -145,7 +152,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state,$fi
             //Notification.info({message: description, delay: 500, closeOnClick: true});
 
             if (description == 'Connected') {
-                inIdleState();
+                UIStateChange.inIdleState();
                 Notification.success({message: description, delay: 3000, closeOnClick: true});
 
             }
@@ -161,47 +168,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state,$fi
 
     };
 
-    var inCallConnectedState = function () {
-        UIStateChange.enableTimer();
-        UIelementOption.isCallConnect = true;
-    };
 
-    var inCallState = function () {
-        UIStateChange.changeCallBtnState(false);
-        UIStateChange.changeVideoCall(false);
-        UIStateChange.changeEndCallBtnState(true);
-        UIStateChange.ChangeEnableIncomingCallState(false);
-        UIStateChange.changeCallHistoryState(false);
-        UIStateChange.changeEnableKeyPadState(false);
-        UIStateChange.changeEnableOutGoingState(true);
-    };
-
-    var inIdleState = function () {
-        UIStateChange.loadInit(true);
-        UIStateChange.ChangeEnableIncomingCallState(false);
-        UIStateChange.changeCallHistoryState(false);
-        UIStateChange.changeCallBtnState(true);
-        UIStateChange.changeVideoCall(true);
-        UIStateChange.changeEnableKeyPadState(true);
-        UIStateChange.changeEndCallBtnState(false);
-
-    };
-
-    var inIncomingState = function () {
-        UIStateChange.changeCallBtnState(false);
-        UIStateChange.changeVideoCall(false);
-        UIStateChange.changeEndCallBtnState(false);
-        UIStateChange.ChangeEnableIncomingCallState(true);
-
-    };
-
-    $scope.answerCall = function () {
-        inCallState();
-        answerCall();
-    };
-    $scope.rejectCall = function () {
-        rejectCall();
-    };
 
 
     $scope.sipSendDTMF = function (dtmf) {
@@ -230,7 +197,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state,$fi
 
     angular.element(document).ready(function () {
         UIStateChange.loadInit(false);
-        if (angular.isDefined($rootScope.login)) {
+        if (angular.isDefined($scope.login)) {
             var userEvent = {
                 onSipEventSession: onSipEventSession,
                 notificationEvent: notificationEvent,
@@ -261,16 +228,19 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state,$fi
     //call state
     // 0  miss call , 1 outgoing , 2 incoming
     $scope.callHistoryes = [{
-        "id": 1, "number": "Veery", "date": $filter('date')(new Date(),'dd-MM-yyyy'), "time":$filter('date')(new Date(),'HH:mm'), "state": 0
+        "id": 1,
+        "number": "Veery",
+        "date": $filter('date')(new Date(), 'dd-MM-yyyy'),
+        "time": $filter('date')(new Date(), 'HH:mm'),
+        "state": 0
     }];
-
 
 
     var addCallToHistory = function (number, state) {
         var dateOut = new Date();
-        var date = $filter('date')(dateOut,'dd-MM-yyyy');
-        var time = $filter('date')(dateOut,'HH:mm');
-        var id = $scope.callHistoryes.length+1;
+        var date = $filter('date')(dateOut, 'dd-MM-yyyy');
+        var time = $filter('date')(dateOut, 'HH:mm');
+        var id = $scope.callHistoryes.length + 1;
         var item = {
             "id": id, "number": number, "date": date, "time": time, "state": state
         };
@@ -278,12 +248,13 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state,$fi
     };
 
     var UIelementOption = {
-        isLoadingHistory: false,
-        isCallHistory: false,
-        isOpenKeyPad: false,
-        isOutGoingCall: false,
+        showLoadingHistory: false,
+        showCallHistory: true,
+        showKeyPad: false,
+        showOutGoingCall: false,
+        showCallConnect: false,
+        showIncomingCall: false,
         isCallConnect: false,
-        isIncomingCall: false,
         isVideoCall: false,
         isTimer: false,
         isCallBtn: false,
@@ -294,67 +265,132 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state,$fi
         isVideoCallBtn: false,
         isChangeBtnWrap: false,
         callFunctions: false
+
     };
 
     $scope.UIelementOption = UIelementOption;
 
 
-    //#UIstate change state
-
     //#UI change state
     var UIStateChange = (function () {
         return {
-            showCallLogs:function(){
+            showKeyPad: function () {
+
+                $scope.UIelementOption.showCallConnect = false;
+                $scope.UIelementOption.showIncomingCall = false;
+
+                if ($scope.UIelementOption.isCallConnect) {
+                    if ($scope.UIelementOption.showKeyPad) {
+                        $scope.UIelementOption.showCallConnect = true;
+                        $scope.UIelementOption.showKeyPad = false;
+                    }
+                    else {
+                        $scope.UIelementOption.showCallConnect = false;
+                        $scope.UIelementOption.showKeyPad = true;
+                    }
+                }
+                else {
+                    if ($scope.UIelementOption.showKeyPad) {
+                        $scope.UIelementOption.showCallHistory = true;
+                        $scope.UIelementOption.showKeyPad = false;
+                    }
+                    else {
+                        $scope.UIelementOption.showCallHistory = false;
+                        $scope.UIelementOption.showKeyPad = true;
+                    }
+                }
+            },
+            inCallConnectedState: function () {
+                try {
+                    $scope.$apply(function () {
+                        $scope.$broadcast('timer-start');
+                        $scope.UIelementOption.isTimer = true;
+                    });
+                }
+                catch (ex) {
+                    $scope.$broadcast('timer-start');
+                    $scope.UIelementOption.isTimer = true;
+                    console.error(ex.message);
+                }
+                $scope.UIelementOption.isCallConnect = true;
+
+                $scope.UIelementOption.showCallConnect = true;
+                $scope.UIelementOption.showIncomingCall = false;
+                $scope.UIelementOption.showOutGoingCall = false;
+                $scope.UIelementOption.showKeyPad = false;
+                $scope.UIelementOption.showCallHistory = false;
+
+                // buttons
+                $scope.UIelementOption.callFunctions = true;
+                $scope.UIelementOption.isVideoCallBtn = false;
+                $scope.UIelementOption.isCallBtn = false;
+                $scope.UIelementOption.isEndCallBtn = true;
 
             },
-            changeCallHistoryState: function (state) {
-                $scope.UIelementOption.isCallHistory = state;
-                $scope.UIelementOption.isOpenKeyPad = false;
-                $scope.UIelementOption.isOutGoingCall = false;
-                $scope.UIelementOption.isIncomingCall = false;
-                $scope.UIelementOption.isVideoCall = false;
+            inCallState: function () {
+                $scope.UIelementOption.showCallConnect = false;
+                $scope.UIelementOption.showIncomingCall = false;
+                $scope.UIelementOption.showOutGoingCall = true;
+                $scope.UIelementOption.showKeyPad = false;
+                $scope.UIelementOption.showCallHistory = false;
+
+                // buttons
+                $scope.UIelementOption.callFunctions = true;
+                $scope.UIelementOption.isVideoCallBtn = false;
+                $scope.UIelementOption.isCallBtn = false;
+                $scope.UIelementOption.isEndCallBtn = true;
+
             },
-            changeEnableKeyPadState: function (state) {
-                $scope.UIelementOption.isOpenKeyPad = state;
-                $scope.UIelementOption.isCallHistory = false;
-                $scope.UIelementOption.isOutGoingCall = false;
-                $scope.UIelementOption.isIncomingCall = false;
-                $scope.UIelementOption.isVideoCall = false;
+            inIdleState: function () {
+
+                $scope.$apply(function () {
+                    $scope.UIelementOption.showCallHistory = true;
+                    $scope.UIelementOption.showCallConnect = false;
+                    $scope.UIelementOption.showIncomingCall = false;
+                    $scope.UIelementOption.showOutGoingCall = false;
+                    $scope.UIelementOption.showKeyPad = false;
+
+
+                    // buttons
+                    $scope.UIelementOption.callFunctions = true;
+                    $scope.UIelementOption.isVideoCallBtn = true;
+                    $scope.UIelementOption.isCallBtn = true;
+                    $scope.UIelementOption.isEndCallBtn = false;
+                });
+
             },
-            changeEnableOutGoingState: function (state) {
-                $scope.UIelementOption.isOutGoingCall = state;
-                $scope.UIelementOption.isOpenKeyPad = false;
-                $scope.UIelementOption.isCallHistory = false;
-                $scope.UIelementOption.isIncomingCall = false;
-                $scope.UIelementOption.isVideoCall = false;
+            inIncomingState: function () {
+                $scope.$apply(function () {
+                    // buttons
+                    $scope.UIelementOption.callFunctions = false;
+                    $scope.UIelementOption.isVideoCallBtn = false;
+                    $scope.UIelementOption.isCallBtn = false;
+                    $scope.UIelementOption.isEndCallBtn = false;
+
+                    $scope.UIelementOption.showCallConnect = false;
+                    $scope.UIelementOption.showOutGoingCall = false;
+                    $scope.UIelementOption.showKeyPad = false;
+                    $scope.UIelementOption.showCallHistory = false;
+                    $scope.UIelementOption.showIncomingCall = true;
+                });
             },
-            ChangeEnableIncomingCallState: function (state) {
-                $scope.UIelementOption.isIncomingCall = state;
-                $scope.UIelementOption.isOutGoingCall = false;
-                $scope.UIelementOption.isOpenKeyPad = false;
-                $scope.UIelementOption.isCallHistory = false;
-                $scope.UIelementOption.isVideoCall = false;
-                $scope.UIelementOption.callFunctions = !state;
-            },
+
             loadInit: function (state) {
-                $scope.UIelementOption.isIncomingCall = state;
-                $scope.UIelementOption.isOutGoingCall = state;
-                $scope.UIelementOption.isOpenKeyPad = state;
-                $scope.UIelementOption.isCallHistory = state;
+                $scope.UIelementOption.showIncomingCall = state;
+                $scope.UIelementOption.showOutGoingCall = state;
+                $scope.UIelementOption.showKeyPad = state;
+                $scope.UIelementOption.showCallHistory = state;
                 $scope.UIelementOption.isVideoCall = state;
 
             },
             refreshAllUI: function () {
-                $scope.UIelementOption.isIncomingCall = false;
-                $scope.UIelementOption.isOutGoingCall = false;
-                $scope.UIelementOption.isOpenKeyPad = false;
-                $scope.UIelementOption.isCallHistory = true;
+                $scope.UIelementOption.showIncomingCall = false;
+                $scope.UIelementOption.showOutGoingCall = false;
+                $scope.UIelementOption.showKeyPad = false;
+                $scope.UIelementOption.showCallHistory = true;
                 $scope.UIelementOption.isVideoCall = false;
             },
-            enableTimer: function () {
-                $scope.$broadcast('timer-start');
-                $scope.UIelementOption.isTimer = true;
-            },
+
             disableTimer: function () {
                 $scope.$broadcast('timer-stop');
                 $scope.UIelementOption.isTimer = false;
@@ -384,73 +420,37 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state,$fi
 
     $scope.eventHandler = {
         keyPadClick: function () {
-            if (UIelementOption.isCallConnect) {
-                if ($scope.UIelementOption.isOpenKeyPad) {
-                    $scope.UIelementOption.isOpenKeyPad = false;
-                    $scope.UIelementOption.isOutGoingCall = true;
-                }
-                else {
-                    $scope.UIelementOption.isOpenKeyPad = true;
-                    $scope.UIelementOption.isOutGoingCall = false;
-                }
-            }
-            else {
-                if (UIelementOption.isCallHistory) {
-                    $scope.UIelementOption.isCallHistory = false;
-                    $scope.UIelementOption.isOpenKeyPad = true;
-                    $scope.UIelementOption.isOutGoingCall = false;
-
-                } else {
-                    $scope.UIelementOption.isCallHistory = true;
-                    $scope.UIelementOption.isOpenKeyPad = false;
-                    $scope.UIelementOption.isOutGoingCall = false;
-
-                }
-            }
+            UIStateChange.showKeyPad();
         },
         makeAudioCall: function (call) {
-            if(call.number == "")
-            {
+            if (call.number == "") {
                 return
             }
-            $scope.UIelementOption.isCallHistory = false;
-            $scope.UIelementOption.isOpenKeyPad = false;
-            if ($scope.UIelementOption.isOutGoingCall) {
-                $scope.UIelementOption.isOutGoingCall = false;
-                $scope.UIelementOption.isCallHistory = true;
-            } else {
-                $scope.UIelementOption.isOutGoingCall = true;
-                $scope.UIelementOption.isCallHistory = false;
-                UIStateChange.changeEnableOutGoingState(true);
-            }
-            inCallState();
+            UIStateChange.inCallState();
             sipCall('call-audio', call.number);
             addCallToHistory(call.number, 1);
         },
         endCall: function () {
-            $scope.UIelementOption.isCallConnect = false;
-            $scope.UIelementOption.isOutGoingCall = false;
-            $scope.UIelementOption.isCallHistory = true;
-            $scope.UIelementOption.isOpenKeyPad = false;
+            UIStateChange.inIdleState();
             sipHangUp();
         },
         makeVideoCall: function (call) {
-            if(call.number == "")
-            {
+            if (call.number == "") {
                 return
             }
-            inCallState();
+            UIStateChange.inCallState();
             sipCall('call-audiovideo', call.number);
             addCallToHistory(call.number, 1);
         },
-        onClickIncomingCall: function () {
-
+        callMute: function () {
+            sipToggleMute();
         },
         answerCall: function () {
-            inCallState();
+            UIStateChange.inCallConnectedState();
             answerCall();
         },
         rejectCall: function () {
+            //UIStateChange.inIdleState();
             rejectCall();
         }
     }

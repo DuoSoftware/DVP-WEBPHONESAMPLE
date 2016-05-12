@@ -45,17 +45,17 @@
                         <div class="reg-wrap p-20 animated fadeInRight">
                             <form class="form-horizontal" name="callForm">
                                 <div class="form-group">
-                                    <div class="col-sm-6"
+                                    <div ng-hide="true" class="col-sm-6"
                                          ng-class="{ 'has-error' : callForm.displayNme.$invalid && !callForm.displayNme.$pristine }">
                                         <label for="displayNme" class="fnt-color-white">Display Name</label>
-                                        <input type="text" required class="form-control" name="displayNme"
+                                        <input type="text"  class="form-control" name="displayNme"
                                                id="displayNme" ng-model="profile.displayName"
                                                placeholder="Display Name">
 
                                         <p ng-show="callForm.displayNme.$invalid && !callForm.displayNme.$pristine"
                                            class="help-block">Display Name is required.</p>
                                     </div>
-                                    <div class="col-sm-6"
+                                    <div class="col-sm-12"
                                          ng-class="{ 'has-error' : callForm.privateId.$invalid && !callForm.privateId.$pristine }">
                                         <label for="privateId" class="fnt-color-white">Private Identity</label>
                                         <input type="text" class="form-control" required name="privateId" id="privateId"
