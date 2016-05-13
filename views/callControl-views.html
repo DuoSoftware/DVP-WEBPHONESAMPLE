@@ -186,7 +186,7 @@
                                             <p class="font-family-Roboto out-call-num">{{call.number}}</p>
 
                                              <span class="font-Dosis out-call-name "
-                                                   ng-show="!UIelementOption.isCallConnect">{{call.status}}
+                                                   >{{call.status}}
                                             </span>
                                         </div>
                                     </div>
@@ -203,7 +203,7 @@
                                                     <img src="assets/images/avatar_default.png">
                                                 </a>
                                             </div>
-                                            <div ng-show="UIelementOption.isTimer" class="font-family-Roboto call-time"
+                                            <div  class="font-family-Roboto call-time"
                                                     >
                                                 <timer interval="1000" auto-start="false">
                                                     {{mminutes}} : {{sseconds}}
@@ -213,10 +213,8 @@
                                             <p class="font-family-Roboto out-call-num">{{call.number}}</p>
 
                                              <span class="font-Dosis out-call-name "
-                                                   ng-show="!UIelementOption.isCallConnect">{{call.status}}
+                                                   >{{call.status}}
                                             </span>
-                                             <span class="font-Dosis out-call-name "
-                                                   ng-show="UIelementOption.isCallConnect">In Call</span>
                                         </div>
                                     </div>
 

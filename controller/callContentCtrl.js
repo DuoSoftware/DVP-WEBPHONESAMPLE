@@ -270,61 +270,72 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, $f
 
     $scope.UIelementOption = UIelementOption;
 
+    $scope.safeApply = function(fn) {
+        var phase = this.$root.$$phase;
+        if(phase == '$apply' || phase == '$digest') {
+            if(fn && (typeof(fn) === 'function')) {
+                fn();
+            }
+        } else {
+            this.$apply(fn);
+        }
+    };
 
     //#UI change state
     var UIStateChange = (function () {
         return {
             showKeyPad: function () {
+                $scope.safeApply(function() {
 
-                $scope.UIelementOption.showCallConnect = false;
-                $scope.UIelementOption.showIncomingCall = false;
 
-                if ($scope.UIelementOption.isCallConnect) {
-                    if ($scope.UIelementOption.showKeyPad) {
-                        $scope.UIelementOption.showCallConnect = true;
-                        $scope.UIelementOption.showKeyPad = false;
+                    $scope.UIelementOption.showCallConnect = false;
+                    $scope.UIelementOption.showIncomingCall = false;
+
+                    if ($scope.UIelementOption.isCallConnect) {
+                        if ($scope.UIelementOption.showKeyPad) {
+                            $scope.UIelementOption.showCallConnect = true;
+                            $scope.UIelementOption.showKeyPad = false;
+                        }
+                        else {
+                            $scope.UIelementOption.showCallConnect = false;
+                            $scope.UIelementOption.showKeyPad = true;
+                        }
                     }
                     else {
-                        $scope.UIelementOption.showCallConnect = false;
-                        $scope.UIelementOption.showKeyPad = true;
+                        if ($scope.UIelementOption.showKeyPad) {
+                            $scope.UIelementOption.showCallHistory = true;
+                            $scope.UIelementOption.showKeyPad = false;
+                        }
+                        else {
+
+                            $scope.UIelementOption.showCallHistory = false;
+                            $scope.UIelementOption.showKeyPad = true;
+                        }
                     }
-                }
-                else {
-                    if ($scope.UIelementOption.showKeyPad) {
-                        $scope.UIelementOption.showCallHistory = true;
-                        $scope.UIelementOption.showKeyPad = false;
-                    }
-                    else {
-                        $scope.UIelementOption.showCallHistory = false;
-                        $scope.UIelementOption.showKeyPad = true;
-                    }
-                }
+                });
             },
             inCallConnectedState: function () {
-                try {
-                    $scope.$apply(function () {
-                        $scope.$broadcast('timer-start');
-                        $scope.UIelementOption.isTimer = true;
-                    });
-                }
-                catch (ex) {
+                $scope.safeApply(function() {
                     $scope.$broadcast('timer-start');
                     $scope.UIelementOption.isTimer = true;
-                    console.error(ex.message);
-                }
-                $scope.UIelementOption.isCallConnect = true;
 
-                $scope.UIelementOption.showCallConnect = true;
-                $scope.UIelementOption.showIncomingCall = false;
-                $scope.UIelementOption.showOutGoingCall = false;
-                $scope.UIelementOption.showKeyPad = false;
-                $scope.UIelementOption.showCallHistory = false;
 
-                // buttons
-                $scope.UIelementOption.callFunctions = true;
-                $scope.UIelementOption.isVideoCallBtn = false;
-                $scope.UIelementOption.isCallBtn = false;
-                $scope.UIelementOption.isEndCallBtn = true;
+                    $scope.UIelementOption.isCallConnect = true;
+
+                    $scope.UIelementOption.showCallConnect = true;
+                    $scope.UIelementOption.showIncomingCall = false;
+                    $scope.UIelementOption.showOutGoingCall = false;
+                    $scope.UIelementOption.showKeyPad = false;
+                    $scope.UIelementOption.showCallHistory = false;
+
+                    // buttons
+                    $scope.UIelementOption.callFunctions = true;
+                    $scope.UIelementOption.isVideoCallBtn = false;
+                    $scope.UIelementOption.isCallBtn = false;
+                    $scope.UIelementOption.isEndCallBtn = true;
+                });
+
+
 
             },
             inCallState: function () {
@@ -356,6 +367,8 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, $f
                     $scope.UIelementOption.isVideoCallBtn = true;
                     $scope.UIelementOption.isCallBtn = true;
                     $scope.UIelementOption.isEndCallBtn = false;
+
+                    $scope.call.status = "Trying";
                 });
 
             },
@@ -431,7 +444,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, $f
             addCallToHistory(call.number, 1);
         },
         endCall: function () {
-            UIStateChange.inIdleState();
+            //UIStateChange.inIdleState();
             sipHangUp();
         },
         makeVideoCall: function (call) {
