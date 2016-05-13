@@ -8,18 +8,18 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state,$fi
     var onEventsListener = function (e) {
         console.info(e.type);
         //document.getElementById("lblStatus").innerHTML = e.type;
-        Notification.info({message: e.type, delay: 500, closeOnClick: true});
+        //Notification.info({message: e.type, delay: 500, closeOnClick: true});
     };
 
     var onSipEventSession = function (e) {
         try {
             $scope.call.status = e;
             //document.getElementById("lblSipStatus").innerHTML = e;
-            Notification.info({message: e, delay: 500, closeOnClick: true});
+            //Notification.info({message: e, delay: 500, closeOnClick: true});
             if (e == 'Session Progress') {
                 //document.getElementById("lblSipStatus").innerHTML = 'Session Progress';
                 //document.getElementById("lblStatus").innerHTML = 'Session Progress';
-                Notification.info({message: 'Session Progress', delay: 500, closeOnClick: true});
+                //Notification.info({message: 'Session Progress', delay: 500, closeOnClick: true});
             }
             else if (e.toString().toLowerCase() == 'in call') {
                 inCallConnectedState();
@@ -104,9 +104,10 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state,$fi
     var onIncomingCall = function (sRemoteNumber) {
         try {
             //document.getElementById("lblSipStatus").innerHTML = sRemoteNumber;
-            Notification.info({message: sRemoteNumber, delay: 500, closeOnClick: true});
+            //Notification.info({message: sRemoteNumber, delay: 500, closeOnClick: true});
             inIncomingState();
             $scope.call.number = sRemoteNumber;
+            addCallToHistory(sRemoteNumber, 2);
         }
         catch (ex) {
             console.error(ex.message);
@@ -124,7 +125,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state,$fi
             stopRingTone();
 
             //document.getElementById("lblSipStatus").innerHTML = msg;
-            Notification.info({message: msg, delay: 500, closeOnClick: true});
+            //Notification.info({message: msg, delay: 500, closeOnClick: true});
             uiVideoDisplayShowHide(false);
             //document.getElementById("divCallOptions").style.opacity = 0;
 
@@ -142,7 +143,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state,$fi
     var notificationEvent = function (description) {
         try {
             //document.getElementById("lblStatus").innerHTML = description;
-            Notification.info({message: description, delay: 500, closeOnClick: true});
+            //Notification.info({message: description, delay: 500, closeOnClick: true});
 
             if (description == 'Connected') {
                 inIdleState();
@@ -276,6 +277,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state,$fi
         };
         $scope.callHistoryes.push(item);
     };
+
 
     var UIelementOption = {
         isLoadingHistory: false,
