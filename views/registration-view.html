@@ -19,6 +19,7 @@
                                 <img src="assets/images/logo1.png">
                             </div>
                             <h1 class="h1 fnt-color-blue1 font-Dosis  fnt-weight-500">connecting world on click</h1>
+
                             <p class="font-family-Roboto fnt-color-3 fnt-weight-200 ">
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
                                 has
@@ -40,25 +41,34 @@
 
                         </div>
                     </div>
-                    <div class="image phone">
-                        <div class="inner">
+                    <div class="col-lg-7 iphone">
+                        <div class="power"></div>
+                        <div class="lock"></div>
+                        <div class="volume up"></div>
+                        <div class="volume down"></div>
+                        <div class="camera"></div>
+                        <div class="speaker"></div>
+                        <div class="screen">
+
                             <form class="form-horizontal" name="callForm">
                                 <div class="form-group">
-                                    <div class="col-sm-6"
+                                    <div ng-hide="true" class="col-sm-6"
                                          ng-class="{ 'has-error' : callForm.displayNme.$invalid && !callForm.displayNme.$pristine }">
                                         <label for="displayNme" class="fnt-color-white">Display Name</label>
-                                        <input type="text" required class="form-control" name="displayNme"
+                                        <input type="text"  class="form-control" name="displayNme"
                                                id="displayNme" ng-model="profile.displayName"
                                                placeholder="Display Name">
+
                                         <p ng-show="callForm.displayNme.$invalid && !callForm.displayNme.$pristine"
                                            class="help-block">Display Name is required.</p>
                                     </div>
-                                    <div class="col-sm-6"
+                                    <div class="col-sm-12"
                                          ng-class="{ 'has-error' : callForm.privateId.$invalid && !callForm.privateId.$pristine }">
                                         <label for="privateId" class="fnt-color-white">Private Identity</label>
                                         <input type="text" class="form-control" required name="privateId" id="privateId"
                                                ng-model="profile.authorizationName"
                                                placeholder="Private Identity*">
+
                                         <p ng-show="callForm.privateId.$invalid && !callForm.privateId.$pristine"
                                            class="help-block">Private ID is required.</p>
                                     </div>
@@ -74,6 +84,7 @@
                                         <label for="publicId" class="fnt-color-white">Public Identity</label>
                                         <input type="text" class="form-control" required name="publicId" id="publicId"
                                                ng-model="profile.publicIdentity" placeholder="Public Identity">
+
                                         <p ng-show="callForm.publicId.$invalid && !callForm.publicId.$pristine"
                                            class="help-block">Public Identity is required.</p>
                                     </div>
@@ -85,16 +96,19 @@
                                         <label for="password" class="fnt-color-white">Password</label>
                                         <input type="password" class="form-control" required name="password"
                                                id="password" ng-model="profile.password" placeholder="Password">
+
                                         <p ng-show="callForm.password.$invalid && !callForm.password.$pristine"
                                            class="help-block">Password is required.</p>
                                     </div>
                                 </div>
+
                                 <div class="form-group">
                                     <div class="col-sm-12"
                                          ng-class="{ 'has-error' : callForm.realm.$invalid && !callForm.realm.$pristine }">
                                         <label for="realm" class="fnt-color-white">Domain</label>
                                         <input type="text" class="form-control" required name="realm" id="realm"
                                                ng-model="profile.server.domain" placeholder="Domain">
+
                                         <p ng-show="callForm.realm.$invalid && !callForm.realm.$pristine"
                                            class="help-block">Domain is required.</p>
                                     </div>
@@ -107,6 +121,7 @@
                                         <input type="text" class="form-control" required name="websocketUrl"
                                                id="websocketUrl" ng-model="profile.server.websocketUrl"
                                                placeholder="websocketUrl">
+
                                         <p ng-show="callForm.websocketUrl.$invalid && !callForm.websocketUrl.$pristine"
                                            class="help-block">Websocket URL is required.</p>
                                     </div>
@@ -117,7 +132,7 @@
                                         <uib-accordion-heading>
                                             optional setting
                                             <i class="pull-right fa fa-cog fa-spin"
-                                            >
+                                                    >
                                             </i>
                                         </uib-accordion-heading>
                                         <div class="form-group">
@@ -162,14 +177,16 @@
                                     </div>
                                 </div>
                             </form>
+
+                        </div>
+                        <div class="button">
+                            <div class="square"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
 </div>
 
 
