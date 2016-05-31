@@ -23,9 +23,12 @@ routerApp.config(["$httpProvider", "$stateProvider", "$urlRouterProvider",
             .state("register", {
                 url: "/reg",
                 templateUrl: "views/registration-view.html"
+            }).state("status", {
+                url: "/status",
+                templateUrl: "views/agentStatusWidget.html"
             }).state("callControl", {
-            url: "/callControl",
-            templateUrl: "views/callControl-views.html"
+                url: "/callControl",
+                templateUrl: "views/callControl-views.html"
 
-        });
+            });
     }]);

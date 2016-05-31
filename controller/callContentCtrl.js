@@ -229,7 +229,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, $f
     // 0  miss call , 1 outgoing , 2 incoming
     $scope.callHistoryes = [{
         "id": 1,
-        "number": "Veery",
+        "number": "Veery-support",
         "date": $filter('date')(new Date(), 'dd-MM-yyyy'),
         "time": $filter('date')(new Date(), 'HH:mm'),
         "state": 0
@@ -426,11 +426,6 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, $f
         }
     })();//end
 
-
-    $scope.sipSendDTMF = function (dtmf) {
-        sipSendDTMF(dtmf);
-    };
-
     $scope.eventHandler = {
         keyPadClick: function () {
             UIStateChange.showKeyPad();
@@ -465,9 +460,12 @@ routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, $f
         rejectCall: function () {
             //UIStateChange.inIdleState();
             rejectCall();
+        },
+        sipSendDTMF: function (dtmf) {
+            sipSendDTMF(dtmf);
+            $scope.call.number = $scope.call.number +dtmf;
         }
     }
-
 
 }).directive('noClick', function () {
     return {
