@@ -33,9 +33,41 @@ clusterModule.factory("resourceService", function ($http, $log, baseUrl,dataPars
 
     };
 
+    var registerWithArds = function (resourceId) {
+
+        return $http({
+            method: 'post',
+            url: baseUrl + "resource",
+            headers: {
+                'authorization': "Bearer "+  dataParser.userProfile.server.token
+            },
+            data: {"ResourceId":resourceId,"HandlingTypes":["CALL"]}
+        }).then(function (response) {
+            return response.data.IsSuccess;
+        });
+
+    };
+
+    var unregisterWithArds = function (resourceId) {
+
+        return $http({
+            method: 'post',
+            url: baseUrl + "resource/"+resourceId,
+            headers: {
+                'authorization': "Bearer "+  dataParser.userProfile.server.token
+            },
+            data: {"ResourceId":resourceId,"HandlingTypes":["CALL"]}
+        }).then(function (response) {
+            return response.data.IsSuccess;
+        });
+
+    };
+
     return {
         BreakRequest: breakRequest,
-        EndBreakRequest: endBreakRequest
+        EndBreakRequest: endBreakRequest,
+        RegisterWithArds:registerWithArds,
+        UnregisterWithArds:unregisterWithArds
     }
 
 });

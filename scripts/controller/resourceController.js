@@ -13,7 +13,7 @@ routerApp.controller('resourceCtrl', function ($rootScope, $scope, $log, $state,
             $scope.currentState = reason;
 
         }, function (error) {
-            $log.debug("GetCallServers err");
+            $log.debug("BreakRequest err");
         });
 
     };
@@ -25,7 +25,19 @@ routerApp.controller('resourceCtrl', function ($rootScope, $scope, $log, $state,
         resourceService.EndBreakRequest(tokenPayload.client, $scope.currentState).then(function (response) {
             $scope.currentState = "Available";
         }, function (error) {
-            $log.debug("GetCallServers err");
+            $log.debug("EndBreakRequest err");
+        });
+
+    };
+
+    $scope.RegisterWithArds = function () {
+
+        var tokenPayload = jwtHelper.decodeToken(dataParser.userProfile.server.token);
+
+        resourceService.RegisterWithArds(tokenPayload.client, $scope.currentState).then(function (response) {
+
+        }, function (error) {
+            $log.debug("RegisterWithArds err");
         });
 
     };
