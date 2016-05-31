@@ -21,6 +21,31 @@
                             been the
                             industry's standard dummy text ever since the 1500s....
                         </p>
+
+                        <div class="row">
+                            <!-- Split button -->
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default">Register</button>
+                            </div>
+                            <div class="btn-group">
+                                <label class="btn btn-primary" ng-model="radioModel"
+                                       uib-btn-radio="'Left'">
+                                    Lunch
+                                </label>
+                                <label class="btn btn-primary" ng-model="radioModel"
+                                       uib-btn-radio="'Middle'">Official</label>
+                                <label class="btn btn-primary" ng-model="radioModel"
+                                       uib-btn-radio="'Right'">Tea</label>
+                                <label class="btn btn-primary" ng-model="radioModel"
+                                       uib-btn-radio="'Right'">Training</label>
+                                <label class="btn btn-primary" ng-model="radioModel"
+                                       uib-btn-radio="'Right'">Wrap</label>
+                                <label class="btn btn-primary" ng-model="radioModel"
+                                       uib-btn-radio="'Right'">Meeting</label>
+                                <label class="btn btn-success" ng-model="radioModel"
+                                       uib-btn-radio="'Right'">Available</label>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="mode-wrap-video">
@@ -73,7 +98,7 @@
                 </div>
                 <div class="col-lg-5">
                     <div class="call-control-wrap call-wrap p-20  fadeInRight">
-                        <form class="form-horizontal" >
+                        <form class="form-horizontal">
                             <div class="form-group">
                                 <!-- <label id="lblStatus"></label></br>
                                    <label id="lblSipStatus"></label></br>
@@ -82,7 +107,8 @@
                                 <!-- #number display -->
                                 <div ng-show="!UIelementOption.showIncomingCall" class="number-display">
                                     <div class="col-sm-12  margin-20-bottom">
-                                        <input required type="text" class="form-control" id="number" ng-model="call.number"
+                                        <input required type="text" class="form-control" id="number"
+                                               ng-model="call.number"
                                                placeholder="Enter the phone no to call">
                                     </div>
                                 </div>
@@ -192,7 +218,7 @@
                                             <p class="font-family-Roboto out-call-num">{{call.number}}</p>
 
                                              <span class="font-Dosis out-call-name "
-                                                   >{{call.status}}
+                                             >{{call.status}}
                                             </span>
                                         </div>
                                     </div>
@@ -209,8 +235,8 @@
                                                     <img src="assets/images/avatar_default.png">
                                                 </a>
                                             </div>
-                                            <div  class="font-family-Roboto call-time"
-                                                    >
+                                            <div class="font-family-Roboto call-time"
+                                            >
                                                 <timer interval="1000" auto-start="false">
                                                     {{mminutes}} : {{sseconds}}
                                                 </timer>
@@ -219,7 +245,7 @@
                                             <p class="font-family-Roboto out-call-num">{{call.number}}</p>
 
                                              <span class="font-Dosis out-call-name "
-                                                   >{{call.status}}
+                                             >{{call.status}}
                                             </span>
                                         </div>
                                     </div>
@@ -243,8 +269,10 @@
                                             <span class="font-Dosis out-call-name">incoming call.</span>
 
                                             <div class="incoming-btn-wrap">
-                                                <span  class="anz icon-call-answer" ng-click="eventHandler.answerCall();"> </span>
-                                                <span class="cut icon-end-call-button" ng-click="eventHandler.rejectCall();"> </span>
+                                                <span class="anz icon-call-answer"
+                                                      ng-click="eventHandler.answerCall();"> </span>
+                                                <span class="cut icon-end-call-button"
+                                                      ng-click="eventHandler.rejectCall();"> </span>
                                             </div>
                                         </div>
                                     </div>

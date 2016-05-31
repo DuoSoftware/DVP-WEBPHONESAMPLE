@@ -31,6 +31,9 @@ routerApp.config(["$httpProvider", "$stateProvider", "$urlRouterProvider",
             }).state("callControl", {
                 url: "/callControl",
                 templateUrl: "views/callControl-views.html"
+            }).state("widget", {
+            url: "/widget",
+            templateUrl: "views/agentStatusWidget.html"
 
-            });
+        })
     }]);
