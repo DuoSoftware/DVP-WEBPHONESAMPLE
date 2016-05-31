@@ -34,7 +34,19 @@ routerApp.controller('resourceCtrl', function ($rootScope, $scope, $log, $state,
 
         var tokenPayload = jwtHelper.decodeToken(dataParser.userProfile.server.token);
 
-        resourceService.RegisterWithArds(tokenPayload.client, $scope.currentState).then(function (response) {
+        resourceService.RegisterWithArds(tokenPayload.client).then(function (response) {
+
+        }, function (error) {
+            $log.debug("RegisterWithArds err");
+        });
+
+    };
+
+    $scope.unregisterWithArds = function () {
+
+        var tokenPayload = jwtHelper.decodeToken(dataParser.userProfile.server.token);
+
+        resourceService.unregisterWithArds(tokenPayload.client).then(function (response) {
 
         }, function (error) {
             $log.debug("RegisterWithArds err");

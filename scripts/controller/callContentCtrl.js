@@ -3,7 +3,59 @@
  */
 
 'use strict'
-routerApp.controller('callContentCtrl', function ($rootScope, $scope, $state, $filter, dataParser, socketAuth, Notification) {
+routerApp.controller('callContentCtrl', function ($rootScope, $log, $scope, $state, $filter, dataParser, socketAuth, Notification,jwtHelper, resourceService) {
+
+
+    $scope.currentState = "";
+    $scope.registerdWithArds = false;
+    $scope.BreakRequest = function (reason) {
+
+        var tokenPayload = jwtHelper.decodeToken(dataParser.userProfile.server.token);
+        console.log(tokenPayload);
+        resourceService.BreakRequest(tokenPayload.client, reason).then(function (response) {
+            $scope.currentState = reason;
+        }, function (error) {
+            $log.debug("BreakRequest err");
+        });
+
+    };
+
+    $scope.EndBreakRequest = function () {
+
+        var tokenPayload = jwtHelper.decodeToken(dataParser.userProfile.server.token);
+
+        resourceService.EndBreakRequest(tokenPayload.client, $scope.currentState).then(function (response) {
+            $scope.currentState = "Available";
+        }, function (error) {
+            $log.debug("EndBreakRequest err");
+        });
+
+    };
+
+    $scope.RegisterWithArds = function () {
+
+        var tokenPayload = jwtHelper.decodeToken(dataParser.userProfile.server.token);
+
+        resourceService.RegisterWithArds(tokenPayload.client, $scope.currentState).then(function (response) {
+
+            $scope.registerdWithArds = response;
+        }, function (error) {
+            $log.debug("RegisterWithArds err");
+        });
+
+    };
+
+    $scope.unregisterWithArds = function () {
+
+        var tokenPayload = jwtHelper.decodeToken(dataParser.userProfile.server.token);
+
+        resourceService.UnregisterWithArds(tokenPayload.client).then(function (response) {
+            $scope.registerdWithArds = !response;
+        }, function (error) {
+            $log.debug("RegisterWithArds err");
+        });
+
+    };
 
     $scope.status = function (dtmf) {
         $state.go('status');

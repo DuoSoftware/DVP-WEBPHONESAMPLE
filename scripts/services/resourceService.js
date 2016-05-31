@@ -10,7 +10,7 @@ clusterModule.factory("resourceService", function ($http, $log, baseUrl,dataPars
     var breakRequest = function (resourceId,reason) {
         return $http({
             method: 'put',
-            url: baseUrl + resourceId + "/state/NotAvailable/reason/"+reason,
+            url: baseUrl+ "/" + resourceId + "/state/NotAvailable/reason/"+reason,
             headers: {
                 'authorization': "Bearer "+  dataParser.userProfile.server.token
             }
@@ -23,7 +23,7 @@ clusterModule.factory("resourceService", function ($http, $log, baseUrl,dataPars
 
         return $http({
             method: 'put',
-            url: baseUrl + resourceId + "/state/Available/reason/EndBreak",
+            url: baseUrl + "/"+ resourceId + "/state/Available/reason/EndBreak",
             headers: {
                 'authorization': "Bearer "+  dataParser.userProfile.server.token
             }
@@ -37,7 +37,7 @@ clusterModule.factory("resourceService", function ($http, $log, baseUrl,dataPars
 
         return $http({
             method: 'post',
-            url: baseUrl + "resource",
+            url: baseUrl ,
             headers: {
                 'authorization': "Bearer "+  dataParser.userProfile.server.token
             },
@@ -51,8 +51,8 @@ clusterModule.factory("resourceService", function ($http, $log, baseUrl,dataPars
     var unregisterWithArds = function (resourceId) {
 
         return $http({
-            method: 'post',
-            url: baseUrl + "resource/"+resourceId,
+            method: 'delete',
+            url: baseUrl + "/"+resourceId,
             headers: {
                 'authorization': "Bearer "+  dataParser.userProfile.server.token
             },

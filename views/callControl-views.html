@@ -1,9 +1,7 @@
 <div class="reg-warp-main bg-image " ng-controller="callContentCtrl" id="callSection">
     <!--<div class="reg-bg-color-wrap"></div>-->
     <!--http://www.alessioatzeni.com/blog/css3-preloader-animation-for-only-user-agent-supports-it/-->
-    <button ng-disabled="callForm.$invalid" type="submit" class="btn btn-default btn-yellow
-                                     height-40 width-180 pull-right" ng-click="status()">status
-    </button>
+
 
     <div class="container">
         <div class="col-lg-12">
@@ -16,36 +14,53 @@
                         <h1 class="h1 fnt-color-blue1 font-Dosis  fnt-weight-500">Veery Web Phone</h1>
 
                         <p class="font-family-Roboto fnt-color-3 fnt-weight-200 ">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                            has
-                            been the
-                            industry's standard dummy text ever since the 1500s....
+                            Veery is an API driven communication platform for developers.
+                            Developers can add voice, sms, messaging, video communication facility to their application
+                            through Veery.
+                            This is a sample soft phone developed using Veery WEBRTC SDK and NOTIFICATION SDK to
+                            demonstrate how to add voice features to your own website.
                         </p>
 
                         <div class="row">
                             <!-- Split button -->
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default">Register</button>
+                                <button ng-show="!registerdWithArds" type="button"
+                                        class="btn btn-default btn-sm btn-warning" ng-click="RegisterWithArds()">
+                                    Register
+                                </button>
+                                <button ng-show="registerdWithArds" type="button"
+                                        class="btn btn-default btn-sm btn-warning" ng-click="unregisterWithArds()">
+                                    Unregister
+                                </button>
                             </div>
-                            <div class="btn-group">
-                                <label class="btn btn-primary" ng-model="radioModel"
-                                       uib-btn-radio="'Left'">
+                            <div class="btn-group" ng-show="registerdWithArds">
+                                <label class="btn btn-primary btn-sm" ng-model="radioModel"
+                                       ng-click="BreakRequest('Lunch')"
+                                       uib-btn-radio="'Lunch'">
                                     Lunch
                                 </label>
-                                <label class="btn btn-primary" ng-model="radioModel"
-                                       uib-btn-radio="'Middle'">Official</label>
-                                <label class="btn btn-primary" ng-model="radioModel"
-                                       uib-btn-radio="'Right'">Tea</label>
-                                <label class="btn btn-primary" ng-model="radioModel"
-                                       uib-btn-radio="'Right'">Training</label>
-                                <label class="btn btn-primary" ng-model="radioModel"
-                                       uib-btn-radio="'Right'">Wrap</label>
-                                <label class="btn btn-primary" ng-model="radioModel"
-                                       uib-btn-radio="'Right'">Meeting</label>
-                                <label class="btn btn-success" ng-model="radioModel"
-                                       uib-btn-radio="'Right'">Available</label>
+                                <label class="btn btn-primary btn-sm" ng-model="radioModel"
+                                       ng-click="BreakRequest('Official')"
+                                       uib-btn-radio="'Official '">Official</label>
+                                <label class="btn btn-primary btn-sm" ng-model="radioModel"
+                                       ng-click="BreakRequest('Tea')"
+                                       uib-btn-radio="'MiddleTea'">Tea</label>
+                                <label class="btn btn-primary btn-sm" ng-model="radioModel"
+                                       ng-click="BreakRequest('Training')"
+                                       uib-btn-radio="'Training'">Training</label>
+                                <label class="btn btn-primary btn-sm" ng-model="radioModel"
+                                       ng-click="BreakRequest('Wrap')"
+                                       uib-btn-radio="'Wrap'">Wrap</label>
+                                <label class="btn btn-primary btn-sm" ng-model="radioModel"
+                                       ng-click="BreakRequest('Meeting')"
+                                       uib-btn-radio="'Meeting'">Meeting</label>
+                                <label class="btn btn-success btn-sm" ng-model="radioModel"
+                                       ng-click="EndBreakRequest()"
+                                       uib-btn-radio="'available'">Available</label>
                             </div>
                         </div>
+
+
                     </div>
 
                     <div class="mode-wrap-video">
@@ -218,7 +233,7 @@
                                             <p class="font-family-Roboto out-call-num">{{call.number}}</p>
 
                                              <span class="font-Dosis out-call-name "
-                                             >{{call.status}}
+                                                     >{{call.status}}
                                             </span>
                                         </div>
                                     </div>
@@ -236,7 +251,7 @@
                                                 </a>
                                             </div>
                                             <div class="font-family-Roboto call-time"
-                                            >
+                                                    >
                                                 <timer interval="1000" auto-start="false">
                                                     {{mminutes}} : {{sseconds}}
                                                 </timer>
@@ -245,7 +260,7 @@
                                             <p class="font-family-Roboto out-call-num">{{call.number}}</p>
 
                                              <span class="font-Dosis out-call-name "
-                                             >{{call.status}}
+                                                     >{{call.status}}
                                             </span>
                                         </div>
                                     </div>
