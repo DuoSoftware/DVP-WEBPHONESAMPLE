@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <title>Veery Soft Phone</title>
 
+    <!-- Bootstrap -->
+    <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+    <!-- bootstrap-progressbar -->
+    <link href="assets/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="assets/css/custom.min.css" rel="stylesheet">
+
+
     <link rel="shortcut icon" href="assets/images/favorite.ico"/>
     <!-- style area  -->
     <link rel="stylesheet" href="assets/css/webphone.css" type='text/css'/>
@@ -39,6 +49,17 @@
 <div ui-view></div>
 </body>
 
+<!-- Bootstrap -->
+<script src="assets/js/bootstrap.min.js"></script>
+<!-- FastClick -->
+<script src="assets/js/fastclick.js"></script>
+<!-- NProgress -->
+<script src="assets/js/nprogress.js"></script>
+<!-- bootstrap-progressbar -->
+<script src="assets/js/bootstrap-progressbar.min.js"></script>
+
+<!-- Custom Theme Scripts -->
+<script src="assets/js/custom.min.js"></script>
 <!-- script area
      #bower_components
      #cutomer JS
@@ -60,19 +81,22 @@
 <script type="text/javascript" src="bower_components/humanize-duration/humanize-duration.js"></script>
 <script type="text/javascript" src="bower_components/moment/min/moment.min.js"></script>
 
+<!-- angular-jwt -->
+<script type="text/javascript" src="bower_components/angular-jwt/dist/angular-jwt.js"></script>
 
 <!-- customer Js  #customer JS-->
 <script type="text/javascript" src="app.js"></script>
-<script type="text/javascript" src="SIPml.js"></script>
-<script type="text/javascript" src="PhoneHandler.js"></script>
-<script type="text/javascript" src="DataParser.js"></script>
-<script type="text/javascript" src="SocketAuthenticated.js"></script>
-<script type="text/javascript" src="SocketConnector.js"></script>
-<script type="text/javascript" src="timer.js"></script>
+<script type="text/javascript" src="scripts/SIPml.js"></script>
+<script type="text/javascript" src="scripts/PhoneHandler.js"></script>
+<script type="text/javascript" src="scripts/DataParser.js"></script>
+<script type="text/javascript" src="scripts/SocketAuthenticated.js"></script>
+<script type="text/javascript" src="scripts/SocketConnector.js"></script>
+
 
 <!-- controller -->
-<script type="text/javascript" src="controller/registrationCtrl.js"></script>
-<script type="text/javascript" src="controller/callContentCtrl.js"></script>
-<script type="text/javascript" src="controller/notificationController.js"></script>
-
+<script type="text/javascript" src="scripts/controller/registrationCtrl.js"></script>
+<script type="text/javascript" src="scripts/controller/callContentCtrl.js"></script>
+<script type="text/javascript" src="scripts/controller/notificationController.js"></script>
+<script type="text/javascript" src="scripts/services/resourceService.js"></script>
+<script type="text/javascript" src="scripts/controller/resourceController.js"></script>
 </html>
