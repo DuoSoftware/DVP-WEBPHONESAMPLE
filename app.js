@@ -6,7 +6,7 @@
 
 var routerApp = angular.module('veerySoftPhone',
     ['ui.bootstrap', 'ui.router', 'btford.socket-io',
-        'ui-notification', 'ngAnimate', 'timer','resourceServiceModule','angular-jwt']);
+        'ui-notification', 'ngAnimate', 'timer','resourceServiceModule','angular-jwt','base64']);
 
 routerApp.constant('baseUrl', 'http://ardsliteservice.104.131.67.21.xip.io/DVP/API/1.0.0.0/ARDS/resource');
 

@@ -43,39 +43,14 @@
                     <div class="col-lg-5">
                         <div class="reg-wrap p-20 animated fadeInRight">
                             <form class="form-horizontal" name="callForm">
-                                <div class="form-group">
-                                    <div ng-hide="true" class="col-sm-6"
-                                         ng-class="{ 'has-error' : callForm.displayNme.$invalid && !callForm.displayNme.$pristine }">
-                                        <label for="displayNme" class="fnt-color-white">Display Name</label>
-                                        <input type="text"  class="form-control" name="displayNme"
-                                               id="displayNme" ng-model="profile.displayName"
-                                               placeholder="Display Name">
 
-                                        <p ng-show="callForm.displayNme.$invalid && !callForm.displayNme.$pristine"
-                                           class="help-block">Display Name is required.</p>
-                                    </div>
-                                    <div class="col-sm-12"
-                                         ng-class="{ 'has-error' : callForm.privateId.$invalid && !callForm.privateId.$pristine }">
-                                        <label for="privateId" class="fnt-color-white">Private Identity</label>
-                                        <input type="text" class="form-control" required name="privateId" id="privateId"
-                                               ng-model="profile.authorizationName"
-                                               placeholder="Private Identity*">
-
-                                        <p ng-show="callForm.privateId.$invalid && !callForm.privateId.$pristine"
-                                           class="help-block">Private ID is required.</p>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-
-                                </div>
 
                                 <div class="form-group">
                                     <div class="col-sm-12"
                                          ng-class="{ 'has-error' : callForm.publicId.$invalid && !callForm.publicId.$pristine }">
-                                        <label for="publicId" class="fnt-color-white">Public Identity</label>
+                                        <label for="publicId" class="fnt-color-white">User Name</label>
                                         <input type="text" class="form-control" required name="publicId" id="publicId"
-                                               ng-model="profile.publicIdentity" placeholder="Public Identity">
+                                               ng-model="profile.userName" placeholder="User Name">
 
                                         <p ng-show="callForm.publicId.$invalid && !callForm.publicId.$pristine"
                                            class="help-block">Public Identity is required.</p>
@@ -94,31 +69,6 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <div class="col-sm-12"
-                                         ng-class="{ 'has-error' : callForm.realm.$invalid && !callForm.realm.$pristine }">
-                                        <label for="realm" class="fnt-color-white">Domain</label>
-                                        <input type="text" class="form-control" required name="realm" id="realm"
-                                               ng-model="profile.server.domain" placeholder="Domain">
-
-                                        <p ng-show="callForm.realm.$invalid && !callForm.realm.$pristine"
-                                           class="help-block">Domain is required.</p>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-sm-12"
-                                         ng-class="{ 'has-error' : callForm.websocketUrl.$invalid && !callForm.websocketUrl.$pristine }">
-                                        <label for="realm" class="fnt-color-white">Web Socket Url</label>
-                                        <input type="text" class="form-control" required name="websocketUrl"
-                                               id="websocketUrl" ng-model="profile.server.websocketUrl"
-                                               placeholder="websocketUrl">
-
-                                        <p ng-show="callForm.websocketUrl.$invalid && !callForm.websocketUrl.$pristine"
-                                           class="help-block">Websocket URL is required.</p>
-                                    </div>
-                                </div>
-
                                 <uib-accordion>
                                     <uib-accordion-group is-open="status.open">
                                         <uib-accordion-heading>
@@ -129,26 +79,10 @@
                                         </uib-accordion-heading>
                                         <div class="form-group">
                                             <div class="col-sm-12">
-                                                <label for="realm" class="fnt-color-white">Token</label>
-                                                <input type="text" class="form-control" id="secToken"
-                                                       ng-model="profile.server.token"
+                                                <label for="secToken" class="fnt-color-white">SIP Password</label>
+                                                <input type="password" class="form-control" id="secToken"
+                                                       ng-model="profile.server.password"
                                                        placeholder="outboundProxy">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-sm-12">
-                                                <label for="realm" class="fnt-color-white">Outbound Proxy</label>
-                                                <input type="text" class="form-control" id="outboundProxy"
-                                                       ng-model="profile.server.outboundProxy"
-                                                       placeholder="outboundProxy">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-sm-12">
-                                                <label for="realm" class="fnt-color-white">Enable RtcwebBreaker</label>
-                                                <input type="text" class="form-control" id="enableRtcwebBreaker"
-                                                       ng-model="profile.server.enableRtcwebBreaker"
-                                                       placeholder="enableRtcwebBreaker">
                                             </div>
                                         </div>
                                     </uib-accordion-group>

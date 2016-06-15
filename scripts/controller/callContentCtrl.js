@@ -34,9 +34,9 @@ routerApp.controller('callContentCtrl', function ($rootScope, $log, $scope, $sta
 
     $scope.RegisterWithArds = function () {
 
-        var tokenPayload = jwtHelper.decodeToken(dataParser.userProfile.server.token);
+        /*var tokenPayload = jwtHelper.decodeToken(dataParser.userProfile.server.token);*/
 
-        resourceService.RegisterWithArds(tokenPayload.client, $scope.currentState).then(function (response) {
+        resourceService.RegisterWithArds(dataParser.userProfile.id, $scope.currentState).then(function (response) {
 
             $scope.registerdWithArds = response;
         }, function (error) {
@@ -210,7 +210,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $log, $scope, $sta
             if (description == 'Connected') {
                 UIStateChange.inIdleState();
                 Notification.success({message: description, delay: 3000, closeOnClick: true});
-
+                $scope.RegisterWithArds();
             }
             else if (description == 'Forbidden') {
                 console.error(description);
