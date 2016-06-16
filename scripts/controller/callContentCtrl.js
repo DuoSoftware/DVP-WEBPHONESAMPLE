@@ -27,8 +27,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $log, $scope, $sta
     };
 
     $scope.RegisterWithArds = function () {
-        resourceService.RegisterWithArds(dataParser.userProfile.id, $scope.currentState).then(function (response) {
-
+        resourceService.RegisterWithArds(dataParser.userProfile.id,dataParser.userProfile.veeryFormat ).then(function (response) {
             $scope.registerdWithArds = response;
         }, function (error) {
             $log.debug("RegisterWithArds err");
