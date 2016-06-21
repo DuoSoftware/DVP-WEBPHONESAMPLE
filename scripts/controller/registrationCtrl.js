@@ -21,7 +21,7 @@ routerApp.controller('registrationCtrl', function ($rootScope, $scope, $state, $
     $scope.Register = function () {
 
 
-        var url = "http://localhost:3636/oauth/token";
+        var url = "http://userservice.104.131.67.21.xip.io/oauth/token";
         var encoded = $base64.encode("ae849240-2c6d-11e6-b274-a9eec7dab26b:6145813102144258048");
         var config = {
             headers: {
@@ -33,7 +33,7 @@ routerApp.controller('registrationCtrl', function ($rootScope, $scope, $state, $
             "grant_type": "password",
             "username": $scope.profile.userName,
             "password": $scope.profile.password,
-            "scope": "write_ardsresource write_notification read_userProfile profile_veeryaccount resourceid"
+            "scope": "write_ardsresource write_notification read_myUserProfile profile_veeryaccount resourceid"
         };
 
 
