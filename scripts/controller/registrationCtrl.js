@@ -3,7 +3,7 @@
  */
 
 'use strict'
-routerApp.controller('registrationCtrl', function ($rootScope, $scope, $state, $base64, $http, jwtHelper, dataParser,Notification, resourceService) {
+routerApp.controller('registrationCtrl', function ($rootScope, $scope, $state, $base64, $http, jwtHelper, dataParser,Notification,oauthServiceBaseUrl, resourceService) {
 
 
     $scope.profile = {};
@@ -21,7 +21,7 @@ routerApp.controller('registrationCtrl', function ($rootScope, $scope, $state, $
     $scope.Register = function () {
 
 
-        var url = "http://localhost:3636/oauth/token";
+        var url = oauthServiceBaseUrl;
         var encoded = $base64.encode("ae849240-2c6d-11e6-b274-a9eec7dab26b:6145813102144258048");
         var config = {
             headers: {
