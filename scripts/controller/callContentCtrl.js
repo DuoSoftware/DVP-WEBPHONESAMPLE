@@ -30,7 +30,9 @@ routerApp.controller('callContentCtrl', function ($rootScope, $log, $scope, $sta
         resourceService.RegisterWithArds(dataParser.userProfile.id,dataParser.userProfile.veeryFormat ).then(function (response) {
             $scope.registerdWithArds = response;
         }, function (error) {
-            $log.debug("RegisterWithArds err");
+            Notification.error({message: "Fail To Register With Resource Server.", delay: 500, closeOnClick: true});
+            $log.debug("RegisterWithArds err"+error);
+
         });
 
     };
