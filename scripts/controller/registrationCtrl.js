@@ -33,7 +33,7 @@ routerApp.controller('registrationCtrl', function ($rootScope, $scope, $state, $
             "grant_type": "password",
             "username": $scope.profile.userName,
             "password": $scope.profile.password,
-            "scope": "write_ardsresource write_notification read_userProfile profile_veeryaccount resourceid"
+            "scope": "write_ardsresource write_notification read_myUserProfile profile_veeryaccount resourceid"
         };
 
 
@@ -56,6 +56,10 @@ routerApp.controller('registrationCtrl', function ($rootScope, $scope, $state, $
                     $scope.profile.server.outboundProxy = "";
                     $scope.profile.server.enableRtcwebBreaker = false;
                     dataParser.userProfile = $scope.profile;
+                    if(!decodeData.context.resourceid){
+                        Notification.error({message: "Fail to Get Resource Information's.", delay: 1000, closeOnClick: true});
+                        return;
+                    }
                     resourceService.GetContactVeeryFormat($scope.profile.userName).then(function (response) {
                         if (response.IsSuccess) {
                             $rootScope.login = 0;
