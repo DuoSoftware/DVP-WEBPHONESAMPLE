@@ -253,7 +253,12 @@ routerApp.controller('callContentCtrl', function ($rootScope, $log, $scope, $sta
                 onIncomingCall: onIncomingCall,
                 uiCallTerminated: uiCallTerminated
             };
-            socketAuth.getAuthenticatedAsPromise();// connect to notification server
+            try {
+                socketAuth.getAuthenticatedAsPromise();// connect to notification server
+            }
+            catch(ex){
+                console.error("getAuthenticatedAsPromise");
+            }
             preInit(userEvent, dataParser.userProfile);// initialize Soft phone
 
         }
