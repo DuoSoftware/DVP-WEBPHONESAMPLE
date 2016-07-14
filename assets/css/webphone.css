@@ -109,3 +109,28 @@ body {
     display: block;
     z-index: 101;
 }
+
+.web-phone-login {
+    width: 100%;
+    text-align: right;
+    position: relative;
+    padding-right: 54px;
+    padding-top: 20px;
+
+}
+
+.web-phone-login > a {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 200;
+    color: #1c90b7 !important;
+    font-size: 15px;
+    background: rgba(46, 52, 60, 0.09);
+    padding: 9px;
+    border-radius: 12px;
+}
+
+.web-phone-login > a > small {
+    font-size: 15px;
+    font-weight: 300!important;
+    color: #d8b91a !important;
+}

@@ -5,6 +5,15 @@
 'use strict'
 routerApp.controller('callContentCtrl', function ($rootScope, $log, $scope, $state, $filter, dataParser, socketAuth, Notification,jwtHelper, resourceService) {
 
+    $scope.$on("$destroy", function () {
+        $scope.unRegister();
+    });
+
+    $scope.logOut = function(){
+        $scope.unRegister();
+        $scope.unregisterWithArds();
+
+    };
 
     $scope.currentState = "";
     $scope.registerdWithArds = false;
@@ -29,6 +38,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $log, $scope, $sta
     $scope.RegisterWithArds = function () {
         resourceService.RegisterWithArds(dataParser.userProfile.id,dataParser.userProfile.veeryFormat ).then(function (response) {
             $scope.registerdWithArds = response;
+            $scope.userName = dataParser.userProfile.userName;
         }, function (error) {
             Notification.error({message: "Fail To Register With Resource Server.", delay: 500, closeOnClick: true});
             $log.debug("RegisterWithArds err"+error);
@@ -40,11 +50,14 @@ routerApp.controller('callContentCtrl', function ($rootScope, $log, $scope, $sta
     $scope.unregisterWithArds = function () {
         resourceService.UnregisterWithArds(dataParser.userProfile.id).then(function (response) {
             $scope.registerdWithArds = !response;
+            $state.go('register');
         }, function (error) {
             $log.debug("RegisterWithArds err");
         });
 
     };
+
+
 
     $scope.status = function (dtmf) {
         $state.go('status');
@@ -236,6 +249,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $log, $scope, $sta
 
     $scope.unRegister = function () {
         sipUnRegister();
+        /*$state.go('register');*/
     };
 
     document.getElementById("phoneButtons").style.visibility = 'hidden';
@@ -516,6 +530,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $log, $scope, $sta
             $scope.call.number = $scope.call.number +dtmf;
         }
     }
+
 
 }).directive('noClick', function () {
     return {
