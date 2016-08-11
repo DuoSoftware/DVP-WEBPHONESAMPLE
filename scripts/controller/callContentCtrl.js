@@ -6,13 +6,12 @@
 routerApp.controller('callContentCtrl', function ($rootScope, $log, $scope, $state, $filter, dataParser, socketAuth, Notification,jwtHelper, resourceService) {
 
     $scope.$on("$destroy", function () {
-        $scope.unRegister();
+        $scope.logOut();
     });
 
     $scope.logOut = function(){
         $scope.unRegister();
         $scope.unregisterWithArds();
-
     };
 
     $scope.currentState = "";
@@ -54,14 +53,60 @@ routerApp.controller('callContentCtrl', function ($rootScope, $log, $scope, $sta
         }, function (error) {
             $log.debug("RegisterWithArds err");
         });
-
     };
-
-
 
     $scope.status = function (dtmf) {
         $state.go('status');
     };
+
+    var fullScreen = function (b_fs) {
+        bFullScreen = b_fs;
+        if (tsk_utils_have_webrtc4native() && bFullScreen && videoRemote.webkitSupportsFullscreen) {
+            if (bFullScreen) {
+                videoRemote.webkitEnterFullScreen();
+            }
+            else {
+                videoRemote.webkitExitFullscreen();
+            }
+        }
+        else {
+            if (tsk_utils_have_webrtc4npapi()) {
+                try {
+                    if (window.__o_display_remote) window.__o_display_remote.setFullScreen(b_fs);
+                }
+                catch (e) {
+                    document.getElementById("divVideo").setAttribute("class", b_fs ? "full-screen" : "normal-screen");
+                }
+            }
+            else {
+                document.getElementById("divVideo").setAttribute("class", b_fs ? "full-screen" : "normal-screen");
+            }
+        }
+    };
+
+    $scope.sipSendDTMF = function (dtmf) {
+        sipSendDTMF(dtmf);
+    };
+
+    var openKeyPad = function () {
+
+    };
+
+    openKeyPad();
+
+    $scope.closeKeyPad = function () {
+        document.getElementById("divKeyPad").style.left = '0px';
+        document.getElementById("divKeyPad").style.top = '0px';
+        document.getElementById("divKeyPad").style.visibility = 'hidden';
+        document.getElementById("divKeyPad").style.visibility = 'hidden';
+    };
+
+    $scope.unRegister = function () {
+        sipUnRegister();
+        /*$state.go('register');*/
+    };
+
+    document.getElementById("phoneButtons").style.visibility = 'hidden';
 
     var onEventsListener = function (e) {
         console.info(e.type);
@@ -92,30 +137,26 @@ routerApp.controller('callContentCtrl', function ($rootScope, $log, $scope, $sta
         }
     };
 
+    var notificationEvent = function (description) {
+        try {
+            //document.getElementById("lblStatus").innerHTML = description;
+            //Notification.info({message: description, delay: 500, closeOnClick: true});
 
-    var fullScreen = function (b_fs) {
-        bFullScreen = b_fs;
-        if (tsk_utils_have_webrtc4native() && bFullScreen && videoRemote.webkitSupportsFullscreen) {
-            if (bFullScreen) {
-                videoRemote.webkitEnterFullScreen();
+            if (description == 'Connected') {
+                UIStateChange.inIdleState();
+                Notification.success({message: description, delay: 3000, closeOnClick: true});
+                $scope.RegisterWithArds();
             }
-            else {
-                videoRemote.webkitExitFullscreen();
-            }
-        }
-        else {
-            if (tsk_utils_have_webrtc4npapi()) {
-                try {
-                    if (window.__o_display_remote) window.__o_display_remote.setFullScreen(b_fs);
-                }
-                catch (e) {
-                    document.getElementById("divVideo").setAttribute("class", b_fs ? "full-screen" : "normal-screen");
-                }
-            }
-            else {
-                document.getElementById("divVideo").setAttribute("class", b_fs ? "full-screen" : "normal-screen");
+            else if (description == 'Forbidden') {
+                console.error(description);
+                Notification.error({message: description, delay: 3000, closeOnClick: true});
+                $state.go('register');
             }
         }
+        catch (ex) {
+            console.error(ex.message);
+        }
+
     };
 
     var onErrorCallback = function (e) {
@@ -124,6 +165,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $log, $scope, $sta
         console.error(e);
         $state.go('register');
     };
+
     var uiOnConnectionEvent = function (b_connected, b_connecting) {
         try {
             if (!b_connected && !b_connecting)
@@ -137,6 +179,7 @@ routerApp.controller('callContentCtrl', function ($rootScope, $log, $scope, $sta
             console.error(ex.message);
         }
     };
+
     var uiVideoDisplayShowHide = function (b_show) {
         if (b_show) {
             document.getElementById("divVideo").style.height = '340px';
@@ -161,7 +204,6 @@ routerApp.controller('callContentCtrl', function ($rootScope, $log, $scope, $sta
             fullScreen(false);
         }
     };
-
 
     var onIncomingCall = function (sRemoteNumber) {
         try {
@@ -203,56 +245,6 @@ routerApp.controller('callContentCtrl', function ($rootScope, $log, $scope, $sta
             console.error(ex.message)
         }
     };
-
-    var notificationEvent = function (description) {
-        try {
-            //document.getElementById("lblStatus").innerHTML = description;
-            //Notification.info({message: description, delay: 500, closeOnClick: true});
-
-            if (description == 'Connected') {
-                UIStateChange.inIdleState();
-                Notification.success({message: description, delay: 3000, closeOnClick: true});
-                $scope.RegisterWithArds();
-            }
-            else if (description == 'Forbidden') {
-                console.error(description);
-                Notification.error({message: description, delay: 3000, closeOnClick: true});
-                $state.go('register');
-            }
-        }
-        catch (ex) {
-            console.error(ex.message);
-        }
-
-    };
-
-
-
-
-    $scope.sipSendDTMF = function (dtmf) {
-        sipSendDTMF(dtmf);
-    };
-
-
-    var openKeyPad = function () {
-
-    };
-
-    openKeyPad();
-
-    $scope.closeKeyPad = function () {
-        document.getElementById("divKeyPad").style.left = '0px';
-        document.getElementById("divKeyPad").style.top = '0px';
-        document.getElementById("divKeyPad").style.visibility = 'hidden';
-        document.getElementById("divKeyPad").style.visibility = 'hidden';
-    };
-
-    $scope.unRegister = function () {
-        sipUnRegister();
-        /*$state.go('register');*/
-    };
-
-    document.getElementById("phoneButtons").style.visibility = 'hidden';
 
     angular.element(document).ready(function () {
         UIStateChange.loadInit(false);

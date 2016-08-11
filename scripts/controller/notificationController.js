@@ -2,8 +2,7 @@
  * Created by Rajinda on 4/26/2016.
  */
 
-angular.module('veerySoftPhone')
-    .controller('notificationController', function($scope, Notification) {
+angular.module('veerySoftPhone').controller('notificationController', function($scope, Notification) {
 
         $scope.primary = function() {
             Notification('Primary notification');

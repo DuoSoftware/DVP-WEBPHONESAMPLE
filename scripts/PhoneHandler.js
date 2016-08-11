@@ -170,6 +170,7 @@ function answerCall(){
         oSipSessionCall.accept();
     }
 }
+
 // makes a call (SIP INVITE)
 function sipCall(s_type, phoneNumber) {
     if (oSipStack && !oSipSessionCall) {// && !tsk_string_is_null_or_empty(txtPhoneNumber)) {
@@ -201,61 +202,6 @@ function sipCall(s_type, phoneNumber) {
     else if (oSipSessionCall) {
         oSipSessionCall.accept(oConfigCall);
         return 'Connecting..';
-    }
-}
-
-// Share entire desktop aor application using BFCP or WebRTC native implementation
-function sipShareScreen() {
-    if (SIPml.getWebRtcType() === 'w4a') {
-        // Sharing using BFCP -> requires an active session
-        if (!oSipSessionCall) {
-            return "No active session";
-        }
-        if (oSipSessionCall.bfcpSharing) {
-            if (oSipSessionCall.stopBfcpShare(oConfigCall) != 0) {
-                return 'Failed to stop BFCP share';
-            }
-            else {
-                oSipSessionCall.bfcpSharing = false;
-            }
-        }
-        else {
-            oConfigCall.screencast_window_id = 0x00000000;
-            if (oSipSessionCall.startBfcpShare(oConfigCall) != 0) {
-                return 'Failed to start BFCP share';
-            }
-            else {
-                oSipSessionCall.bfcpSharing = true;
-            }
-        }
-    }
-    else {
-        sipCall('call-screenshare');
-    }
-}
-
-// holds or resumes the call
-function sipToggleHoldResume() {
-    if (oSipSessionCall) {
-        var i_ret;
-        i_ret = oSipSessionCall.bHeld ? oSipSessionCall.resume() : oSipSessionCall.hold();
-        if (i_ret != 0) {
-            return 'Hold / Resume failed';
-        }
-    }
-}
-
-// Mute or Unmute the call
-function sipToggleMute() {
-    if (oSipSessionCall) {
-        var i_ret;
-        var bMute = !oSipSessionCall.bMute;
-        i_ret = oSipSessionCall.mute('audio'/*could be 'video'*/, bMute);
-        if (i_ret != 0) {
-            return 'Mute / Unmute failed';
-        }
-        oSipSessionCall.bMute = bMute;
-        btnMute.value = bMute ? "Unmute" : "Mute";
     }
 }
 
@@ -382,7 +328,7 @@ function onSipEventStack(e /*SIPml.Stack.Event*/) {
         {
             //divGlassPanel.style.visibility = 'hidden';
             if (e.type == 'm_permission_refused') {
-				oSipSessionCall = null;
+                oSipSessionCall = null;
                 if (oNotifICall) {
                     oNotifICall.cancel();
                     oNotifICall = null;
@@ -438,7 +384,7 @@ function onSipEventSession(e /* SIPml.Session.Event */) {
         {
             if (e.session == oSipSessionRegister) {
                 UserEvent.uiOnConnectionEvent(false, false);
-                
+
                 oSipSessionRegister = null;
             }
             else if (e.session == oSipSessionCall) {
@@ -448,7 +394,7 @@ function onSipEventSession(e /* SIPml.Session.Event */) {
                 }
                 UserEvent.uiCallTerminated(e.description);
             }
-			oSipSessionCall = null;
+            oSipSessionCall = null;
             break;
         } // 'terminating' | 'terminated'
 
@@ -645,4 +591,61 @@ function onSipEventSession(e /* SIPml.Session.Event */) {
         }
     }
 }
+
+// Share entire desktop aor application using BFCP or WebRTC native implementation
+function sipShareScreen() {
+    if (SIPml.getWebRtcType() === 'w4a') {
+        // Sharing using BFCP -> requires an active session
+        if (!oSipSessionCall) {
+            return "No active session";
+        }
+        if (oSipSessionCall.bfcpSharing) {
+            if (oSipSessionCall.stopBfcpShare(oConfigCall) != 0) {
+                return 'Failed to stop BFCP share';
+            }
+            else {
+                oSipSessionCall.bfcpSharing = false;
+            }
+        }
+        else {
+            oConfigCall.screencast_window_id = 0x00000000;
+            if (oSipSessionCall.startBfcpShare(oConfigCall) != 0) {
+                return 'Failed to start BFCP share';
+            }
+            else {
+                oSipSessionCall.bfcpSharing = true;
+            }
+        }
+    }
+    else {
+        sipCall('call-screenshare');
+    }
+}
+
+// holds or resumes the call
+function sipToggleHoldResume() {
+    if (oSipSessionCall) {
+        var i_ret;
+        i_ret = oSipSessionCall.bHeld ? oSipSessionCall.resume() : oSipSessionCall.hold();
+        if (i_ret != 0) {
+            return 'Hold / Resume failed';
+        }
+    }
+}
+
+// Mute or Unmute the call
+function sipToggleMute() {
+    if (oSipSessionCall) {
+        var i_ret;
+        var bMute = !oSipSessionCall.bMute;
+        i_ret = oSipSessionCall.mute('audio'/*could be 'video'*/, bMute);
+        if (i_ret != 0) {
+            return 'Mute / Unmute failed';
+        }
+        oSipSessionCall.bMute = bMute;
+        btnMute.value = bMute ? "Unmute" : "Mute";
+    }
+}
+
+
 

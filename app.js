@@ -11,6 +11,8 @@ var routerApp = angular.module('veerySoftPhone',
 routerApp.constant('baseUrl', 'http://ardsliteservice.104.131.67.21.xip.io/DVP/API/1.0.0.0/ARDS/resource');
 routerApp.constant('userServiceBaseUrl', 'http://userservice.104.131.67.21.xip.io/DVP/API/1.0.0.0/');
 routerApp.constant('oauthServiceBaseUrl', 'http://userservice.104.131.67.21.xip.io/oauth/token');
+routerApp.constant('notificationBaseUrl', 'notificationservice.104.131.67.21.xip.io');
+
 
 routerApp.config(["$httpProvider", "$stateProvider", "$urlRouterProvider",
     function ($httpProvider, $stateProvider, $urlRouterProvider) {

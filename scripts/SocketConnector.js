@@ -5,7 +5,7 @@
 /* global io */
 
 angular.module('veerySoftPhone')
-    .factory('socket', function (socketFactory, Notification, dataParser) {
+    .factory('socket', function (socketFactory, Notification, dataParser,notificationBaseUrl) {
 
         var socket, ioSocket, isAuthenticated,
             self = {
@@ -24,7 +24,7 @@ angular.module('veerySoftPhone')
                 isAuthenticated = false;
 
                 // socket.io now auto-configures its connection when we omit a connection url
-                ioSocket = io('notificationservice.104.131.67.21.xip.io', {
+                ioSocket = io(notificationBaseUrl, {
                     path: ''
                 });
 
